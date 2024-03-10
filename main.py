@@ -1,16 +1,51 @@
-# This is a sample Python script.
+# » Release date: 10 March 2024
+# ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+# »› Developed by Foxx
+# »› Copyright © 2024 Aurel Hoxha. All rights reserved.
+# »› GitHub: https://github.com/TeamFoxx
+# »› For support and enquiries please contact hello@aurelhoxha.de
+# »› Use of this program is subject to the terms of the MIT licence.
+# »› A copy of the licence can be found in the file "LICENSE" in the root directory of this project.
+# ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+#
+# ⏤ { imports } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+from cogs import *
+
+# ⏤ { pre-settings } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
+
+coffee = commands.Bot(
+    intents=discord.Intents.all(),
+    command_prefix=commands.when_mentioned_or("."),
+    sync_commands=True,
+    auto_check_for_updates=True
+)
+coffee.remove_command("help")
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+# ⏤ { On Bot ready } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
+
+@coffee.event
+async def on_ready():
+    print(f"{Fore.GREEN}━━━ {Fore.WHITE}Ready Information {Fore.GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+    print(f"{Fore.GREEN}»› {Fore.WHITE}Logged in as {Fore.MAGENTA}{coffee.user}")
+    print(f"{Fore.GREEN}»› {Fore.WHITE}Developed with {Fore.RED}<3 {Fore.MAGENTA}by Foxx")
+    print(f"{Fore.GREEN}»› {Fore.WHITE}For inquiries, reach out to {Fore.MAGENTA}hello@aurelhoxha.de")
+    print(f"{Fore.GREEN}»› {Fore.WHITE}Check out the code on {Fore.MAGENTA}GitHub: https://github.com/TeamFoxx")
+    print(f"{Fore.GREEN}»› {Fore.WHITE}Join my {Fore.MAGENTA}Discord server: https://discord.gg/nQEwwyJ")
+
+    activity = discord.Activity(name=f"Lifeservices v1.0.0", type=discord.ActivityType.watching)
+    await coffee.change_presence(activity=activity)
+
+# ⏤ { heartbeat } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
+
+_core = [p.stem for p in Path('./core').glob('*.py') if p.stem != '__init__']
+for ext in _core:
+    coffee.load_extension(f'core.{ext}')
+    print(f'\033[32m{ext}\033[0m was loaded successfully')
+
+_cogs = [p.stem for p in Path('./cogs').glob('*.py') if p.stem != '__init__']
+[(coffee.load_extension(f'cogs.{ext}'), print(f'\033[32m{ext}\033[0m was loaded successfully')) for ext in _cogs]
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+coffee.run(my_secrets.key.token)
