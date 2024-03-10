@@ -12,40 +12,40 @@
 
 from cogs import *
 
-# ⏤ { pre-settings } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
+# ⏤ { settings } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
-coffee = commands.Bot(
+reelab = commands.Bot(
     intents=discord.Intents.all(),
     command_prefix=commands.when_mentioned_or("."),
     sync_commands=True,
     auto_check_for_updates=True
 )
-coffee.remove_command("help")
+reelab.remove_command("help")
 
 
-# ⏤ { On Bot ready } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
+# ⏤ { core } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
-@coffee.event
+@reelab.event
 async def on_ready():
     print(f"{Fore.GREEN}━━━ {Fore.WHITE}Ready Information {Fore.GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━")
-    print(f"{Fore.GREEN}»› {Fore.WHITE}Logged in as {Fore.MAGENTA}{coffee.user}")
+    print(f"{Fore.GREEN}»› {Fore.WHITE}Logged in as {Fore.MAGENTA}{reelab.user}")
     print(f"{Fore.GREEN}»› {Fore.WHITE}Developed with {Fore.RED}<3 {Fore.MAGENTA}by Foxx")
     print(f"{Fore.GREEN}»› {Fore.WHITE}For inquiries, reach out to {Fore.MAGENTA}hello@aurelhoxha.de")
     print(f"{Fore.GREEN}»› {Fore.WHITE}Check out the code on {Fore.MAGENTA}GitHub: https://github.com/TeamFoxx")
     print(f"{Fore.GREEN}»› {Fore.WHITE}Join my {Fore.MAGENTA}Discord server: https://discord.gg/nQEwwyJ")
 
     activity = discord.Activity(name=f"Lifeservices v1.0.0", type=discord.ActivityType.watching)
-    await coffee.change_presence(activity=activity)
-
-# ⏤ { heartbeat } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
+    await reelab.change_presence(activity=activity)
 
 _core = [p.stem for p in Path('./core').glob('*.py') if p.stem != '__init__']
 for ext in _core:
-    coffee.load_extension(f'core.{ext}')
+    reelab.load_extension(f'core.{ext}')
     print(f'\033[32m{ext}\033[0m was loaded successfully')
 
 _cogs = [p.stem for p in Path('./cogs').glob('*.py') if p.stem != '__init__']
-[(coffee.load_extension(f'cogs.{ext}'), print(f'\033[32m{ext}\033[0m was loaded successfully')) for ext in _cogs]
+[(reelab.load_extension(f'cogs.{ext}'), print(f'\033[32m{ext}\033[0m was loaded successfully')) for ext in _cogs]
 
 
-coffee.run(my_secrets.key.token)
+# ⏤ { settings } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
+
+reelab.run(my_secrets.key.token)
