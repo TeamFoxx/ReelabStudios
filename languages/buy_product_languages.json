@@ -1,0 +1,112 @@
+{
+  "en": {
+    "language_selection_description": "## {plantbig_plant} Turn dreams into reality!\n> We, the **Reelab Team**, are thrilled about your decision to purchase a product. Please select from the options below in the dropdown menu to proceed with your purchase or to access customer support.",
+    "language_selection_options_placeholder": "Explore your options...",
+    "language_selection_order_bot_lable": "Order Discord Bot",
+    "language_selection_order_bot_description": "Enhance your server with a Discord bot.",
+    "language_selection_order_website_lable": "Order Website",
+    "language_selection_order_website_description": "Establish your online presence with a sleek site.",
+    "language_selection_order_graphic_lable": "Order Graphics",
+    "language_selection_order_graphic_description": "Enhance your brand with custom graphics.",
+    "language_selection_order_bundle_lable": "Order Bundle",
+    "language_selection_order_bundle_description": "Unlock savings by bundling services.",
+    "language_selection_customer_support_lable": "Get Customer Support",
+    "language_selection_customer_support_description": "Get timely help from our support team.",
+
+    "discord_bot_products_description": "## {plantbig_plant} Pre-made or Custom Creations?\n- Choose between **Pre-made** or **Custom bot**\n- **Instant Solutions** or **Tailored Creations**\n- Seamless Integration, Maximum Flexibility\n\n{community_admin} **- Your Bot, Your Way.** __Pick Yours Now!__",
+    "discord_select_bot_options_placeholder": "Choose a bot...",
+
+    "discord_modmail_bot_label": "ModMail Bot",
+    "discord_modmail_bot_description": "A bot for managing your server's modmail system.",
+    "discord_music_bot_label": "24/7 Music Bot",
+    "discord_music_bot_description": "Enjoy uninterrupted music playback in your server.",
+    "discord_admin_bot_label": "Administration Bot",
+    "discord_admin_bot_description": "Simplify server administration tasks with this bot.",
+    "discord_tempvoice_bot_label": "TempVoice Bot",
+    "discord_tempvoice_bot_description": "Create temporary voice channels easily.",
+    "discord_studies_bot_label": "Work & Studies Bot",
+    "discord_studies_bot_description": "Enhance productivity with tools tailored for work and studies.",
+    "discord_personalized_bot_label": "I want a personalized bot",
+
+    "discord_order_bot_step_1_description": "## {community_developer} Configuration Step - I/V\n> Select how many people are on your Discord server.\n\n**Note:** This is necessary for hosting reasons. Depending on the number of users using the bot, we may need to increase the allocated resources to ensure optimal performance.",
+    "discord_order_bot_step_1_user_amount_1_lable": "< 1k",
+    "discord_order_bot_step_1_user_amount_2_lable": "1k-2.5k",
+    "discord_order_bot_step_1_user_amount_3_lable": "2.5k-5k",
+    "discord_order_bot_step_1_user_amount_4_lable": "> 5k",
+
+    "discord_order_bot_step_2_description": "## {community_developer} Configuration Step - II/V\n> Please select below for **how long you would like to order your bot**. You can extend your product at any time afterwards.\n\n**Keep in mind:** __We offer a 24-hour free trial.__",
+    "discord_order_bot_step_2_hosting_duration_1_lable": "30 Days",
+    "discord_order_bot_step_2_hosting_duration_2_lable": "90 Days",
+    "discord_order_bot_step_2_hosting_duration_3_lable": "180 Days",
+    "discord_order_bot_step_2_hosting_duration_4_lable": "365 Days",
+
+    "discord_order_bot_step_3_description": "## {community_developer} Configuration Step - III/V\n> Do you want to purchase an About Me package?\n\n__What is the About Me Pack?__\n- **Visual Showcase**: See the thumbnail on the right for a preview.\n- **Custom Bio**: Your bot will come with a professionally crafted pre-made bio. With this package, you gain the flexibility to customize the description to your liking.\n- **Pricing**: The package is available for just __0.50€ per month__.",
+    "discord_order_bot_step_3_about_me_pack_1_lable": "Yes!",
+    "discord_order_bot_step_3_about_me_pack_2_lable": "No, thanks.",
+
+    "discord_order_bot_step_4_description": "## {community_developer} Configuration Step - IV/V\n> Below you will be asked for a number of details depending on your bot, including:\n\n- Bot name\n- Bot status `(playing/watching/listening/streaming/competing)`\n\nClick on the button below to **start configuring your bot.**",
+    "discord_order_bot_step_4_configure_lable": "Configure Bot",
+    "discord_order_bot_step_4_configure_modal_title": "Enter your bot details",
+    "discord_order_bot_step_4_configure_modal_name_lable": "Bot Name",
+    "discord_order_bot_step_4_configure_modal_status_lable": "Bot Status",
+    "discord_order_bot_step_4_configure_modal_status_placeholder": "e.g., {watching} over the safety of users",
+
+    "discord_order_bot_step_5_description": "## {community_developer} Configuration Step - V/V\n> Last but not least, **double-check what you've entered** and **accept the terms and conditions** for Using the Bot.\n\n__Your Entered Details:__\n- **Bot Type:** {bot_type}\n- **Bot Name:** {bot_name}\n- **Bot Status:** {bot_status}\n- **Possible bot users:** {bot_users}\n- **About Me Pack:** {about_me_pack_status}{about_me_pack_cost_text}\n- **Hosting price a month:** {bot_user_pricing}\n- **Hosting duration:** {bot_hosting_duration} {hosting_duration_month}\n### {plant_plant} The total amount to be paid is __{total_price_formatted}__\n**Note:** By accepting the [terms and conditions](https://discord.com/channels/1216127716970070128/1216346561601339474/1222872839187857582), a __ticket will be created automatically__ and our **Staff Team** will contact you shortly.",
+    "discord_order_bot_step_5_accept_rules_lable": "I accept the ToS"
+  },
+  "de": {
+    "language_selection_description": "## {plantbig_plant} Träume verwirklichen!\n> Wir, das **Reelab-Team**, freuen uns über Ihre Entscheidung, ein Produkt zu kaufen. Bitte wählen Sie unten aus den Optionen im Dropdown-Menü aus, um mit Ihrem Kauf fortzufahren oder auf den Kundensupport zuzugreifen.",
+    "language_selection_options_placeholder": "Erkunden Sie Ihre Optionen...",
+    "language_selection_order_bot_lable": "Discord-Bot bestellen",
+    "language_selection_order_bot_description": "Verbessern Sie Ihren Server mit einem Discord-Bot.",
+    "language_selection_order_website_lable": "Website bestellen",
+    "language_selection_order_website_description": "Gestalten Sie Ihre Online-Präsenz mit einer eleganten Website.",
+    "language_selection_order_graphic_lable": "Grafiken bestellen",
+    "language_selection_order_graphic_description": "Verbessern Sie Ihre Marke mit individuellen Grafiken.",
+    "language_selection_order_bundle_lable": "Paket bestellen",
+    "language_selection_order_bundle_description": "Sparen Sie durch das Bündeln von Dienstleistungen.",
+    "language_selection_customer_support_lable": "Kundensupport erhalten",
+    "language_selection_customer_support_description": "Erhalten Sie zeitnahe Unterstützung von unserem Support-Team.",
+
+    "discord_bot_products_description": "## {plantbig_plant} Fertige oder individuelle Kreationen?\n- Wählen Sie zwischen **Fertigprodukten** oder **individuellen Bots**\n- **Sofortige Lösungen** oder **maßgeschneiderte Kreationen**\n- Nahtlose Integration, maximale Flexibilität\n\n{community_admin} **- Ihr Bot, Ihr Weg.** __Wählen Sie jetzt Ihren aus!__",
+    "discord_select_bot_options_placeholder": "Wählen Sie einen Bot...",
+
+    "discord_modmail_bot_label": "ModMail Bot",
+    "discord_modmail_bot_description": "Ein Bot zur Verwaltung des ModMail-Systems Ihres Servers.",
+    "discord_music_bot_label": "24/7 Musikbot",
+    "discord_music_bot_description": "Genießen Sie unterbrechungsfreie Musikwiedergabe in Ihrem Server.",
+    "discord_admin_bot_label": "Verwaltungsbote",
+    "discord_admin_bot_description": "Vereinfachen Sie Verwaltungsaufgaben auf Ihrem Server mit diesem Bot.",
+    "discord_tempvoice_bot_label": "TempVoice Bot",
+    "discord_tempvoice_bot_description": "Erstellen Sie problemlos temporäre Sprachkanäle.",
+    "discord_studies_bot_label": "Arbeits- und Lernbot",
+    "discord_studies_bot_description": "Steigern Sie die Produktivität mit Tools, die speziell für Arbeit und Studium entwickelt wurden.",
+    "discord_personalized_bot_label": "Ich möchte einen personalisierten Bot",
+
+    "discord_order_bot_step_1_description": "## {community_developer} Konfigurationsschritt - I/V\n> Wählen Sie aus, wie viele Personen sich auf Ihrem Discord-Server befinden.\n\n**Hinweis:** Dies ist aus Hosting-Gründen erforderlich. Abhängig von der Anzahl der Benutzer, die den Bot verwenden, müssen wir möglicherweise die zugewiesenen Ressourcen erhöhen, um eine optimale Leistung sicherzustellen.",
+    "discord_order_bot_step_1_user_amount_1_lable": "< 1k",
+    "discord_order_bot_step_1_user_amount_2_lable": "1k-2,5k",
+    "discord_order_bot_step_1_user_amount_3_lable": "2,5k-5k",
+    "discord_order_bot_step_1_user_amount_4_lable": "> 5k",
+
+    "discord_order_bot_step_2_description": "## {community_developer} Konfigurationsschritt - II/V\n> Bitte wählen Sie unten aus, **wie lange Sie Ihren Bot bestellen möchten**. Sie können Ihr Produkt jederzeit verlängern.\n\n**Beachten Sie:** __Wir bieten eine 24-stündige kostenlose Testversion an.__",
+    "discord_order_bot_step_2_hosting_duration_1_lable": "30 Tage",
+    "discord_order_bot_step_2_hosting_duration_2_lable": "90 Tage",
+    "discord_order_bot_step_2_hosting_duration_3_lable": "180 Tage",
+    "discord_order_bot_step_2_hosting_duration_4_lable": "365 Tage",
+
+    "discord_order_bot_step_3_description": "## {community_developer} Konfigurationsschritt - III/V\n> Möchten Sie ein About Me-Paket kaufen?\n\n__Was ist das About Me-Pack?__\n- **Visuelle Darstellung**: Sehen Sie die Miniaturansicht rechts für eine Vorschau.\n- **Benutzerdefinierte Bio**: Ihr Bot wird mit einer professionell gestalteten vorgefertigten Bio geliefert. Mit diesem Paket erhalten Sie die Flexibilität, die Beschreibung nach Ihren Wünschen anzupassen.\n- **Preisgestaltung**: Das Paket ist bereits für nur __0,50€ pro Monat__ erhältlich.",
+    "discord_order_bot_step_3_about_me_pack_1_lable": "Ja, bitte!",
+    "discord_order_bot_step_3_about_me_pack_2_lable": "Nein, danke.",
+
+    "discord_order_bot_step_4_description": "## {community_developer} Konfigurationsschritt - IV/V\n> Im Folgenden werden Sie nach einer Reihe von Details gefragt, die je nach Ihrem Bot variieren, darunter:\n\n- Bot-Name\n- Bot-Status `(spielt/beobachtet/hört zu/streamt/nimmt teil)`\n\nKlicken Sie auf die Schaltfläche unten, um Ihren Bot **zu konfigurieren.**",
+    "discord_order_bot_step_4_configure_lable": "Bot konfigurieren",
+    "discord_order_bot_step_4_configure_modal_title": "Geben Sie Ihre Bot-Details ein",
+    "discord_order_bot_step_4_configure_modal_name_lable": "Bot-Name",
+    "discord_order_bot_step_4_configure_modal_status_lable": "Bot-Status",
+    "discord_order_bot_step_4_configure_modal_status_placeholder": "z.B. {watching} die Sicherheit der Benutzer",
+
+    "discord_order_bot_step_5_description": "## {community_developer} Konfigurationsschritt - V/V\n> Zu guter Letzt, **überprüfen Sie noch einmal, was Sie eingegeben haben** und **akzeptieren Sie die Nutzungsbedingungen** für die Verwendung des Bots.\n\n__Ihre eingegebenen Details:__\n- **Bot-Typ:** {bot_type}\n- **Bot-Name:** {bot_name}\n- **Bot-Status:** {bot_status}\n- **Mögliche Bot-Benutzer:** {bot_users}\n- **About Me-Pack:** {about_me_pack_status}{about_me_pack_cost_text}\n- **Preis für Hosting pro Monat:** {bot_user_pricing}\n- **Hosting-Dauer:** {bot_hosting_duration} {hosting_duration_month}\n### {plant_plant} Der Gesamtbetrag, der zu zahlen ist, beträgt __{total_price_formatted}__\n**Hinweis:** Durch Akzeptieren der [Nutzungsbedingungen](https://discord.com/channels/1216127716970070128/1216346561601339474/1222872839187857582) wird automatisch ein __Ticket erstellt__ und unser **Personalteam** wird sich in Kürze mit Ihnen in Verbindung setzen.",
+    "discord_order_bot_step_5_accept_rules_lable": "Ich akzeptiere die Nutzungsbedingungen"
+}
+}
