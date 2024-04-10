@@ -10,22 +10,27 @@
 # ⏤ { imports } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
 from cogs import *
-
+from cogs.ProductPurchase import user_lang
 
 # ⏤ { configurations } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 user_data = {}
 
+counting_file_path = "counting.json"
+
 # emojis
 EMOJIS = {
-    "community_developer": 1217203400593117256,
+    "community_owner": 1217203408516284516,
     "community_admin": 1217203398802280631,
+    "community_developer": 1217203400593117256,
     "community_advisor": 1217203395434385438,
-    "plantbig_plant": 1217203467777474640,
-    "log_timeoutremoved": 1217203449654018128,
+    "community_member": 1217203405316030595,
+    "community_eventhost": 1217203402237280488,
     "function_tick": 1217203424425152582,
     "function_cross": 1217203796065648691,
-    "community_owner": 1217203408516284516,
+    "log_timeoutremoved": 1217203449654018128,
     "log_membershipscreening": 1217203998659055797,
+    "log_memberjoin": 1217203966450860093,
+    "plantbig_plant": 1217203467777474640,
     "plant_plant": 1217204087884611665
 }
 
@@ -93,6 +98,25 @@ def format_price(price):
         return f"{price:.2f}€"
 
 
+def load_counting():
+    """
+    Loads the counting value from the file if it exists, otherwise returns 0.
+    """
+    try:
+        with open(counting_file_path, "r") as file:
+            return int(file.read())
+    except FileNotFoundError:
+        return 0
+
+
+def save_counting(counting):
+    """
+    Saves the counting value to the file.
+    """
+    with open(counting_file_path, "w") as file:
+        file.write(str(counting))
+
+
 # ⏤ { settings } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
 logging.basicConfig(filename='bot.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -101,6 +125,8 @@ logging.basicConfig(filename='bot.log', level=logging.INFO, format='%(asctime)s 
 class BuyDiscordBot(commands.Cog):
     def __init__(self, bot):
         self.bot: commands.Bot = bot
+        self.order_product_channel_id = 1216178294458814526
+        self.official_staff_id = 1216137762537996479
 
 # ⏤ { function definitions } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
@@ -152,102 +178,13 @@ class BuyDiscordBot(commands.Cog):
 
 # ⏤ { codebase } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
-    @commands.Cog.on_select('^language_select_options$')
-    async def language_selection(self, interaction, select_menu):
-        user_id = interaction.author.id
-        logging.info(f'{str(user_id)} - Selected Language to proceed purchase.')
-
-        # Retrieve emojis
-        plantbig_plant = self.bot.get_emoji(EMOJIS["plantbig_plant"])
-        community_advisor = self.bot.get_emoji(1217203395434385438)
-        community_member = self.bot.get_emoji(1217203405316030595)
-        community_eventhost = self.bot.get_emoji(1217203402237280488)
-
-        # Get the selected language from the interaction
-        selected_language = select_menu.values[0]
-
-        # Define user language based on the selected language
-        if selected_language == 'DE':
-            user_language = 'de'
-        elif selected_language == 'TR':
-            user_language = 'tr'
-        elif selected_language == 'FR':
-            user_language = 'fr'
-        elif selected_language == 'IT':
-            user_language = 'it'
-        elif selected_language == 'JA':
-            user_language = 'ja'
-        elif selected_language == 'ZH':
-            user_language = 'zh'
-        else:
-            user_language = 'en'
-
-        # Store user_language to user_data
-        user_info = user_data.get(user_id, {})
-        user_info["user_language"] = user_language
-        user_data[user_id] = user_info
-
-        # Load language data
-        script_directory = Path(__file__).resolve().parent.parent
-        file_path = script_directory / "languages/buy_product_languages.json"
-        language = load_language_data(file_path, user_language)
-
-        buy_message = discord.Embed(
-            colour=EMBED_COLOR,
-            description=language["language_selection_description"].format(plantbig_plant=plantbig_plant)
-        )
-        buy_message.set_author(name="www.reelab.studio", url="https://reelab.studio/", icon_url="attachment://reelab_logo_white.png")
-        buy_message.set_image(url="attachment://reelab_banner_white.gif")
-        buy_message.set_footer(text="~ The official Reelab Studio Discord Bot")
-
-        # Load attachments
-        banner_file, icon_file, footer_file = await self.attachments()
-
-        await interaction.edit(embed=buy_message,
-                              attachments=[banner_file, icon_file],
-                              components=[[
-                                  SelectMenu(
-                                      placeholder=language["language_selection_options_placeholder"],
-                                      options=[
-                                          SelectOption(
-                                              label=language["language_selection_order_bot_lable"],
-                                              description=language["language_selection_order_bot_description"],
-                                              emoji=community_member,
-                                              value='order_discord_bot'
-                                          ),
-                                          SelectOption(
-                                              label=language["language_selection_order_website_lable"],
-                                              description=language["language_selection_order_website_description"],
-                                              emoji=community_member,
-                                              value='order_website'
-                                          ),
-                                          SelectOption(
-                                              label=language["language_selection_order_graphic_lable"],
-                                              description=language["language_selection_order_graphic_description"],
-                                              emoji=community_member,
-                                              value='order_graphics'
-                                          ),
-                                          SelectOption(
-                                              label=language["language_selection_order_bundle_lable"],
-                                              description=language["language_selection_order_bundle_description"],
-                                              emoji=community_eventhost,
-                                              value='order_bundle'
-                                          ),
-                                          SelectOption(
-                                              label=language["language_selection_customer_support_lable"],
-                                              description=language["language_selection_customer_support_description"],
-                                              emoji=community_advisor,
-                                              value='customer_support'
-                                          )
-                                      ],
-                                      custom_id='products',
-                                      max_values=1
-                                  )]])
-
     @commands.Cog.on_select('^products$')
     async def discord_bot_products(self, interaction, select_menu):
         user_id = interaction.author.id
-        logging.info(f'{str(user_id)} - Select Discord bot function called.')
+
+        user_lang_info = user_lang.get(user_id, {})
+        user_language = user_lang_info.get('language', 'en')
+        print(user_language)
 
         # Define user language and load language data
         user_info = user_data.get(user_id, {})
@@ -283,6 +220,12 @@ class BuyDiscordBot(commands.Cog):
 
             # Add options to the select menu
             select_options = [
+                SelectOption(
+                    label=language["discord_personalized_bot_label"],
+                    description=language["discord_personalized_bot_description"],
+                    emoji=community_admin,
+                    value='personalized_bot'
+                ),
                 SelectOption(
                     label=language["discord_modmail_bot_label"],
                     description=language["discord_modmail_bot_description"],
@@ -323,19 +266,10 @@ class BuyDiscordBot(commands.Cog):
                 max_values=1
             )
 
-            # Create the "I want a personalized bot" button
-            personalized_bot_button = Button(
-                style=ButtonStyle.green,
-                emoji="🚀",
-                label=language["discord_personalized_bot_label"],
-                custom_id="personalized_bot",
-                disabled=False
-            )
-
             # Edit interaction with new embed and components
             await interaction.edit(embeds=[header, description],
                                    attachments=[banner_file, icon_file, footer_file],
-                                   components=[[bot_select_menu], [personalized_bot_button]])
+                                   components=[[bot_select_menu]])
 
     @commands.Cog.on_select('^select_bot_options$')
     async def order_bot_step_1(self, interaction, select_menu):
@@ -358,7 +292,48 @@ class BuyDiscordBot(commands.Cog):
 
         # Retrieve emojis
         community_advisor = self.bot.get_emoji(EMOJIS["community_advisor"])
+        log_membershipscreening = self.bot.get_emoji(EMOJIS["log_membershipscreening"])
         community_developer = self.bot.get_emoji(EMOJIS["community_developer"])
+        community_admin = self.bot.get_emoji(EMOJIS["community_admin"])
+
+        # send message for personalized bot request.
+        if select_menu.values[0] == "personalized_bot":
+            # Log the selected bot type
+            logging.info(f'{str(user_id)} - Bot type selected by user: Personalized Bot')
+
+            # remove old message
+            await self.send_processing_response(interaction)
+
+            # Header over Bot message
+            header = await self.header()
+
+            # Create Discord bot selection description
+            description_personalized = discord.Embed(
+                description=language["discord_order_personalized_bot_description"].format(community_admin=community_admin),
+                color=EMBED_COLOR,
+            )
+            description_personalized.set_image(url="attachment://reelab_banner_blue.png")
+            description_personalized.set_footer(text="~ The official Reelab Studio Discord Bot")
+
+            # Attachments
+            banner_file, icon_file, footer_file = await self.attachments()
+
+            # creates a list of buttons to be sent
+            buttons_personalized = [
+                Button(
+                    style=ButtonStyle.green,
+                    emoji=log_membershipscreening,
+                    label=language["discord_order_personalized_bot_lable"],
+                    custom_id="personalized_bot_accept_tos",
+                )
+            ]
+
+            # Edit interaction with new embed and components
+            await interaction.edit(embeds=[header, description_personalized],
+                                   attachments=[banner_file, icon_file, footer_file],
+                                   components=[buttons_personalized]
+                                   )
+            return
 
         # Getting user ID to fetch stored information
         user_id = interaction.author.id
@@ -528,9 +503,9 @@ class BuyDiscordBot(commands.Cog):
         language = load_language_data(file_path, user_language)
 
         # Retrieve emojis
-        function_tick = self.bot.get_emoji(1217203424425152582)
-        function_cross = self.bot.get_emoji(1217203796065648691)
-        community_developer = self.bot.get_emoji(1217203400593117256)
+        function_tick = self.bot.get_emoji(EMOJIS["function_tick"])
+        function_cross = self.bot.get_emoji(EMOJIS["function_cross"])
+        community_developer = self.bot.get_emoji(EMOJIS["community_developer"])
 
         # Retrieve user data from the database or initialize an empty dictionary if not found
         user_info = user_data.get(user_id, {})
@@ -604,8 +579,8 @@ class BuyDiscordBot(commands.Cog):
         language = load_language_data(file_path, user_language)
 
         # Retrieve emojis
-        community_developer = self.bot.get_emoji(1217203400593117256)
-        community_owner = self.bot.get_emoji(1217203408516284516)
+        community_developer = self.bot.get_emoji(EMOJIS["community_developer"])
+        community_owner = self.bot.get_emoji(EMOJIS["community_owner"])
 
         # Retrieve user data from the database or initialize an empty dictionary if not found
         user_info = user_data.get(user_id, {})
@@ -710,9 +685,9 @@ class BuyDiscordBot(commands.Cog):
         language = load_language_data(file_path, user_language)
 
         # Retrieve emojis
-        log_membershipscreening = self.bot.get_emoji(1217203998659055797)
-        community_developer = self.bot.get_emoji(1217203400593117256)
-        plant_plant = self.bot.get_emoji(1217204087884611665)
+        log_membershipscreening = self.bot.get_emoji(EMOJIS["log_membershipscreening"])
+        community_developer = self.bot.get_emoji(EMOJIS["community_developer"])
+        plant_plant = self.bot.get_emoji(EMOJIS["plant_plant"])
 
         # Get bot name and status entered by the user
         bot_name = ctx.get_field('bot_name').value or None
@@ -749,9 +724,6 @@ class BuyDiscordBot(commands.Cog):
         # Header over Bot message
         header = await self.header()
 
-        # Log all user information that have been saved
-        logging.info(f'{str(user_id)} - Bot summary created by user: %s', user_info)
-
         formatted_description = language["discord_order_bot_step_5_description"].format(
             community_developer=community_developer,
             bot_type=bot_type,
@@ -786,13 +758,300 @@ class BuyDiscordBot(commands.Cog):
                                style=ButtonStyle.green,
                                emoji=log_membershipscreening,
                                label=language["discord_order_bot_step_5_accept_rules_lable"],
-                               custom_id="about_me_pack:yes",
+                               custom_id="pre_made_bot_accept_tos",
                            )
                        ]]
                        )
 
+    @commands.Cog.on_click("^pre_made_bot_accept_tos$")
+    async def order_pre_made_bot_open_thread(self, ctx: discord.ComponentInteraction, button):
+        # Extract user ID from the interaction context
+        user = ctx.author
+
+        # Define user language and load language data
+        user_info = user_data.get(user.id, {})
+        user_language = user_info.get('user_language', 'en')
+        script_directory = Path(__file__).resolve().parent.parent
+        file_path = script_directory / "languages/buy_product_languages.json"
+        language = load_language_data(file_path, user_language)
+
+        # Get Order Product channel for thread creation
+        channel = ctx.guild.get_channel(self.order_product_channel_id)
+
+        # Get Official Staff role
+        staff = ctx.guild.get_role(self.official_staff_id)
+
+        # Retrieve emojis
+        plant_plant = self.bot.get_emoji(EMOJIS["plant_plant"])
+        function_cross = self.bot.get_emoji(EMOJIS["function_cross"])
+
+        # Determine hosting duration ending
+        hosting_duration_month = "month" if user_info.get('hosting_duration', 'Not entered') == 1 else "months"
+
+        # Determine about me pack status and cost
+        about_me_pack_status = 'Selected' if user_info.get('about_me_pack') == 'yes' else 'Not selected'
+        about_me_pack_total_cost = 0.50 * int(user_info.get('hosting_duration', 1))
+        about_me_pack_cost_text = f" (Cost: {format_price(about_me_pack_total_cost)})" if about_me_pack_status == 'Selected' else ""
+        price_about_me_pack = about_me_pack_total_cost if about_me_pack_status == 'Selected' else 0
+
+        # Calculate total price
+        total_price = price_about_me_pack + (float(user_info.get('user_amount_pricing', '0').replace('€', '').replace(',', '.')) * int(user_info.get('hosting_duration', '1')))
+        total_price_formatted = f"{total_price:.2f}€"
+
+        # Get all user information for the further embed
+        bot_type = user_info.get('bot_type', 'Not entered')
+        bot_name = user_info.get('bot_name', 'Not entered')
+        bot_status = user_info.get('bot_status', 'Not entered')
+        bot_users = user_info.get('bot_users', 'Not entered')
+        bot_user_pricing = user_info.get('user_amount_pricing', 'Not entered')
+        bot_hosting_duration = user_info.get('hosting_duration', 'Not entered')
+
+        # Remove old message
+        await self.send_processing_response(ctx)
+
+        # Header over Bot message
+        header = await self.header()
+
+        # Log all user information that have been saved
+        logging.info(f'{str(user.id)} - Bot summary created by user: %s', user_info)
+
+        # Format the bot description for embedding
+        formatted_description = language["discord_order_bot_thread_message"].format(
+            plant_plant=plant_plant,
+            user=user.mention,
+            bot_type=bot_type,
+            bot_name=bot_name,
+            bot_status=bot_status,
+            bot_users=bot_users,
+            about_me_pack_status=about_me_pack_status,
+            about_me_pack_cost_text=about_me_pack_cost_text,
+            bot_user_pricing=bot_user_pricing,
+            bot_hosting_duration=bot_hosting_duration,
+            hosting_duration_month=hosting_duration_month,
+            total_price_formatted=total_price_formatted
+        )
+
+        # Load the current counting
+        counting = load_counting()
+
+        # Create a thread with a unique name based on the counting
+        thread = await channel.create_thread(
+            name=f"#{counting:04} | {user} | {bot_type}",
+            reason=f"#{counting:04} | {user} | {bot_type}",
+            private=True,
+            invitable=True
+        )
+
+        # Increment and save the counting for future threads
+        counting += 1
+        save_counting(counting)
+
+        # Send summary in thread.
+        description = discord.Embed(
+            description=formatted_description,
+            color=EMBED_COLOR,
+        )
+        description.set_image(url="attachment://reelab_banner_blue.png")
+        description.set_footer(text="~ The official Reelab Studio Discord Bot")
+
+        # Attachments
+        banner_file, icon_file, footer_file = await self.attachments()
+
+        # Send the bot summary message with buttons for pricing information and closing the order
+        await thread.send(language["discord_order_bot_thread_ping_message"].format(user=user.mention, staff=staff.mention))
+        await thread.send(embeds=[header, description],
+                          files=[banner_file, icon_file, footer_file],
+                          components=[[
+                              Button(
+                                  style=ButtonStyle.grey,
+                                  emoji=plant_plant,
+                                  label=language["discord_order_bot_thread_price_button"],
+                                  custom_id="pricing_information",
+                              ),
+                              Button(
+                                  style=ButtonStyle.grey,
+                                  emoji=function_cross,
+                                  label=language["discord_order_bot_thread_close_button"],
+                                  custom_id="close_order",
+                              )
+                          ]]
+                          )
+        # Send summary in thread.
+        user_message = discord.Embed(
+            description=language["discord_order_bot_user_message"].format(thread=thread.mention),
+            color=EMBED_COLOR,
+        )
+        user_message.set_image(url="attachment://reelab_banner_blue.png")
+        user_message.set_footer(text="~ The official Reelab Studio Discord Bot")
+
+        # Attachments
+        banner_file, icon_file, footer_file = await self.attachments()
+
+        # Edit the message with updated embed and components
+        await ctx.edit(embeds=[header, user_message],
+                       attachments=[banner_file, icon_file, footer_file],
+                       )
+
         # Delete user data after processing
-        del user_data[user_id]
+        del user_data[user.id]
+
+    @commands.Cog.on_click("^personalized_bot_accept_tos$")
+    async def order_personalized_bot_open_thread(self, ctx: discord.ComponentInteraction, button):
+        # Extract user ID from the interaction context
+        user = ctx.author
+
+        # Define user language and load language data
+        user_info = user_data.get(user.id, {})
+        user_language = user_info.get('user_language', 'en')
+        script_directory = Path(__file__).resolve().parent.parent
+        file_path = script_directory / "languages/buy_product_languages.json"
+        language = load_language_data(file_path, user_language)
+
+        # Log all user information that have been saved
+        logging.info(f'{str(user.id)} - Personalized Bot ordered by user: %s', user_info)
+
+        # Get Order Product channel for thread creation
+        channel = ctx.guild.get_channel(self.order_product_channel_id)
+
+        # Get Official Staff role
+        staff = ctx.guild.get_role(self.official_staff_id)
+
+        # Retrieve emojis
+        plant_plant = self.bot.get_emoji(EMOJIS["plant_plant"])
+        function_cross = self.bot.get_emoji(EMOJIS["function_cross"])
+
+        # Load the current counting
+        counting = load_counting()
+
+        # Create a thread with a unique name based on the counting
+        thread = await channel.create_thread(
+            name=f"#{counting:04} | {user} | Personalized Bot",
+            reason=f"#{counting:04} | {user} | Personalized Bot",
+            private=True,
+            invitable=True
+        )
+
+        # Increment and save the counting for future threads
+        counting += 1
+        save_counting(counting)
+
+        # Remove old message
+        await self.send_processing_response(ctx)
+
+        # Header over Bot message
+        header = await self.header()
+
+        # Send summary in thread.
+        description = discord.Embed(
+            description=language["discord_order_bot_personalized_thread_message"].format(user=user.mention, plant_plant=plant_plant),
+            color=EMBED_COLOR,
+        )
+        description.set_image(url="attachment://reelab_banner_blue.png")
+        description.set_footer(text="~ The official Reelab Studio Discord Bot")
+
+        # Attachments
+        banner_file, icon_file, footer_file = await self.attachments()
+
+        # Send the bot summary message with buttons for pricing information and closing the order
+        await thread.send(language["discord_order_bot_thread_ping_message"].format(user=user.mention, staff=staff.mention))
+        await thread.send(embeds=[header, description],
+                          files=[banner_file, icon_file, footer_file],
+                          components=[[
+                              Button(
+                                  style=ButtonStyle.grey,
+                                  emoji=plant_plant,
+                                  label=language["discord_order_bot_thread_price_button"],
+                                  custom_id="pricing_information",
+                              ),
+                              Button(
+                                  style=ButtonStyle.grey,
+                                  emoji=function_cross,
+                                  label=language["discord_order_bot_thread_close_button"],
+                                  custom_id="close_order",
+                              )
+                          ]]
+                          )
+
+        # Send summary in thread.
+        user_message = discord.Embed(
+            description=language["discord_order_bot_user_message"].format(thread=thread.mention),
+            color=EMBED_COLOR,
+        )
+        user_message.set_image(url="attachment://reelab_banner_blue.png")
+        user_message.set_footer(text="~ The official Reelab Studio Discord Bot")
+
+        # Attachments
+        banner_file, icon_file, footer_file = await self.attachments()
+
+        # Edit the message with updated embed and components
+        await ctx.edit(embeds=[header, user_message],
+                       attachments=[banner_file, icon_file, footer_file],
+                       )
+
+        # Delete user data after processing
+        if user_data.get(user.id):
+            del user_data[user.id]
+        else:
+            return
+
+    @commands.Cog.on_click("^close_order$")
+    async def order_bot_close_thread(self, ctx: discord.ComponentInteraction, button):
+        # Extract user ID from the interaction context
+        user = ctx.author
+
+        # Log thread closing
+        logging.info(f'{str(user.id)} - the thread has been closed by: %s', user.name)
+
+        # Get the current thread and its name
+        thread = ctx.channel
+        thread_name = thread.name
+
+        # Update the thread name to indicate it's closed
+        new_thread_name = f"{thread_name} | closed"
+
+        # Prepare response message for closing the thread
+        response_message = discord.Embed(
+            color=EMBED_COLOR,
+            description="Thread is being closed and archived."
+        )
+        await ctx.respond(embed=response_message, hidden=True)
+
+        # Remove all members from the thread
+        for member in thread.members:
+            await thread.remove_member(member)
+
+        # Edit the thread's name to reflect closure
+        await thread.edit(name=new_thread_name)
+
+        # Archive the thread
+        await thread.edit(archived=True)
+
+    @commands.Cog.on_click("^pricing_information$")
+    async def order_bot_pricing_information(self, ctx: discord.ComponentInteraction, button):
+        # Extract user ID from the interaction context
+        user = ctx.author
+
+        # Define user language and load language data
+        user_info = user_data.get(user.id, {})
+        user_language = user_info.get('user_language', 'en')
+        script_directory = Path(__file__).resolve().parent.parent
+        file_path = script_directory / "languages/buy_product_languages.json"
+        language = load_language_data(file_path, user_language)
+
+        # Log pricing information
+        logging.info(f'{str(user.id)} - Pricing information called by: %s', user.name)
+
+        # Retrieve emojis
+        plantbig_plant = self.bot.get_emoji(EMOJIS["plantbig_plant"])
+        log_memberjoin = self.bot.get_emoji(EMOJIS["log_memberjoin"])
+        community_admin = self.bot.get_emoji(EMOJIS["community_admin"])
+
+        # Send pricing information in chat.
+        response_message = discord.Embed(
+            color=EMBED_COLOR,
+            description=language["discord_order_bot_pricing_information"].format(plantbig_plant=plantbig_plant, log_memberjoin=log_memberjoin, community_admin=community_admin)
+        )
+        await ctx.respond(embed=response_message, hidden=True)
 
 
 # ⏤ { settings } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
