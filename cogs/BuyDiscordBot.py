@@ -10,33 +10,12 @@
 # ⏤ { imports } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
 from cogs import *
-from cogs.ProductPurchase import user_lang
+from cogs.ProductPurchase import EMOJIS, EMBED_COLOR, HEADER_COLOR
 
 # ⏤ { configurations } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 user_data = {}
 
 counting_file_path = "counting.json"
-
-# emojis
-EMOJIS = {
-    "community_owner": 1217203408516284516,
-    "community_admin": 1217203398802280631,
-    "community_developer": 1217203400593117256,
-    "community_advisor": 1217203395434385438,
-    "community_member": 1217203405316030595,
-    "community_eventhost": 1217203402237280488,
-    "function_tick": 1217203424425152582,
-    "function_cross": 1217203796065648691,
-    "log_timeoutremoved": 1217203449654018128,
-    "log_membershipscreening": 1217203998659055797,
-    "log_memberjoin": 1217203966450860093,
-    "plantbig_plant": 1217203467777474640,
-    "plant_plant": 1217204087884611665
-}
-
-# embed-styles
-EMBED_COLOR = 0x48689b
-HEADER_COLOR = 0x2b2d31
 
 
 # ⏤ { function definitions } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
@@ -180,14 +159,17 @@ class BuyDiscordBot(commands.Cog):
 
     @commands.Cog.on_select('^products$')
     async def discord_bot_products(self, interaction, select_menu):
+        from cogs.ProductPurchase import user_lang
+
         user_id = interaction.author.id
 
-        user_lang_info = user_lang.get(user_id, {})
-        user_language = user_lang_info.get('language', 'en')
-        print(user_language)
+        user_info = user_lang.get(user_id, {})
+        user_language = user_info.get('language', 'en')
 
-        # Define user language and load language data
         user_info = user_data.get(user_id, {})
+        user_info["user_language"] = user_language
+        user_data[user_id] = user_info
+
         user_language = user_info.get('user_language', 'en')
         script_directory = Path(__file__).resolve().parent.parent
         file_path = script_directory / "languages/buy_product_languages.json"

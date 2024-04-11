@@ -12,7 +12,6 @@
 from cogs import *
 
 # ⏤ { configurations } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
-
 user_lang = {}
 
 # emojis
@@ -373,19 +372,18 @@ class ProductPurchase(commands.Cog):
         else:
             user_language = 'en'
 
-        print(user_language)
-
         # Retrieve user data from the database or initialize an empty dictionary if not found
         user_info = user_lang.get(user_id, {})
 
-        # Update user information with the selected hosting duration
+        # Update user information with the selected language
         user_info["language"] = user_language
 
         # Update user data in the database
         user_lang[user_id] = user_info
 
         user_language = user_info.get('language', 'en')
-        print(user_language)
+
+        print(user_lang)
 
         # Load language data
         script_directory = Path(__file__).resolve().parent.parent
