@@ -1,0 +1,122 @@
+{
+  "en": {
+    "language_selection_description": "## {plantbig_plant} Turn dreams into reality!\n> We, the **Reelab Team**, are thrilled about your decision to purchase a product. Please select from the options below in the dropdown menu to proceed with your purchase or to access customer support.",
+    "language_selection_options_placeholder": "Explore your options...",
+
+    "language_selection_order_bot_lable": "Order Discord Bot",
+    "language_selection_order_bot_description": "Enhance your server with a Discord bot.",
+    "language_selection_order_website_lable": "Order Website",
+    "language_selection_order_website_description": "Establish your online presence with a sleek site.",
+    "language_selection_order_graphic_lable": "Order Graphics",
+    "language_selection_order_graphic_description": "Enhance your brand with custom graphics.",
+    "language_selection_order_bundle_lable": "Order Bundle",
+    "language_selection_order_bundle_description": "Unlock savings by bundling services.",
+    "language_selection_customer_support_lable": "Get Customer Support",
+    "language_selection_customer_support_description": "Get timely help from our support team."
+  },
+  "de": {
+    "language_selection_description": "## {plantbig_plant} Mach deine Träume wahr!\n> Wir, das **Reelab Team**, sind begeistert von deiner Entscheidung, ein Produkt zu kaufen. Bitte wähle aus den folgenden Optionen im Dropdown-Menü aus, um deinen Kauf fortzusetzen oder Kundensupport zu erhalten.",
+    "language_selection_options_placeholder": "Entdecke deine Möglichkeiten...",
+
+    "language_selection_order_bot_lable": "Discord Bot bestellen",
+    "language_selection_order_bot_description": "Verbessere deinen Server mit einem Discord Bot.",
+    "language_selection_order_website_lable": "Website bestellen",
+    "language_selection_order_website_description": "Erstelle deine Online-Präsenz mit einer schicken Webseite.",
+    "language_selection_order_graphic_lable": "Grafiken bestellen",
+    "language_selection_order_graphic_description": "Verbessere dein Branding mit individuellen Grafiken.",
+    "language_selection_order_bundle_lable": "Bundle bestellen",
+    "language_selection_order_bundle_description": "Entsperre Rabatte, indem du Dienstleistungen bündelst.",
+    "language_selection_customer_support_lable": "Kundensupport erhalten",
+    "language_selection_customer_support_description": "Erhalte zeitnah Hilfe von unserem Support-Team."
+  },
+  "tr": {
+    "language_selection_description": "## {plantbig_plant} Hayallerini Gerçeğe Dönüştür!\n> Biz, **Reelab Ekibi**, bir ürün satın alma kararınla heyecanlandık. Lütfen devam etmek için aşağıdaki seçeneklerden birini açılır menüden seç veya müşteri desteği almak için.",
+    "language_selection_options_placeholder": "Seçeneklerini keşfet...",
+
+    "language_selection_order_bot_lable": "Discord Botu Siparişi Ver",
+    "language_selection_order_bot_description": "Discord Botu ile sunucunu geliştir.",
+    "language_selection_order_website_lable": "Web Sitesi Siparişi Ver",
+    "language_selection_order_website_description": "Şık bir site ile çevrimiçi varlığını oluştur.",
+    "language_selection_order_graphic_lable": "Grafikler Siparişi Ver",
+    "language_selection_order_graphic_description": "Özel grafiklerle markanı güçlendir.",
+    "language_selection_order_bundle_lable": "Paket Siparişi Ver",
+    "language_selection_order_bundle_description": "Hizmetleri paketleyerek indirimleri aç.",
+    "language_selection_customer_support_lable": "Müşteri Desteği Al",
+    "language_selection_customer_support_description": "Destek ekibimizden zamanında yardım al."
+  },
+  "fr": {
+    "language_selection_description": "## {plantbig_plant} Transformez vos rêves en réalité!\n> Nous, l'équipe **Reelab**, sommes ravis de votre décision d'acheter un produit. Veuillez sélectionner parmi les options ci-dessous dans le menu déroulant pour poursuivre votre achat ou pour obtenir un support client.",
+    "language_selection_options_placeholder": "Explorez vos options...",
+
+    "language_selection_order_bot_lable": "Commander un Bot Discord",
+    "language_selection_order_bot_description": "Améliorez votre serveur avec un Bot Discord.",
+    "language_selection_order_website_lable": "Commander un Site Web",
+    "language_selection_order_website_description": "Établissez votre présence en ligne avec un site élégant.",
+    "language_selection_order_graphic_lable": "Commander des Graphiques",
+    "language_selection_order_graphic_description": "Améliorez votre marque avec des graphiques personnalisés.",
+    "language_selection_order_bundle_lable": "Commander un Pack",
+    "language_selection_order_bundle_description": "Débloquez des économies en regroupant des services.",
+    "language_selection_customer_support_lable": "Obtenir du Support Client",
+    "language_selection_customer_support_description": "Obtenez une aide rapide de notre équipe de support."
+  },
+  "it": {
+    "language_selection_description": "## {plantbig_plant} Trasforma i tuoi sogni in realtà!\n> Noi, il team **Reelab**, siamo entusiasti della tua decisione di acquistare un prodotto. Seleziona dalle opzioni seguenti nel menu a discesa per procedere con il tuo acquisto o per accedere al supporto clienti.",
+    "language_selection_options_placeholder": "Esplora le tue opzioni...",
+
+    "language_selection_order_bot_lable": "Ordina un Bot Discord",
+    "language_selection_order_bot_description": "Migliora il tuo server con un Bot Discord.",
+    "language_selection_order_website_lable": "Ordina un Sito Web",
+    "language_selection_order_website_description": "Stabilisci la tua presenza online con un sito elegante.",
+    "language_selection_order_graphic_lable": "Ordina Grafiche",
+    "language_selection_order_graphic_description": "Migliora il tuo marchio con grafiche personalizzate.",
+    "language_selection_order_bundle_lable": "Ordina un Pacchetto",
+    "language_selection_order_bundle_description": "Sblocca risparmi raggruppando servizi.",
+    "language_selection_customer_support_lable": "Ottieni Assistenza Clienti",
+    "language_selection_customer_support_description": "Ricevi assistenza tempestiva dal nostro team di supporto."
+  },
+  "ja": {
+    "language_selection_description": "## {plantbig_plant} 夢を現実に！\n> 私たち **Reelab チーム** は、製品を購入するというあなたの決定に興奮しています。ご購入またはカスタマーサポートに進むために、ドロップダウンメニューから以下のオプションを選択してください。",
+    "language_selection_options_placeholder": "オプションを見る...",
+
+    "language_selection_order_bot_lable": "Discord ボットの注文",
+    "language_selection_order_bot_description": "Discord ボットでサーバーを強化します。",
+    "language_selection_order_website_lable": "ウェブサイトの注文",
+    "language_selection_order_website_description": "洗練されたサイトでオンラインプレゼンスを確立します。",
+    "language_selection_order_graphic_lable": "グラフィックスの注文",
+    "language_selection_order_graphic_description": "カスタムグラフィックスでブランドを向上させます。",
+    "language_selection_order_bundle_lable": "バンドルの注文",
+    "language_selection_order_bundle_description": "サービスをバンドルして割引を解除します。",
+    "language_selection_customer_support_lable": "カスタマーサポートの取得",
+    "language_selection_customer_support_description": "サポートチームから迅速な支援を受け取ります。"
+  },
+  "zh": {
+    "language_selection_description": "## {plantbig_plant} 将梦想变为现实！\n> 我们，**Reelab 团队**，对您购买产品的决定感到兴奋。请从下拉菜单中选择以下选项，继续购买或获取客户支持。",
+    "language_selection_options_placeholder": "探索您的选择...",
+
+    "language_selection_order_bot_lable": "订购 Discord 机器人",
+    "language_selection_order_bot_description": "通过 Discord 机器人改善您的服务器。",
+    "language_selection_order_website_lable": "订购网站",
+    "language_selection_order_website_description": "使用时尚的网站建立您的在线存在。",
+    "language_selection_order_graphic_lable": "订购图形",
+    "language_selection_order_graphic_description": "使用定制图形提升您的品牌。",
+    "language_selection_order_bundle_lable": "订购捆绑服务",
+    "language_selection_order_bundle_description": "捆绑服务以解锁优惠。",
+    "language_selection_customer_support_lable": "获取客户支持",
+    "language_selection_customer_support_description": "从我们的支持团队及时获取帮助。"
+  },
+  "ko": {
+    "language_selection_description": "## {plantbig_plant} 꿈을 현실로 만들어보세요!\n> **Reelab 팀**은(는) 제품을 구매하신 결정에 기쁘게 생각합니다. 구매를 계속 진행하거나 고객 지원을 받으려면 아래 드롭다운 메뉴에서 옵션을 선택하십시오.",
+    "language_selection_options_placeholder": "옵션을 살펴보세요...",
+
+    "language_selection_order_bot_lable": "Discord 봇 주문",
+    "language_selection_order_bot_description": "Discord 봇으로 서버를 강화하세요.",
+    "language_selection_order_website_lable": "웹사이트 주문",
+    "language_selection_order_website_description": "세련된 사이트로 온라인 존재를 확립하세요.",
+    "language_selection_order_graphic_lable": "그래픽 주문",
+    "language_selection_order_graphic_description": "맞춤형 그래픽으로 브랜드를 향상시키세요.",
+    "language_selection_order_bundle_lable": "번들 주문",
+    "language_selection_order_bundle_description": "서비스를 번들하여 할인 혜택을 받으세요.",
+    "language_selection_customer_support_lable": "고객 지원 받기",
+    "language_selection_customer_support_description": "지원팀에서 신속한 도움을 받으세요."
+  }
+}

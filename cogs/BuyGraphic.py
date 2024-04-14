@@ -61,7 +61,7 @@ def save_counting(counting):
 logging.basicConfig(filename='bot.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 
-class BuyWebsite(commands.Cog):
+class BuyGraphic(commands.Cog):
     def __init__(self, bot):
         self.bot: commands.Bot = bot
         self.order_product_channel_id = 1216178294458814526
@@ -118,9 +118,9 @@ class BuyWebsite(commands.Cog):
 # ⏤ { codebase } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
     @commands.Cog.on_select('^products$')
-    async def website_products(self, interaction, select_menu):
+    async def graphic_products(self, interaction, select_menu):
         # Check if the selected value of the select menu is "order_discord_bot"
-        if select_menu.values[0] == "order_website":
+        if select_menu.values[0] == "order_graphics":
             # Import required modules
             from cogs.ProductPurchase import user_lang
 
@@ -153,7 +153,7 @@ class BuyWebsite(commands.Cog):
 
             # Define the file path for language data
             script_directory = Path(__file__).resolve().parent.parent
-            file_path = script_directory / "languages/order_website_language_file.json"
+            file_path = script_directory / "languages/order_graphic_language_file.json"
 
             # Load language data based on the user's language preference
             language = load_language_data(file_path, user_language)
@@ -170,7 +170,7 @@ class BuyWebsite(commands.Cog):
 
             # Create Discord bot selection description
             description = discord.Embed(
-                description=language["web_personalized_site_description"].format(plant_plant=plant_plant),
+                description=language["order_graphics_description"].format(plant_plant=plant_plant),
                 color=EMBED_COLOR,
             )
             description.set_image(url="attachment://reelab_banner_blue.png")
@@ -184,8 +184,8 @@ class BuyWebsite(commands.Cog):
                 Button(
                     style=ButtonStyle.green,
                     emoji=log_membershipscreening,
-                    label=language["order_website_accept_tos"],
-                    custom_id="website_accept_tos",
+                    label=language["order_graphics_accept_tos"],
+                    custom_id="graphic_accept_tos",
                 )
             ]
 
@@ -195,8 +195,8 @@ class BuyWebsite(commands.Cog):
                                    components=[buttons]
                                    )
 
-    @commands.Cog.on_click("^website_accept_tos$")
-    async def order_website_open_thread(self, ctx: discord.ComponentInteraction, button):
+    @commands.Cog.on_click("^graphic_accept_tos$")
+    async def order_graphic_open_thread(self, ctx: discord.ComponentInteraction, button):
         # Extract user ID from the interaction context
         user = ctx.author
 
@@ -204,11 +204,11 @@ class BuyWebsite(commands.Cog):
         user_info = user_data.get(user.id, {})
         user_language = user_info.get('user_language', 'en')
         script_directory = Path(__file__).resolve().parent.parent
-        file_path = script_directory / "languages/order_website_language_file.json"
+        file_path = script_directory / "languages/order_graphic_language_file.json"
         language = load_language_data(file_path, user_language)
 
         # Log all user information that have been saved
-        logging.info(f'{str(user.id)} - Website ordered by user: %s', user_info)
+        logging.info(f'{str(user.id)} - Graphic ordered by user: %s', user_info)
 
         # Get Order Product channel for thread creation
         channel = ctx.guild.get_channel(self.order_product_channel_id)
@@ -226,8 +226,8 @@ class BuyWebsite(commands.Cog):
 
         # Create a thread with a unique name based on the counting
         thread = await channel.create_thread(
-            name=f"#{counting:04} | {user} | Website",
-            reason=f"#{counting:04} | {user} | Website",
+            name=f"#{counting:04} | {user} | Graphics",
+            reason=f"#{counting:04} | {user} | Graphics",
             private=True,
             invitable=True
         )
@@ -244,9 +244,9 @@ class BuyWebsite(commands.Cog):
 
         # Send summary in thread.
         description = discord.Embed(
-            description=language["order_website_personalized_thread_message"].format(user=user.mention,
-                                                                                     plant_plant=plant_plant,
-                                                                                     community_advisor=community_advisor),
+            description=language["order_graphic_thread_message"].format(user=user.mention,
+                                                                        plant_plant=plant_plant,
+                                                                        community_advisor=community_advisor),
             color=EMBED_COLOR,
         )
         description.set_image(url="attachment://reelab_banner_blue.png")
@@ -256,28 +256,28 @@ class BuyWebsite(commands.Cog):
         banner_file, icon_file, footer_file = await self.attachments()
 
         # Send the bot summary message with buttons for pricing information and closing the order
-        await thread.send(language["order_website_thread_ping_message"].format(user=user.mention, staff=staff.mention))
+        await thread.send(language["order_graphic_thread_ping_message"].format(user=user.mention, staff=staff.mention))
         await thread.send(embeds=[header, description],
                           files=[banner_file, icon_file, footer_file],
                           components=[[
                               Button(
                                   style=ButtonStyle.grey,
                                   emoji=plant_plant,
-                                  label=language["order_website_thread_price_button"],
-                                  custom_id="website_pricing_information",
+                                  label=language["order_graphic_thread_price_button"],
+                                  custom_id="graphic_pricing_information",
                               ),
                               Button(
                                   style=ButtonStyle.grey,
                                   emoji=function_cross,
-                                  label=language["order_website_thread_close_button"],
-                                  custom_id="close_website_order",
+                                  label=language["order_graphic_thread_close_button"],
+                                  custom_id="close_graphic_order",
                               )
                           ]]
                           )
 
         # Send summary in thread.
         user_message = discord.Embed(
-            description=language["order_website_user_message"].format(thread=thread.mention),
+            description=language["order_graphic_user_message"].format(thread=thread.mention),
             color=EMBED_COLOR,
         )
         user_message.set_image(url="attachment://reelab_banner_blue.png")
@@ -291,8 +291,8 @@ class BuyWebsite(commands.Cog):
                        attachments=[banner_file, icon_file, footer_file],
                        )
 
-    @commands.Cog.on_click("^website_pricing_information$")
-    async def website_pricing_information(self, ctx: discord.ComponentInteraction, button):
+    @commands.Cog.on_click("^graphic_pricing_information$")
+    async def graphic_pricing_information(self, ctx: discord.ComponentInteraction, button):
         # Extract user ID from the interaction context
         user = ctx.author
 
@@ -300,7 +300,7 @@ class BuyWebsite(commands.Cog):
         user_info = user_data.get(user.id, {})
         user_language = user_info.get('user_language', 'en')
         script_directory = Path(__file__).resolve().parent.parent
-        file_path = script_directory / "languages/order_website_language_file.json"
+        file_path = script_directory / "languages/order_graphic_language_file.json"
         language = load_language_data(file_path, user_language)
 
         # Log pricing information
@@ -314,14 +314,14 @@ class BuyWebsite(commands.Cog):
         # Send pricing information in chat.
         response_message = discord.Embed(
             color=EMBED_COLOR,
-            description=language["order_website_pricing_information"].format(plantbig_plant=plantbig_plant,
+            description=language["order_graphic_pricing_information"].format(plantbig_plant=plantbig_plant,
                                                                              log_memberjoin=log_memberjoin,
                                                                              community_admin=community_admin)
         )
         await ctx.respond(embed=response_message, hidden=True)
 
-    @commands.Cog.on_click("^close_website_order$")
-    async def order_bot_close_thread(self, ctx: discord.ComponentInteraction, button):
+    @commands.Cog.on_click("^close_graphic_order$")
+    async def order_graphic_close_thread(self, ctx: discord.ComponentInteraction, button):
         # Extract user ID from the interaction context
         user = ctx.author
 
@@ -362,4 +362,4 @@ class BuyWebsite(commands.Cog):
 # ⏤ { settings } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
 def setup(reelab_bot):
-    reelab_bot.add_cog(BuyWebsite(reelab_bot))
+    reelab_bot.add_cog(BuyGraphic(reelab_bot))

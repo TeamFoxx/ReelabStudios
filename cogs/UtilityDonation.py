@@ -1,10 +1,10 @@
 # ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-# »› Entwickelt von Foxx
-# »› Copyright © 2024 Aurel Hoxha. Alle Rechte vorbehalten.
+# »› Developed by Foxx
+# »› Copyright © 2024 Aurel Hoxha. All rights reserved.
 # »› GitHub: https://github.com/TeamFoxx
-# »› Für Support und Anfragen kontaktieren Sie bitte hello@aurelhoxha.de
-# »› Verwendung dieses Programms unterliegt den Bedingungen der MIT-Lizenz.
-# »› Eine Kopie der Lizenz finden Sie in der Datei "LICENSE" im Hauptverzeichnis dieses Projekts.
+# »› For support and inquiries, please contact hello@aurelhoxha.de
+# »› Use of this program is subject to the terms of the All Rights Reserved License.
+# »› A copy of the license can be found in the "LICENSE" file in the root directory of this project.
 # ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 #
 # ⏤ { imports } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤

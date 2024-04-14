@@ -1,39 +1,19 @@
 # ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-# »› Entwickelt von Foxx
-# »› Copyright © 2024 Aurel Hoxha. Alle Rechte vorbehalten.
+# »› Developed by Foxx
+# »› Copyright © 2024 Aurel Hoxha. All rights reserved.
 # »› GitHub: https://github.com/TeamFoxx
-# »› Für Support und Anfragen kontaktieren Sie bitte hello@aurelhoxha.de
-# »› Verwendung dieses Programms unterliegt den Bedingungen der MIT-Lizenz.
-# »› Eine Kopie der Lizenz finden Sie in der Datei "LICENSE" im Hauptverzeichnis dieses Projekts.
+# »› For support and inquiries, please contact hello@aurelhoxha.de
+# »› Use of this program is subject to the terms of the All Rights Reserved License.
+# »› A copy of the license can be found in the "LICENSE" file in the root directory of this project.
 # ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 #
 # ⏤ { imports } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
 from cogs import *
+from config import EMOJIS, EMBED_COLOR, HEADER_COLOR
 
 # ⏤ { configurations } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 user_lang = {}
-
-# emojis
-EMOJIS = {
-    "community_owner": 1217203408516284516,
-    "community_admin": 1217203398802280631,
-    "community_developer": 1217203400593117256,
-    "community_advisor": 1217203395434385438,
-    "community_member": 1217203405316030595,
-    "community_eventhost": 1217203402237280488,
-    "function_tick": 1217203424425152582,
-    "function_cross": 1217203796065648691,
-    "log_timeoutremoved": 1217203449654018128,
-    "log_membershipscreening": 1217203998659055797,
-    "log_memberjoin": 1217203966450860093,
-    "plantbig_plant": 1217203467777474640,
-    "plant_plant": 1217204087884611665
-}
-
-# embed-styles
-EMBED_COLOR = 0x48689b
-HEADER_COLOR = 0x2b2d31
 
 
 # ⏤ { function definitions } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
@@ -113,31 +93,22 @@ class ProductPurchase(commands.Cog):
 # ⏤ { codebase } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
     @commands.Cog.slash_command(
-        name="buy-a-product",
+        name="order-a-product",
         description='Send the "buy a product" Message to this chat.',
         default_required_permissions=discord.Permissions(administrator=True)
     )
     async def buy_product(self, ctx):
-        # Discord Emoji
-        community_planner = self.bot.get_emoji(1217203741279653968)
-        community_member = self.bot.get_emoji(1217203405316030595)
-        community_eventhost = self.bot.get_emoji(1217203402237280488)
-        plantbig_plant = self.bot.get_emoji(1217203467777474640)
-        community_developer = self.bot.get_emoji(1217203400593117256)
+        # Retrieve emojis
+        community_planner = self.bot.get_emoji(EMOJIS["community_planner"])
+        community_member = self.bot.get_emoji(EMOJIS["community_member"])
+        community_eventhost = self.bot.get_emoji(EMOJIS["community_eventhost"])
+        plantbig_plant = self.bot.get_emoji(EMOJIS["plantbig_plant"])
+        community_developer = self.bot.get_emoji(EMOJIS["community_developer"])
 
-        # Header of every Bot message
-        header = discord.Embed(colour=0x2b2d31)
-        header.set_author(name="The official Reelab Studio Discord Server", url="https://reelab.studio/",
-                          icon_url="attachment://reelab_logo_white.png")
-        header.set_image(url="attachment://reelab_banner_white.gif")
+        # Create header
+        header = await self.header()
 
-        banner_path = "./pictures/reelab_banner_white.gif"
-        banner_file = discord.File(banner_path, filename="reelab_banner_white.gif")
-
-        icon_path = "./pictures/reelab_logo_white.png"
-        icon_file = discord.File(icon_path, filename="reelab_logo_white.png")
-
-        # Following message
+        # Embedded message to be sent
         buy_product_msg = discord.Embed(
             description=f"# {plantbig_plant} Transforming Ideas into Digital Reality\n"
                         f"> Whether it's for branding or community building, our services are tailored to transform your ideas into digital reality. **Explore our offerings below.**\n\n"
@@ -167,188 +138,189 @@ class ProductPurchase(commands.Cog):
                         f"- :shopping_cart: **Ready to purchase?** Just klick the button below.\n"
                         f"- Need assistance or have questions? Feel free to ask our staff members in the server!\n\n"
                         f"**Note:** Our current payment methods include PayPal, credit/debit card, Discord Nitro boosts, and promotional offers.",
-            color=0x48689b,
+            color=EMBED_COLOR,
         )
-        buy_product_msg.set_author(name="www.reelab.studio", url="https://reelab.studio/")
         buy_product_msg.set_image(url="attachment://reelab_banner_blue.png")
 
-        footer_path = "./pictures/reelab_banner_blue.png"
-        footer_file = discord.File(footer_path, filename="reelab_banner_blue.png")
+        # Creates a list of buttons to be sent
+        buttons = [
+            Button(
+                style=ButtonStyle.green,
+                emoji="🛍️",
+                label="Order a Product",
+                custom_id="order_product",
+                disabled=False
+            ),
+            Button(
+                style=ButtonStyle.grey,
+                emoji="🌍",
+                label="Purchase in Your Language",
+                custom_id="language_selection",
+                disabled=False
+            )
+        ]
 
+        # Load attachments
+        banner_file, icon_file, footer_file = await self.attachments()
+
+        # Edit interaction with new embed and components
         await ctx.respond(embeds=[header, buy_product_msg],
                           files=[banner_file, icon_file, footer_file],
-                          components=[[
-                              Button(
-                                  style=ButtonStyle.green,
-                                  emoji="🛍️",
-                                  label="Order a Product",
-                                  custom_id="order_product",
-                                  disabled=False
-                              ),
-                              Button(
-                                  style=ButtonStyle.grey,
-                                  emoji="🌍",
-                                  label="Purchase in Your Language",
-                                  custom_id="language_selection",
-                                  disabled=False
-                              )
-                          ]]
-                          )
+                          components=[buttons])
 
     # Order product section.
     @commands.Cog.on_click('^order_product$')
     async def order_product(self, ctx: discord.ComponentInteraction, button):
-        community_advisor = self.bot.get_emoji(1217203395434385438)
-        community_member = self.bot.get_emoji(1217203405316030595)
-        community_eventhost = self.bot.get_emoji(1217203402237280488)
-        plantbig_plant = self.bot.get_emoji(1217203467777474640)
+        # Retrieve emojis
+        community_advisor = self.bot.get_emoji(EMOJIS["community_advisor"])
+        community_member = self.bot.get_emoji(EMOJIS["community_member"])
+        community_eventhost = self.bot.get_emoji(EMOJIS["community_eventhost"])
+        plantbig_plant = self.bot.get_emoji(EMOJIS["plantbig_plant"])
 
+        # Embedded message to be sent
         buy_message = discord.Embed(
-            colour=0x48689b,
+            colour=EMBED_COLOR,
             description=f"## {plantbig_plant} Turn dreams into reality!\n"
                         f"> We, the **Reelab Team**, are thrilled about your decision to purchase a product. "
                         f"Please select from the options below in the dropdown menu to proceed with your purchase or to access customer support."
         )
 
-        buy_message.set_author(
-            name="www.reelab.studio",
-            url="https://reelab.studio/",
-            icon_url="attachment://reelab_logo_white.png"
+        buy_message.set_author(name="www.reelab.studio", url="https://reelab.studio/",
+                               icon_url="attachment://reelab_logo_white.png")
+        buy_message.set_image(url="attachment://reelab_banner_white.gif")
+        buy_message.set_footer(text="~ The official Reelab Studio Discord Bot")
+
+        # Load attachments
+        banner_file, icon_file, footer_file = await self.attachments()
+
+        # Add options to the select menu
+        select_options = [
+            SelectOption(
+                label='Order Discord Bot',
+                description="Enhance your server with a Discord bot.",
+                emoji=community_member,
+                value='order_discord_bot'
+            ),
+            SelectOption(
+                label='Order Website',
+                description="Establish your online presence with a sleek site.",
+                emoji=community_member,
+                value='order_website'
+            ),
+            SelectOption(
+                label='Order Graphics',
+                description="Enhance your brand with custom graphics.",
+                emoji=community_member,
+                value='order_graphics'
+            ),
+            SelectOption(
+                label='Order Bundle',
+                description="Unlock savings by bundling services.",
+                emoji=community_eventhost,
+                value='order_bundle'
+            ),
+            SelectOption(
+                label='Get Customer Support',
+                description="Get timely help from our support team.",
+                emoji=community_advisor,
+                value='customer_support'
+            )
+        ]
+
+        # Create select menu
+        select_menu = SelectMenu(
+            placeholder='Explore your options...',
+            options=select_options,
+            custom_id='products',
+            max_values=1
         )
 
-        buy_message.set_image(
-            url="attachment://reelab_banner_white.gif"
-        )
-
-        buy_message.set_footer(
-            text="~ The official Reelab Studio Discord Bot"
-        )
-
-        banner_path = "./pictures/reelab_banner_white.gif"
-        banner_file = discord.File(banner_path, filename="reelab_banner_white.gif")
-
-        icon_path = "./pictures/reelab_logo_white.png"
-        icon_file = discord.File(icon_path, filename="reelab_logo_white.png")
-
+        # Edit interaction with new embed and components
         await ctx.respond(embed=buy_message,
                           hidden=True,
                           files=[banner_file, icon_file],
-                          components=[[
-                              SelectMenu(
-                                  placeholder='Explore your options...',
-                                  options=[
-                                      SelectOption(
-                                          label='Order Discord Bot',
-                                          description="Enhance your server with a Discord bot.",
-                                          emoji=community_member,
-                                          value='order_discord_bot'
-                                      ),
-                                      SelectOption(
-                                          label='Order Website',
-                                          description="Establish your online presence with a sleek site.",
-                                          emoji=community_member,
-                                          value='order_website'
-                                      ),
-                                      SelectOption(
-                                          label='Order Graphics',
-                                          description="Enhance your brand with custom graphics.",
-                                          emoji=community_member,
-                                          value='order_graphics'
-                                      ),
-                                      SelectOption(
-                                          label='Order Bundle',
-                                          description="Unlock savings by bundling services.",
-                                          emoji=community_eventhost,
-                                          value='order_bundle'
-                                      ),
-                                      SelectOption(
-                                          label='Get Customer Support',
-                                          description="Get timely help from our support team.",
-                                          emoji=community_advisor,
-                                          value='customer_support'
-                                      )
-                                  ],
-                                  custom_id='products',
-                                  max_values=1
-                              )]])
+                          components=[[select_menu]])
 
     @commands.Cog.on_click('^language_selection$')
     async def language_selection(self, ctx: discord.ComponentInteraction, button):
-        plantbig_plant = self.bot.get_emoji(1217203467777474640)
+        # Retrieve emojis
+        plantbig_plant = self.bot.get_emoji(EMOJIS["plantbig_plant"])
 
+        # Embedded message to be sent
         select_language_message = discord.Embed(
-            colour=0x48689b,
+            colour=EMBED_COLOR,
             description=f"## {plantbig_plant} Select your preferred language for your purchase.\n"
-                        f"> We, the **Reelab Team**, are thrilled about your decision to purchase a product. We offer multi-language shopping to ensure a better experience and to overcome language barriers."
+                        f"> We, the **Reelab Team**, are thrilled about your decision to purchase a product. "
+                        f"We offer multi-language shopping to ensure a better experience and to overcome language barriers."
         )
 
-        select_language_message.set_author(
-            name="www.reelab.studio",
-            url="https://reelab.studio/",
-            icon_url="attachment://reelab_logo_white.png"
+        select_language_message.set_author(name="www.reelab.studio", url="https://reelab.studio/",
+                                           icon_url="attachment://reelab_logo_white.png")
+        select_language_message.set_image(url="attachment://reelab_banner_white.gif")
+        select_language_message.set_footer(text="~ The official Reelab Studio Discord Bot")
+
+        # Load attachments
+        banner_file, icon_file, footer_file = await self.attachments()
+
+        # Add options to the select menu
+        select_options = [
+            SelectOption(
+                label='Deutsch',
+                description="Wenn du deutsch bist , ist dies die Sprache, die du verwendest.",
+                emoji='🇩🇪',
+                value='DE'
+            ),
+            SelectOption(
+                label='Türkçe',
+                description="Eğer Türkçe konuşuyorsanız, bu dili seçmelisiniz.",
+                emoji='🇹🇷',
+                value='TR'
+            ),
+            SelectOption(
+                label='Français',
+                description="Si vous parlez français, c'est la langue que vous souhaitez utiliser.",
+                emoji='🇫🇷',
+                value='FR'
+            ),
+            SelectOption(
+                label='Italiano',
+                description="Se parli italiano, questa è la lingua che desideri utilizzare.",
+                emoji='🇮🇹',
+                value='IT'
+            ),
+            SelectOption(
+                label='日本語',
+                description="日本語を話す方は、この言語を選択してください。",
+                emoji='🇯🇵',
+                value='JA'
+            ),
+            SelectOption(
+                label='中文',
+                description="如果您会说中文，这就是您想要使用的语言。",
+                emoji='🇨🇳',
+                value='ZH'
+            ),
+            SelectOption(
+                label='한국어',
+                description="한국어를 구사하는 경우 이 언어를 선택하세요.",
+                emoji='🇰🇷',
+                value='KO'
+            )
+        ]
+
+        # Create select menu
+        select_menu = SelectMenu(
+            placeholder='Select your language...',
+            options=select_options,
+            custom_id='language_select_options',
+            max_values=1
         )
 
-        select_language_message.set_image(
-            url="attachment://reelab_banner_white.gif"
-        )
-
-        select_language_message.set_footer(
-            text="~ The official Reelab Studio Discord Bot"
-        )
-
-        banner_path = "./pictures/reelab_banner_white.gif"
-        banner_file = discord.File(banner_path, filename="reelab_banner_white.gif")
-
-        icon_path = "./pictures/reelab_logo_white.png"
-        icon_file = discord.File(icon_path, filename="reelab_logo_white.png")
-
+        # Edit interaction with new embed and components
         await ctx.respond(embed=select_language_message,
                           hidden=True,
                           files=[banner_file, icon_file],
-                          components=[[
-                              SelectMenu(
-                                  placeholder='Select your language...',
-                                  options=[
-                                      SelectOption(
-                                          label='Deutsch',
-                                          description="Wenn du deutsch bist , ist dies die Sprache, die du verwendest.",
-                                          emoji='🇩🇪',
-                                          value='DE'
-                                      ),
-                                      SelectOption(
-                                          label='Türkçe',
-                                          description="Eğer Türkçe konuşuyorsanız, bu dili seçmelisiniz.",
-                                          emoji='🇹🇷',
-                                          value='TR'
-                                      ),
-                                      SelectOption(
-                                          label='Français',
-                                          description="Si vous parlez français, c'est la langue que vous souhaitez utiliser.",
-                                          emoji='🇫🇷',
-                                          value='FR'
-                                      ),
-                                      SelectOption(
-                                          label='Italiano',
-                                          description="Se parli italiano, questa è la lingua che desideri utilizzare.",
-                                          emoji='🇮🇹',
-                                          value='IT'
-                                      ),
-                                      SelectOption(
-                                          label='日本語',
-                                          description="日本語を話す方は、この言語を選択してください。",
-                                          emoji='🇯🇵',
-                                          value='JA'
-                                      ),
-                                      SelectOption(
-                                          label='中文',
-                                          description="如果您会说中文，这就是您想要使用的语言。",
-                                          emoji='🇨🇳',
-                                          value='ZH'
-                                      )
-                                  ],
-                                  custom_id='language_select_options',
-                                  max_values=1
-                              )]])
+                          components=[[select_menu]])
 
     @commands.Cog.on_select('^language_select_options$')
     async def language_selection_confirmed(self, interaction, select_menu):
@@ -367,7 +339,7 @@ class ProductPurchase(commands.Cog):
         selected_language = select_menu.values[0]
 
         # Define user language based on the selected language
-        if selected_language in ['DE', 'TR', 'FR', 'IT', 'JA', 'ZH']:
+        if selected_language in ['DE', 'TR', 'FR', 'IT', 'JA', 'ZH', 'KO']:
             user_language = selected_language.lower()
         else:
             user_language = 'en'
@@ -383,13 +355,12 @@ class ProductPurchase(commands.Cog):
 
         user_language = user_info.get('language', 'en')
 
-        print(user_lang)
-
         # Load language data
         script_directory = Path(__file__).resolve().parent.parent
-        file_path = script_directory / "languages/buy_product_languages.json"
+        file_path = script_directory / "languages/products_language_file.json"
         language = load_language_data(file_path, user_language)
 
+        # Embedded message to be sent
         buy_message = discord.Embed(
             colour=EMBED_COLOR,
             description=language["language_selection_description"].format(plantbig_plant=plantbig_plant)

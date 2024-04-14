@@ -1,0 +1,442 @@
+{
+  "en": {
+    "discord_bot_products_description": "## {plantbig_plant} Choose Your Bot Type\n- Select either a **Pre-made** or a **Custom bot** to suit your needs.\n- Get **Instant Solutions** or opt for **Tailored Creations** for a personalized touch.\n- Pre-made bots starting at 1.50€\n\n{community_admin} **- Your Bot, Your Way.** __Pick Yours Now!__",
+    "discord_select_bot_options_placeholder": "Choose a bot...",
+
+    "discord_personalized_bot_label": "Personalized Bot",
+    "discord_personalized_bot_description": "Create your own customized Discord bot tailored to your specific needs and preferences.",
+    "discord_modmail_bot_label": "ModMail Bot",
+    "discord_modmail_bot_description": "A bot for managing your server's modmail system.",
+    "discord_music_bot_label": "24/7 Music Bot",
+    "discord_music_bot_description": "Enjoy uninterrupted music playback in your server.",
+    "discord_admin_bot_label": "Administration Bot",
+    "discord_admin_bot_description": "Simplify server administration tasks with this bot.",
+    "discord_tempvoice_bot_label": "TempVoice Bot",
+    "discord_tempvoice_bot_description": "Create temporary voice channels easily.",
+    "discord_studies_bot_label": "Work & Studies Bot",
+    "discord_studies_bot_description": "Enhance productivity with tools tailored for work and studies.",
+
+    "discord_order_personalized_bot_description": "## {plant_plant} -  Ready for Your Personalized Discord Bot?\n> Hey there! We're absolutely thrilled that you're considering getting your own personalized Discord bot.\n\n### Crafted Just for You!\n- **Tailored Solutions:** Crafted specifically for your server's requirements.\n- **Unique Identity:** Reflects the personality and style of your community.\n- **Enhanced Functionality:** Unlock features and commands unavailable in pre-made bots.\n- **Pricing:** Starting from €50\n\n> With a personalized bot, you're not just getting a tool – you're investing in the growth and success of your server.\n\nReview the [Terms of Service](https://discord.com/channels/1216127716970070128/1216346561601339474/1222872839187857582) and **kickstart the process of acquiring your custom bot today!**",
+    "discord_order_personalized_bot_lable": "Accept Terms & Submit Purchase Request",
+
+    "discord_order_bot_step_1_description": "## {community_developer} Configuration Step - I/V\n> Select how many people are on your Discord server.\n\n**Note:** This is necessary for hosting reasons. Depending on the number of users using the bot, we may need to increase the allocated resources to ensure optimal performance.",
+    "discord_order_bot_step_1_user_amount_1_lable": "< 1k",
+    "discord_order_bot_step_1_user_amount_2_lable": "1k-2.5k",
+    "discord_order_bot_step_1_user_amount_3_lable": "2.5k-5k",
+    "discord_order_bot_step_1_user_amount_4_lable": "> 5k",
+
+    "discord_order_bot_step_2_description": "## {community_developer} Configuration Step - II/V\n> Please select below for **how long you would like to order your bot**. You can extend your product at any time afterwards.\n### {log_memberjoin} One-time setup fees apply as follows:\n- 30 Days: €5 one-time setup fee\n- 90 Days: €4 one-time setup fee\n- 180 Days: €2.50 one-time setup fee\n- 365 Days: **No setup fees.**\n\n**Keep in mind:** __We offer a 24-hour free trial.__",
+    "discord_order_bot_step_2_hosting_duration_1_lable": "30 Days",
+    "discord_order_bot_step_2_hosting_duration_2_lable": "90 Days",
+    "discord_order_bot_step_2_hosting_duration_3_lable": "180 Days",
+    "discord_order_bot_step_2_hosting_duration_4_lable": "365 Days",
+
+    "discord_order_bot_step_3_description": "## {community_developer} Configuration Step - III/V\n> Do you want to purchase an About Me package?\n\n__What is the About Me Pack?__\n- **Visual Showcase**: See the thumbnail on the right for a preview.\n- **Custom Bio**: Your bot will come with a professionally crafted pre-made bio. With this package, you gain the flexibility to customize the description to your liking.\n- **Pricing**: The package is available for just __0.50€ per month__.",
+    "discord_order_bot_step_3_about_me_pack_1_lable": "Yes!",
+    "discord_order_bot_step_3_about_me_pack_2_lable": "No, thanks.",
+
+    "discord_order_bot_step_4_description": "## {community_developer} Configuration Step - IV/V\n> Below you will be asked for a number of details depending on your bot, including:\n\n- Bot name\n- Bot status `(playing/watching/listening/streaming/competing)`\n\nClick on the button below to **start configuring your bot.**",
+    "discord_order_bot_step_4_configure_lable": "Configure Bot",
+    "discord_order_bot_step_4_configure_modal_title": "Enter your bot details",
+    "discord_order_bot_step_4_configure_modal_name_lable": "Bot Name",
+    "discord_order_bot_step_4_configure_modal_status_lable": "Bot Status",
+    "discord_order_bot_step_4_configure_modal_status_placeholder": "e.g., {watching} over the safety of users",
+
+    "discord_order_bot_step_5_description": "## {community_developer} Configuration Step - V/V\n> Last but not least, **double-check what you've entered** and **accept the terms and conditions** for Using the Bot.\n\n__Your Entered Details:__\n- **Bot Type:** {bot_type}\n- **Bot Name:** {bot_name}\n- **Bot Status:** {bot_status}\n- **Possible bot users:** {bot_users}\n- **About Me Pack:** {about_me_pack_status}{about_me_pack_cost_text}\n- **Setup fees:** {setup_fees_formatted}\n- **Hosting price a month:** {bot_user_pricing}\n- **Hosting duration:** {bot_hosting_duration} {hosting_duration_month}\n### {plant_plant} The total amount to be paid is __{total_price_formatted}__\n**Note:** By accepting the [terms and conditions](https://discord.com/channels/1216127716970070128/1216346561601339474/1222872839187857582), a __ticket will be created automatically__ and our __Staff Team__ will contact you shortly.",
+    "discord_order_bot_step_5_accept_rules_lable": "Accept Terms & Order At Cost",
+
+    "discord_order_bot_thread_ping_message": "Thanks for requesting a bot {user}. Our {staff} will be with you shortly.",
+    "discord_order_bot_user_message": "Thank you for your purchase request. A member of our team will be in touch with you shortly. View your ticket and add any additional information here >> {thread}",
+    "discord_order_bot_thread_message": "## {plant_plant} Bot request - {user}\n> Thank you for purchasing one of our bots. - We're here to bring your vision to life!**The team is now working on building your bot** according to the specifications you have given us.\n\n__Your Entered Details:__\n- **Bot Type:** {bot_type}\n- **Bot Name:** {bot_name}\n- **Bot Status:** {bot_status}\n- **Possible bot users:** {bot_users}\n- **About Me Pack:** {about_me_pack_status}{about_me_pack_cost_text}\n- **Setup fees:** {setup_fees_formatted}\n- **Hosting price a month:** {bot_user_pricing}\n- **Hosting duration:** {bot_hosting_duration} {hosting_duration_month}\n### {plant_plant} The total amount to be paid is __{total_price_formatted}__\n**Note:** Our current payment methods include PayPal, credit/debit card, Discord Nitro boosts, and promotional offers.",
+    "discord_order_bot_personalized_thread_message": "## {plant_plant} Bot request - {user}\n> Thank you for your decision to purchase a custom discord bot. - We're here to bring your vision to life!\n\n__Share your ideas with us here in the chat__\n- Feel free to start with the Discord bot name, its status, and a brief description.\n- Additionally, let us know about the main colors you'd like to incorporate into your bot's design.\n- Feel free to describe any specific features or functionalities you have in mind for your bot.\n- If there are any specific emojis or icons you'd like to include, please mention them as well.\n- Don't hesitate to provide any other details or preferences you have for your bot's design and functionality. We're here to bring your vision to life!\n### {community_advisor} Our team will get in touch with you shortly to discuss everything.\n\n**Note:** Our current payment methods include PayPal, credit/debit card, Discord Nitro boosts, and promotional offers.",
+    "discord_order_bot_thread_price_button": "Pricing information",
+    "discord_order_bot_thread_close_button": "Close order",
+
+    "discord_order_bot_pricing_information": "## {plantbig_plant} Price Information for Discord Bot Development\n\n### Hello and welcome!\n> Thank you for your interest in our Discord bot development services. We'd like to show you how our pricing for custom Discord Bot development works before we get to work on your project.\n\n## {log_memberjoin} Hourly Rate\n- The hourly rate we charge is €55. This is based on experience, expertise and regional market conditions.\n## {log_memberjoin} Project Scope\n- Pricing is influenced by the complexity and scope of the desired bot. A simple bot with basic functionalities requires fewer working hours compared to a more complex bot with advanced features and integrations.\n## {log_memberjoin} Additional Services\n- If additional features or integrations are required for the bot, these will also be factored into the pricing.\n## {log_memberjoin} Variable Workload\n- Discord bot development can vary greatly, making it difficult to set a fixed timeframe in advance. However, our experience in bot development helps us to be realistic about the workload.\n## {log_memberjoin} Extra Hours\n- A buffer of additional hours is allocated to cover unforeseen issues or additional requirements beyond the original project scope. These additional hours are charged at the hourly rate.\n\n> {community_admin} **-** If you're interested in these services or have any questions about pricing, feel free to reach out. Please don't hesitate to contact us."
+  },
+  "de": {
+    "discord_bot_products_description": "## {plantbig_plant} Wähle deinen Bot-Typ\n- Wähle entweder einen **Vorgefertigten** oder einen **Benutzerdefinierten Bot**, der deinen Bedürfnissen entspricht.\n- Erhalte **Sofortlösungen** oder entscheide dich für **Maßgeschneiderte Kreationen** für einen persönlichen Touch.\n- Vorgefertigte Bots ab 1,50€\n\n{community_admin} **- Dein Bot, Dein Weg.** __Wähle jetzt deinen aus!__",
+    "discord_select_bot_options_placeholder": "Wähle einen Bot...",
+
+    "discord_personalized_bot_label": "Persönlicher Bot",
+    "discord_personalized_bot_description": "Erstelle deinen eigenen Discord-Bot, zugeschnitten auf deine Bedürfnisse und Vorlieben.",
+    "discord_modmail_bot_label": "ModMail-Bot",
+    "discord_modmail_bot_description": "Ein Bot zur Verwaltung des Modmail-Systems deines Servers.",
+    "discord_music_bot_label": "24/7 Musik-Bot",
+    "discord_music_bot_description": "Genieße ununterbrochene Musikwiedergabe auf deinem Server.",
+    "discord_admin_bot_label": "Verwaltungs-Bot",
+    "discord_admin_bot_description": "Vereinfache Serververwaltungsaufgaben mit diesem Bot.",
+    "discord_tempvoice_bot_label": "Temporärer Sprachkanal-Bot",
+    "discord_tempvoice_bot_description": "Erstelle ganz einfach temporäre Sprachkanäle.",
+    "discord_studies_bot_label": "Arbeits- & Lern-Bot",
+    "discord_studies_bot_description": "Steigere die Produktivität mit auf Arbeit und Lernen zugeschnittenen Tools.",
+
+    "discord_order_personalized_bot_description": "## {plant_plant} - Bereit für deinen persönlichen Discord-Bot?\n> Hey! Wir freuen uns riesig, dass du darüber nachdenkst, deinen eigenen personalisierten Discord-Bot zu bekommen.\n\n### Speziell für dich gemacht!\n- **Maßgeschneiderte Lösungen:** Speziell für die Anforderungen deines Servers entwickelt.\n- **Einzigartige Identität:** Spiegelt die Persönlichkeit und den Stil deiner Community wider.\n- **Erweiterte Funktionalität:** Schalte Funktionen und Befehle frei, die in vorgefertigten Bots nicht verfügbar sind.\n- **Preis:** Ab 50€\n\n> Mit einem personalisierten Bot bekommst du nicht nur ein Werkzeug – du investierst in das Wachstum und den Erfolg deines Servers.\n\nÜberprüfe die [Nutzungsbedingungen](https://discord.com/channels/1216127716970070128/1216346561601339474/1222872839187857582) und **starte noch heute den Prozess zum Erwerb deines individuellen Bots!**",
+    "discord_order_personalized_bot_lable": "Nutzungsbedingungen akzeptieren und Kaufanfrage absenden",
+
+    "discord_order_bot_step_1_description": "## {community_developer} Konfigurationsschritt - I/V\n> Wähle aus, wie viele Personen auf deinem Discord-Server sind.\n\n**Hinweis:** Dies ist aus Hosting-Gründen erforderlich. Abhängig von der Anzahl der Benutzer, die den Bot verwenden, müssen wir möglicherweise die zugewiesenen Ressourcen erhöhen, um eine optimale Leistung sicherzustellen.",
+    "discord_order_bot_step_1_user_amount_1_lable": "< 1k",
+    "discord_order_bot_step_1_user_amount_2_lable": "1k-2,5k",
+    "discord_order_bot_step_1_user_amount_3_lable": "2,5k-5k",
+    "discord_order_bot_step_1_user_amount_4_lable": "> 5k",
+
+    "discord_order_bot_step_2_description": "## {community_developer} Konfigurationsschritt - II/V\n> Bitte wählen Sie unten aus, **wie lange Sie Ihren Bot bestellen möchten**. Sie können Ihr Produkt jederzeit verlängern.\n ### {log_memberjoin} Einmalige Einrichtungsgebühren gelten wie folgt:\n- 30 Tage: €5 einmalige Gebühr\n- 90 Tage: €4 einmalige Gebühr\n- 180 Tage: €2.50 einmalige Gebühr\n- 365 Tage: **Keine Einrichtungsgebühren.**\n\n**Beachten Sie:** __Wir bieten eine 24-stündige kostenlose Testversion.__",
+    "discord_order_bot_step_2_hosting_duration_1_lable": "30 Tage",
+    "discord_order_bot_step_2_hosting_duration_2_lable": "90 Tage",
+    "discord_order_bot_step_2_hosting_duration_3_lable": "180 Tage",
+    "discord_order_bot_step_2_hosting_duration_4_lable": "365 Tage",
+
+    "discord_order_bot_step_3_description": "## {community_developer} Konfigurationsschritt - III/V\n> Möchtest du ein About-Me-Paket kaufen?\n\n__Was ist das About-Me-Pack?__\n- **Visuelle Darstellung**: Siehe die Miniaturansicht rechts für eine Vorschau.\n- **Benutzerdefinierte Biografie**: Dein Bot wird mit einer professionell gestalteten vorgefertigten Biografie geliefert. Mit diesem Paket erhältst du die Flexibilität, die Beschreibung nach deinen Wünschen anzupassen.\n- **Preis**: Das Paket ist bereits für nur __0,50€ pro Monat__ erhältlich.",
+    "discord_order_bot_step_3_about_me_pack_1_lable": "Ja, bitte!",
+    "discord_order_bot_step_3_about_me_pack_2_lable": "Nein, danke.",
+
+    "discord_order_bot_step_4_description": "## {community_developer} Konfigurationsschritt - IV/V\n> Im Folgenden werden je nach Bot verschiedene Details von dir abgefragt, darunter:\n\n- Bot-Name\n- Bot-Status `(spielt/beobachtet/hört zu/streamt/nimmt teil)`\n\nKlicke auf die Schaltfläche unten, um deinen Bot zu **konfigurieren.**",
+    "discord_order_bot_step_4_configure_lable": "Bot konfigurieren",
+    "discord_order_bot_step_4_configure_modal_title": "Gib deine Bot-Details ein",
+    "discord_order_bot_step_4_configure_modal_name_lable": "Bot-Name",
+    "discord_order_bot_step_4_configure_modal_status_lable": "Bot-Status",
+    "discord_order_bot_step_4_configure_modal_status_placeholder": "z. B. {beobachtet} die Sicherheit der Benutzer",
+
+    "discord_order_bot_step_5_description": "## {community_developer} Konfigurationsschritt - V/V\n> Zu guter Letzt, **überprüfe bitte, ob du alles richtig eingegeben hast** und **akzeptiere die Nutzungsbedingungen** für die Verwendung des Bots.\n\n__Deine eingegebenen Details:__\n- **Bot-Typ:** {bot_type}\n- **Bot-Name:** {bot_name}\n- **Bot-Status:** {bot_status}\n- **Mögliche Bot-Benutzer:** {bot_users}\n- **Über mich-Paket:** {about_me_pack_status}{about_me_pack_cost_text}\n- **Einrichtungsgebühren:** {setup_fees_formatted}\n- **Monatlicher Hosting-Preis:** {bot_user_pricing}\n- **Hosting-Dauer:** {bot_hosting_duration} {hosting_duration_month}\n### {plant_plant} Der Gesamtbetrag beträgt __{total_price_formatted}__\n**Hinweis:** Durch die Zustimmung zu den [Nutzungsbedingungen](https://discord.com/channels/1216127716970070128/1216346561601339474/1222872839187857582) wird automatisch ein __Ticket erstellt__ und unser __Team__ wird sich bald bei dir melden.",
+    "discord_order_bot_step_5_accept_rules_lable": "Nutzungsbedingungen akzeptieren und zum Preis bestellen",
+
+    "discord_order_bot_thread_ping_message": "Danke für die Bot-Anfrage {user}. Unser {staff} wird sich in Kürze bei dir melden.",
+    "discord_order_bot_user_message": "Vielen Dank für deine Kaufanfrage. Ein Mitglied unseres Teams wird sich in Kürze bei dir melden. Sieh dir dein Ticket an und füge hier weitere Informationen hinzu >> {thread}",
+    "discord_order_bot_thread_message": "## {plant_plant} Bot-Anfrage - {user}\n> Danke, dass du einen unserer Bots gekauft hast! - Wir sind hier, um deine Idee zum Leben zu erwecken! **Unser Team arbeitet jetzt daran, deinen Bot zu erstellen** basierend auf den Details, die du uns gegeben hast.\n\n__Deine Angaben:__\n- **Bot-Typ:** {bot_type}\n- **Bot-Name:** {bot_name}\n- **Bot-Status:** {bot_status}\n- **Mögliche Bot-Benutzer:** {bot_users}\n- **Über mich-Paket:** {about_me_pack_status}{about_me_pack_cost_text}\n- **Einrichtungsgebühren:** {setup_fees_formatted}\n- **Monatlicher Hosting-Preis:** {bot_user_pricing}\n- **Hosting-Dauer:** {bot_hosting_duration} {hosting_duration_month}\n### {plant_plant} Die Gesamtzahlung beträgt __{total_price_formatted}__\n**Hinweis:** Wir akzeptieren PayPal, Kredit-/Debitkarte, Discord Nitro-Boosts und Sonderangebote.",
+    "discord_order_bot_personalized_thread_message": "## {plant_plant} Bot-Anfrage - {user}\n> Vielen Dank für deine Entscheidung, einen benutzerdefinierten Discord-Bot zu kaufen. - Wir sind hier, um deine Vision zum Leben zu erwecken!\n\n__Teile uns deine Ideen hier im Chat mit__\n- Fange gerne mit dem Discord-Bot-Namen, seinem Status und einer kurzen Beschreibung an.\n- Lass uns außerdem wissen, welche Hauptfarben du in das Design deines Bots integrieren möchtest.\n- Beschreibe gerne spezifische Funktionen oder Eigenschaften, die du für deinen Bot im Sinn hast.\n- Wenn es bestimmte Emojis oder Symbole gibt, die du einschließen möchtest, erwähne sie bitte ebenfalls.\n- Zögere nicht, uns weitere Details oder Vorlieben für das Design und die Funktionalität deines Bots mitzuteilen. Wir sind hier, um deine Vision zum Leben zu erwecken!\n### {community_advisor} Unser Team wird sich in Kürze mit dir in Verbindung setzen, um alles zu besprechen.\n\n**Hinweis:** Unsere aktuellen Zahlungsmethoden umfassen PayPal, Kredit-/Debitkarte, Discord Nitro-Boosts und Sonderangebote.",
+    "discord_order_bot_thread_price_button": "Preisinformationen",
+    "discord_order_bot_thread_close_button": "Bestellung schließen",
+
+    "discord_order_bot_pricing_information": "## {plantbig_plant} Preisinformationen für die Entwicklung von Discord-Bots\n\n### Hallo und herzlich willkommen!\n> Vielen Dank für Ihr Interesse an unseren Discord-Bot-Entwicklungsdiensten. Bevor wir uns an die Arbeit an Ihrem Projekt machen, möchten wir Ihnen zeigen, wie unsere Preisgestaltung für die benutzerdefinierte Entwicklung von Discord-Bots funktioniert.\n## {log_memberjoin} Stundensatz\n- Der von uns berechnete Stundensatz beträgt 55€. Dies basiert auf Erfahrung, Fachwissen und regionalen Marktbedingungen.\n## {log_memberjoin} Projektumfang\n- Die Preisgestaltung wird durch die Komplexität und den Umfang des gewünschten Bots beeinflusst. Ein einfacher Bot mit grundlegenden Funktionen erfordert weniger Arbeitsstunden im Vergleich zu einem komplexeren Bot mit erweiterten Funktionen und Integrationen.\n## {log_memberjoin} Zusätzliche Dienstleistungen\n- Wenn zusätzliche Funktionen oder Integrationen für den Bot erforderlich sind, werden diese ebenfalls in die Preisgestaltung einbezogen.\n## {log_memberjoin} Variable Arbeitsbelastung\n- Die Entwicklung von Discord-Bots kann stark variieren, was es schwierig macht, im Voraus einen festen Zeitrahmen festzulegen. Unsere Erfahrung in der Bot-Entwicklung hilft uns jedoch, realistisch über die Arbeitslast zu sein.\n## {log_memberjoin} Zusätzliche Stunden\n- Ein Puffer zusätzlicher Stunden wird bereitgestellt, um unvorhergesehene Probleme oder zusätzliche Anforderungen über den ursprünglichen Projektrahmen hinaus abzudecken. Diese zusätzlichen Stunden werden zum Stundensatz berechnet.\n\n> {community_admin} **-** Wenn Sie an diesen Diensten interessiert sind oder Fragen zur Preisgestaltung haben, zögern Sie nicht, uns zu kontaktieren. Bitte zögern Sie nicht, uns zu kontaktieren."
+  },
+  "tr": {
+    "discord_bot_products_description": "## {plantbig_plant} Bot Türünü Seç\n- İhtiyaçlarınıza uygun olarak ya **Önceden yapılmış** ya da **Özel bot** seçin.\n- **Anlık Çözümler** alın ya da kişiselleştirilmiş bir dokunuş için **Özelleştirilmiş Yaratımlar** tercih edin.\n- Önceden yapılmış botlar 1,50€'dan başlıyor\n\n{community_admin} **- Botunuz, Sizin Yönteminiz.** __Şimdi Seninkini Seç!__",
+    "discord_select_bot_options_placeholder": "Bir bot seç...",
+
+    "discord_personalized_bot_label": "Kişiselleştirilmiş Bot",
+    "discord_personalized_bot_description": "Belirli ihtiyaçlarınıza ve tercihlerinize uygun olarak özelleştirilmiş bir Discord botu oluşturun.",
+    "discord_modmail_bot_label": "ModMail Botu",
+    "discord_modmail_bot_description": "Sunucunuzun modmail sistemini yönetmek için bir bot.",
+    "discord_music_bot_label": "24/7 Müzik Botu",
+    "discord_music_bot_description": "Sunucunuzda kesintisiz müzik çalma keyfini yaşayın.",
+    "discord_admin_bot_label": "Yönetim Botu",
+    "discord_admin_bot_description": "Bu bot ile sunucu yönetimi görevlerini basitleştirin.",
+    "discord_tempvoice_bot_label": "Geçici Ses Botu",
+    "discord_tempvoice_bot_description": "Geçici ses kanalları kolayca oluşturun.",
+    "discord_studies_bot_label": "Çalışma & Çalışma Botu",
+    "discord_studies_bot_description": "Çalışma ve çalışma için özel olarak tasarlanmış araçlarla üretkenliği artırın.",
+
+    "discord_order_personalized_bot_description": "## {plant_plant} - Kişisel Discord Botunuz İçin Hazır mısınız?\n> Merhaba! Kendi kişisel Discord botunuzu almayı düşündüğünüz için son derece heyecanlıyız.\n\n### Sadece Sizin İçin Hazırlandı!\n- **Özelleştirilmiş Çözümler:** Sunucunuzun gereksinimlerine özel olarak hazırlanmıştır.\n- **Benzersiz Kimlik:** Topluluğunuzun kişiliğini ve tarzını yansıtır.\n- **Gelişmiş İşlevsellik:** Önceden yapılmış botlarda bulunmayan özellikleri ve komutları açın.\n- **Fiyatlandırma:** 50€'dan başlayan fiyatlarla\n\n> Kişisel bir botla sadece bir araç almıyorsunuz - sunucunuzun büyümesine ve başarısına yatırım yapıyorsunuz.\n\n[Gizlilik Politikasını](https://discord.com/channels/1216127716970070128/1216346561601339474/1222872839187857582) gözden geçirin ve **özel botunuzu edinme sürecini hemen başlatın!**",
+    "discord_order_personalized_bot_lable": "Koşulları Kabul Edin ve Satın Alma Talebi Gönderin",
+
+    "discord_order_bot_step_1_description": "## {community_developer} Yapılandırma Adımı - I/V\n> Discord sunucunuzda kaç kişinin olduğunu seçin.\n\n**Not:** Bu, barındırma nedenleriyle gereklidir. Botu kullanan kullanıcı sayısına bağlı olarak, optimal performansı sağlamak için ayrılan kaynakları artırmamız gerekebilir.",
+    "discord_order_bot_step_1_user_amount_1_lable": "< 1k",
+    "discord_order_bot_step_1_user_amount_2_lable": "1k-2.5k",
+    "discord_order_bot_step_1_user_amount_3_lable": "2.5k-5k",
+    "discord_order_bot_step_1_user_amount_4_lable": "> 5k",
+
+    "discord_order_bot_step_2_description": "## {community_developer} Yapılandırma Adımı - II/V\n> Aşağıdan **botunuzu ne kadar süreyle sipariş etmek istediğinizi** seçin. Ürününüzü istediğiniz zaman daha sonra uzatabilirsiniz.\n### {log_memberjoin} Bir kez kurulum ücretleri aşağıdaki gibidir:\n- 30 Gün: €5 bir defalık kurulum ücreti\n- 90 Gün: €4 bir defalık kurulum ücreti\n- 180 Gün: €2.50 bir defalık kurulum ücreti\n- 365 Gün: **Kurulum ücreti yok.**\n\n**Aklında bulunsun:** __24 saatlik ücretsiz deneme sürümü sunuyoruz.__",
+    "discord_order_bot_step_2_hosting_duration_1_lable": "30 Gün",
+    "discord_order_bot_step_2_hosting_duration_2_lable": "90 Gün",
+    "discord_order_bot_step_2_hosting_duration_3_lable": "180 Gün",
+    "discord_order_bot_step_2_hosting_duration_4_lable": "365 Gün",
+
+    "discord_order_bot_step_3_description": "## {community_developer} Yapılandırma Adımı - III/V\n> Bir Hakkımda paketi satın almak ister misiniz?\n\n__Hakkımda Paketi Nedir?__\n- **Görsel Vitrin**: Bir önizleme için sağdaki küçük resme bakın.\n- **Özel Biyografi**: Botunuz profesyonel olarak hazırlanmış bir önceden hazırlanmış biyografi ile birlikte gelir. Bu paketle birlikte, açıklamayı isteğinize göre özelleştirme esnekliği kazanırsınız.\n- **Fiyatlandırma**: Paket, sadece __ayda 0,50€__ karşılığında sunulmaktadır.",
+    "discord_order_bot_step_3_about_me_pack_1_lable": "Evet, lütfen!",
+    "discord_order_bot_step_3_about_me_pack_2_lable": "Hayır, teşekkürler.",
+
+    "discord_order_bot_step_4_description": "## {community_developer} Yapılandırma Adımı - IV/V\n> Aşağıda, botunuzla ilgili olarak adınızı ve aşağıdakiler gibi ayrıntıları girmeniz istenecektir:\n\n- Bot adı\n- Bot durumu `(oynuyor/izliyor/dinliyor/yayınlıyor/yarışıyor)`\n\nBotunuzu **yapılandırmaya başlamak için** aşağıdaki düğmeye tıklayın.",
+    "discord_order_bot_step_4_configure_lable": "Botu Yapılandır",
+    "discord_order_bot_step_4_configure_modal_title": "Bot ayrıntılarınızı girin",
+    "discord_order_bot_step_4_configure_modal_name_lable": "Bot Adı",
+    "discord_order_bot_step_4_configure_modal_status_lable": "Bot Durumu",
+    "discord_order_bot_step_4_configure_modal_status_placeholder": "örn., {izliyor} kullanıcıların güvenliğini sağlar",
+
+    "discord_order_bot_step_5_description": "## {community_developer} Yapılandırma Adımı - V/V\n> Son olarak, **girdiklerini doğru olduğundan emin ol** ve Bota İlişkin Kullanım Koşullarını kabul et**.\n\n__Girdiğin Detaylar:__\n- **Bot Türü:** {bot_type}\n- **Bot Adı:** {bot_name}\n- **Bot Durumu:** {bot_status}\n- **Olası bot kullanıcıları:** {bot_users}\n- **Hakkımda Paketi:** {about_me_pack_status}{about_me_pack_cost_text}\n- **Kurulum ücreti:** {setup_fees_formatted}\n- **Aylık Barındırma Ücreti:** {bot_user_pricing}\n- **Barındırma Süresi:** {bot_hosting_duration} {hosting_duration_month}\n### {plant_plant} Ödenecek toplam tutar __{total_price_formatted}__\n**Not:** [Kullanım Koşullarını](https://discord.com/channels/1216127716970070128/1216346561601339474/1222872839187857582) kabul ederek otomatik olarak bir __bilet oluşturulur__ ve __Ekibimiz__ kısa süre içinde seninle iletişime geçecektir.",
+    "discord_order_bot_step_5_accept_rules_lable": "Koşulları Kabul Edin ve Maliyetle Sipariş Verin",
+
+    "discord_order_bot_thread_ping_message": "Bot talebiniz için teşekkürler {user}. {staff} ekibimiz yakında sizinle iletişime geçecektir.",
+    "discord_order_bot_user_message": "Satın alma talebiniz için teşekkür ederiz. Ekibimizden bir üye yakında sizinle iletişime geçecektir. Biletinizi görüntüleyin ve buraya ek bilgi ekleyin >> {thread}",
+    "discord_order_bot_thread_message": "## {plant_plant} Bot talebi - {user}\n> Bir botumuzdan satın aldığınız için teşekkürler! - Fikrinizi gerçeğe dönüştürmek için buradayız! **Ekibimiz şu anda size verdiğiniz detaylara göre botunuzu oluşturuyor**.\n\n__Söyledikleriniz:__\n- **Bot Türü:** {bot_type}\n- **Bot Adı:** {bot_name}\n- **Bot Durumu:** {bot_status}\n- **Mümkün olan bot kullanıcıları:** {bot_users}\n- **Hakkımda Paketi:** {about_me_pack_status}{about_me_pack_cost_text}\n- **Kurulum ücretleri:** {setup_fees_formatted}\n- **Aylık barındırma fiyatı:** {bot_user_pricing}\n- **Barındırma süresi:** {bot_hosting_duration} {hosting_duration_month}\n### {plant_plant} Toplam ödeme miktarı __{total_price_formatted}__\n**Not:** Geçerli ödeme yöntemlerimiz arasında PayPal, kredi/kredi kartı, Discord Nitro yükseltmeleri ve promosyon teklifleri bulunmaktadır.",
+    "discord_order_bot_personalized_thread_message": "## {plant_plant} Bot talebi - {user}\n> Özel bir discord botu satın almayı tercih ettiğiniz için teşekkür ederiz. - Vizyonunuzu hayata geçirmek için buradayız!\n\n__Fikirlerinizi burada sohbet olarak paylaşın__\n- Discord bot adı, durumu ve kısa bir açıklamayla başlayabilirsiniz.\n- Ayrıca, bot tasarımınıza dahil etmek istediğiniz ana renkleri belirtin.\n- Botunuz için aklınızda bulunan özel özellikleri veya işlevleri açıklamaktan çekinmeyin.\n- Dahil etmek istediğiniz belirli emojiler veya simgeler varsa, lütfen bunları da belirtin.\n- Botunuzun tasarımı ve işlevselliği için sahip olduğunuz diğer ayrıntıları veya tercihleri sağlamaktan çekinmeyin. Vizyonunuzu hayata geçirmek için buradayız!\n### {community_advisor} Ekibimiz yakında sizinle her şeyi tartışmak için iletişime geçecektir.\n\n**Not:** Mevcut ödeme yöntemlerimiz arasında PayPal, kredi/kart, Discord Nitro yükseltmeleri ve promosyon teklifleri bulunmaktadır.",
+    "discord_order_bot_thread_price_button": "Fiyat bilgisi",
+    "discord_order_bot_thread_close_button": "Siparişi kapat",
+
+    "discord_order_bot_pricing_information": "## {plantbig_plant} Discord Bot Geliştirme için Fiyat Bilgileri\n\n### Merhaba ve hoş geldiniz!\n> Discord bot geliştirme hizmetlerimize ilginiz için teşekkür ederiz. Projemiz üzerinde çalışmaya başlamadan önce, özel Discord Bot geliştirme için fiyatlandırmamızın nasıl çalıştığını göstermek istiyoruz.\n## {log_memberjoin} Saatlik Ücret\n- Talep ettiğimiz saatlik ücret 55€'dır. Bu, deneyim, uzmanlık ve bölgesel pazar koşullarına dayanmaktadır.\n## {log_memberjoin} Proje Kapsamı\n- Fiyatlandırma, istenen botun karmaşıklığı ve kapsamı tarafından etkilenir. Temel işlevlere sahip basit bir bot, gelişmiş özelliklere ve entegrasyonlara sahip daha karmaşık bir botla karşılaştırıldığında daha az çalışma saati gerektirir.\n## {log_memberjoin} Ek Hizmetler\n- Bot için ek özellikler veya entegrasyonlar gerekiyorsa, bunlar da fiyatlandırmaya dahil edilir.\n## {log_memberjoin} Değişken İş Yükü\n- Discord bot geliştirme büyük ölçüde değişebilir, bu da önceden sabit bir zaman çerçevesi belirlemeyi zorlaştırır. Ancak, bot geliştirme konusundaki deneyimimiz, iş yükü konusunda gerçekçi olmamıza yardımcı olur.\n## {log_memberjoin} Ek Saatler\n- Beklenmeyen sorunları veya orijinal proje kapsamının ötesinde ek gereksinimleri karşılamak için ek saatlerin bir tamponu ayrılır. Bu ek saatler saatlik ücret üzerinden ücretlendirilir.\n\n> {community_admin} **-** Bu hizmetlerden veya fiyatlandırma hakkında herhangi bir sorunuz varsa, bizimle iletişime geçmekten çekinmeyin. Lütfen bize ulaşmaktan çekinmeyin."
+  },
+  "fr": {
+    "discord_bot_products_description": "## {plantbig_plant} Choisissez Votre Type de Bot\n- Sélectionnez soit un **bot préfabriqué** soit un **bot personnalisé** selon vos besoins.\n- Obtenez des **Solutions Instantanées** ou optez pour des **Créations Personnalisées** pour une touche personnalisée.\n- Bots préfabriqués à partir de 1.50€\n\n{community_admin} **- Votre Bot, Votre Façon.** __Choisissez le Vôtre Maintenant !__",
+    "discord_select_bot_options_placeholder": "Choisissez un bot...",
+
+    "discord_personalized_bot_label": "Bot Personnalisé",
+    "discord_personalized_bot_description": "Créez votre propre bot Discord personnalisé adapté à vos besoins et préférences spécifiques.",
+    "discord_modmail_bot_label": "Bot ModMail",
+    "discord_modmail_bot_description": "Un bot pour gérer le système de modmail de votre serveur.",
+    "discord_music_bot_label": "Bot Musical 24/7",
+    "discord_music_bot_description": "Profitez d'une lecture musicale ininterrompue sur votre serveur.",
+    "discord_admin_bot_label": "Bot d'Administration",
+    "discord_admin_bot_description": "Simplifiez les tâches d'administration du serveur avec ce bot.",
+    "discord_tempvoice_bot_label": "Bot Vocal Temporaire",
+    "discord_tempvoice_bot_description": "Créez facilement des canaux vocaux temporaires.",
+    "discord_studies_bot_label": "Bot de Travail & Études",
+    "discord_studies_bot_description": "Améliorez la productivité avec des outils adaptés au travail et aux études.",
+
+    "discord_order_personalized_bot_description": "## {plant_plant} - Prêt pour Votre Bot Discord Personnalisé ?\n> Salut ! Nous sommes absolument ravis que vous envisagiez d'obtenir votre propre bot Discord personnalisé.\n\n### Fabriqué Juste pour Vous !\n- **Solutions Sur Mesure :** Fabriquées spécifiquement pour les besoins de votre serveur.\n- **Identité Unique :** Reflète la personnalité et le style de votre communauté.\n- **Fonctionnalités Améliorées :** Débloquez des fonctionnalités et des commandes indisponibles dans les bots préfabriqués.\n- **Tarification :** À partir de 50€\n\n> Avec un bot personnalisé, vous n'obtenez pas simplement un outil - vous investissez dans la croissance et le succès de votre serveur.\n\nConsultez les [Conditions Générales](https://discord.com/channels/1216127716970070128/1216346561601339474/1222872839187857582) et **démarrez le processus d'acquisition de votre bot personnalisé dès aujourd'hui !**",
+    "discord_order_personalized_bot_lable": "Accepter les Conditions & Envoyer la Demande d'Achat",
+
+    "discord_order_bot_step_1_description": "## {community_developer} Étape de Configuration - I/V\n> Sélectionnez combien de personnes sont sur votre serveur Discord.\n\n**Remarque :** Cela est nécessaire pour des raisons d'hébergement. En fonction du nombre d'utilisateurs utilisant le bot, nous pouvons avoir besoin d'augmenter les ressources allouées pour assurer des performances optimales.",
+    "discord_order_bot_step_1_user_amount_1_lable": "< 1k",
+    "discord_order_bot_step_1_user_amount_2_lable": "1k-2.5k",
+    "discord_order_bot_step_1_user_amount_3_lable": "2.5k-5k",
+    "discord_order_bot_step_1_user_amount_4_lable": "> 5k",
+
+    "discord_order_bot_step_2_description": "## {community_developer} Étape de Configuration - II/V\n> Veuillez sélectionner ci-dessous **pour quelle durée vous souhaitez commander votre bot**. Vous pouvez étendre votre produit à tout moment par la suite.\n### {log_memberjoin} Des frais de configuration uniques s'appliquent comme suit :\n- 30 jours : €5 de frais de configuration uniques\n- 90 jours : €4 de frais de configuration uniques\n- 180 jours : €2.50 de frais de configuration uniques\n- 365 jours : **Aucuns frais de configuration.**\n\n**N'oubliez pas :** __Nous offrons un essai gratuit de 24 heures.__",
+    "discord_order_bot_step_2_hosting_duration_1_lable": "30 Jours",
+    "discord_order_bot_step_2_hosting_duration_2_lable": "90 Jours",
+    "discord_order_bot_step_2_hosting_duration_3_lable": "180 Jours",
+    "discord_order_bot_step_2_hosting_duration_4_lable": "365 Jours",
+
+    "discord_order_bot_step_3_description": "## {community_developer} Étape de Configuration - III/V\n> Voulez-vous acheter un pack À Propos de Moi ?\n\n__Qu'est-ce que le Pack À Propos de Moi ?__\n- **Vitrine Visuelle :** Consultez la vignette à droite pour un aperçu.\n- **Biographie Personnalisée :** Votre bot sera accompagné d'une biographie préfabriquée professionnellement. Avec ce pack, vous gagnez la flexibilité de personnaliser la description selon vos préférences.\n- **Tarification :** Le pack est disponible pour seulement __0,50€ par mois__.",
+    "discord_order_bot_step_3_about_me_pack_1_lable": "Oui, s'il vous plaît !",
+    "discord_order_bot_step_3_about_me_pack_2_lable": "Non, merci.",
+
+    "discord_order_bot_step_4_description": "## {community_developer} Étape de Configuration - IV/V\n> Vous devrez fournir plusieurs détails concernant votre bot, notamment :\n\n- Nom du bot\n- État du bot `(joue/regarde/écoute/en streaming/participe à une compétition)`\n\nCliquez sur le bouton ci-dessous pour **commencer la configuration de votre bot.**",
+    "discord_order_bot_step_4_configure_lable": "Configurer le Bot",
+    "discord_order_bot_step_4_configure_modal_title": "Entrez les détails de votre bot",
+    "discord_order_bot_step_4_configure_modal_name_lable": "Nom du Bot",
+    "discord_order_bot_step_4_configure_modal_status_lable": "État du Bot",
+    "discord_order_bot_step_4_configure_modal_status_placeholder": "par ex., {regarde} la sécurité des utilisateurs",
+
+    "discord_order_bot_step_5_description": "## {community_developer} Étape de configuration - V/V\n> Enfin, **vérifie que tu as bien entré toutes les informations correctement** et **accepte les conditions générales d'utilisation** pour utiliser le bot.\n\n__Vos détails saisis :__\n- **Type de bot :** {bot_type}\n- **Nom du bot :** {bot_name}\n- **Statut du bot :** {bot_status}\n- **Utilisateurs potentiels du bot :** {bot_users}\n- **À propos de moi Pack :** {about_me_pack_status}{about_me_pack_cost_text}\n- **Frais de configuration :** {setup_fees_formatted}\n- **Prix d'hébergement par mois :** {bot_user_pricing}\n- **Durée d'hébergement :** {bot_hosting_duration} {hosting_duration_month}\n### {plant_plant} Le montant total à payer est de __{total_price_formatted}__\n**Remarque :** En acceptant les [conditions générales d'utilisation](https://discord.com/channels/1216127716970070128/1216346561601339474/1222872839187857582), un __ticket sera automatiquement créé__ et notre __équipe__ vous contactera sous peu.",
+    "discord_order_bot_step_5_accept_rules_lable": "Accepter les Conditions & Commander au Coût",
+
+    "discord_order_bot_thread_ping_message": "Merci d'avoir demandé un bot {user}. Notre {staff} sera bientôt avec vous.",
+    "discord_order_bot_user_message": "Merci pour votre demande d'achat. Un membre de notre équipe prendra bientôt contact avec vous. Consultez votre ticket et ajoutez toute information supplémentaire ici >> {thread}",
+    "discord_order_bot_thread_message": "## {plant_plant} Demande de bot - {user}\n> Merci d'avoir acheté l'un de nos bots ! - Nous sommes là pour donner vie à votre idée ! **Notre équipe est maintenant occupée à créer votre bot** en fonction des détails que vous nous avez donnés.\n\n__Ce que vous nous avez dit :__\n- **Type de bot :** {bot_type}\n- **Nom du bot :** {bot_name}\n- **Statut du bot :** {bot_status}\n- **Utilisateurs potentiels du bot :** {bot_users}\n- **À propos de moi Pack :** {about_me_pack_status}{about_me_pack_cost_text}\n- **Frais de configuration :** {setup_fees_formatted}\n- **Prix d'hébergement mensuel :** {bot_user_pricing}\n- **Durée d'hébergement :** {bot_hosting_duration} {hosting_duration_month}\n### {plant_plant} Le paiement total est de __{total_price_formatted}__\n**Remarque :** Nous acceptons PayPal, carte de crédit/débit, boosts Discord Nitro et offres promotionnelles.",
+    "discord_order_bot_personalized_thread_message": "## {plant_plant} Demande de bot - {user}\n> Merci pour votre décision d'acheter un bot Discord personnalisé. - Nous sommes là pour donner vie à votre vision !\n\n__Partagez vos idées avec nous ici dans le chat__\n- N'hésitez pas à commencer par le nom du bot Discord, son statut et une brève description.\n- De plus, faites-nous savoir les principales couleurs que vous aimeriez incorporer dans la conception de votre bot.\n- N'hésitez pas à décrire les fonctionnalités ou les fonctionnalités spécifiques que vous avez en tête pour votre bot.\n- Si vous souhaitez inclure des emojis ou des icônes spécifiques, veuillez également les mentionner.\n- N'hésitez pas à fournir d'autres détails ou préférences que vous avez pour la conception et la fonctionnalité de votre bot. Nous sommes là pour donner vie à votre vision !\n### {community_advisor} Notre équipe prendra bientôt contact avec vous pour discuter de tout.\n\n**Remarque :** Nos méthodes de paiement actuelles incluent PayPal, la carte de crédit/débit, les boosts Discord Nitro et les offres promotionnelles.",
+    "discord_order_bot_thread_price_button": "Informations sur les prix",
+    "discord_order_bot_thread_close_button": "Fermer la commande",
+
+    "discord_order_bot_pricing_information": "## {plantbig_plant} Informations sur les Prix du Développement de Bot Discord\n\n### Bonjour et bienvenue !\n> Merci de votre intérêt pour nos services de développement de bot Discord. Nous aimerions vous montrer comment fonctionne notre tarification pour le développement personnalisé de bot Discord avant de commencer à travailler sur votre projet.\n## {log_memberjoin} Taux Horaire\n- Le taux horaire que nous facturons est de 55€. Ceci est basé sur l'expérience, l'expertise et les conditions du marché régional.\n## {log_memberjoin} Portée du Projet\n- Le tarif est influencé par la complexité et la portée du bot désiré. Un bot simple avec des fonctionnalités de base nécessite moins d'heures de travail par rapport à un bot plus complexe avec des fonctionnalités avancées et des intégrations.\n## {log_memberjoin} Services Additionnels\n- Si des fonctionnalités ou des intégrations supplémentaires sont nécessaires pour le bot, elles seront également prises en compte dans la tarification.\n## {log_memberjoin} Charge de Travail Variable\n- Le développement de bot Discord peut varier considérablement, ce qui rend difficile la fixation d'un calendrier fixe à l'avance. Cependant, notre expérience dans le développement de bot nous aide à être réalistes quant à la charge de travail.\n## {log_memberjoin} Heures Supplémentaires\n- Un tampon d'heures supplémentaires est alloué pour couvrir les problèmes imprévus ou les exigences supplémentaires au-delà de la portée initiale du projet. Ces heures supplémentaires sont facturées au taux horaire.\n\n> {community_admin} **-** Si vous êtes intéressé par ces services ou si vous avez des questions sur la tarification, n'hésitez pas à nous contacter. N'hésitez pas à nous contacter."
+  },
+  "it": {
+    "discord_bot_products_description": "## {plantbig_plant} Scegli il Tuo Tipo di Bot\n- Scegli tra un **bot predefinito** o un **bot personalizzato** per soddisfare le tue esigenze.\n- Ottieni **Soluzioni Immediate** o opta per **Creazioni Personalizzate** per un tocco personalizzato.\n- Bot predefiniti a partire da 1.50€\n\n{community_admin} **- Il Tuo Bot, Il Tuo Modo.** __Scegli il Tuo Ora!__",
+    "discord_select_bot_options_placeholder": "Scegli un bot...",
+
+    "discord_personalized_bot_label": "Bot Personalizzato",
+    "discord_personalized_bot_description": "Crea il tuo bot Discord personalizzato su misura per le tue esigenze e preferenze specifiche.",
+    "discord_modmail_bot_label": "Bot ModMail",
+    "discord_modmail_bot_description": "Un bot per gestire il sistema di modmail del tuo server.",
+    "discord_music_bot_label": "Bot Musicale 24/7",
+    "discord_music_bot_description": "Goditi la riproduzione musicale ininterrotta nel tuo server.",
+    "discord_admin_bot_label": "Bot di Amministrazione",
+    "discord_admin_bot_description": "Semplifica le operazioni di amministrazione del server con questo bot.",
+    "discord_tempvoice_bot_label": "Bot TempVoice",
+    "discord_tempvoice_bot_description": "Crea facilmente canali vocali temporanei.",
+    "discord_studies_bot_label": "Bot di Lavoro & Studi",
+    "discord_studies_bot_description": "Aumenta la produttività con strumenti pensati per il lavoro e lo studio.",
+
+    "discord_order_personalized_bot_description": "## {plant_plant} - Pronto per il Tuo Bot Discord Personalizzato?\n> Ciao! Siamo assolutamente entusiasti che tu stia considerando di ottenere il tuo bot Discord personalizzato.\n\n### Realizzato Solo per Te!\n- **Soluzioni Su Misura:** Realizzate specificamente per le esigenze del tuo server.\n- **Identità Unica:** Riflette la personalità e lo stile della tua comunità.\n- **Funzionalità Migliorate:** Sblocca funzionalità e comandi non disponibili nei bot predefiniti.\n- **Prezzo:** A partire da 50€\n\n> Con un bot personalizzato, non stai solo ottenendo uno strumento, stai investendo nella crescita e nel successo del tuo server.\n\nConsulta le [Condizioni di Servizio](https://discord.com/channels/1216127716970070128/1216346561601339474/1222872839187857582) e **avvia il processo di acquisto del tuo bot personalizzato oggi stesso!**",
+    "discord_order_personalized_bot_lable": "Accetta le Condizioni & Invia la Richiesta d'Acquisto",
+
+    "discord_order_bot_step_1_description": "## {community_developer} Fase di Configurazione - I/V\n> Seleziona quanti utenti sono nel tuo server Discord.\n\n**Nota:** Questo è necessario per motivi di hosting. A seconda del numero di utenti che utilizzano il bot, potremmo dover aumentare le risorse allocate per garantire prestazioni ottimali.",
+    "discord_order_bot_step_1_user_amount_1_lable": "< 1k",
+    "discord_order_bot_step_1_user_amount_2_lable": "1k-2.5k",
+    "discord_order_bot_step_1_user_amount_3_lable": "2.5k-5k",
+    "discord_order_bot_step_1_user_amount_4_lable": "> 5k",
+
+    "discord_order_bot_step_2_description": "## {community_developer} Passaggio di Configurazione - II/V\n> Seleziona qui sotto **per quanto tempo desideri ordinare il tuo bot**. Puoi estendere il tuo prodotto in qualsiasi momento successivamente.\n### {log_memberjoin} Le tariffe di configurazione singola si applicano come segue:\n- 30 Giorni: €5 tariffa di configurazione singola\n- 90 Giorni: €4 tariffa di configurazione singola\n- 180 Giorni: €2.50 tariffa di configurazione singola\n- 365 Giorni: **Nessuna tariffa di configurazione.**\n\n**Ricorda:** __Offriamo una prova gratuita di 24 ore.__",
+    "discord_order_bot_step_2_hosting_duration_1_lable": "30 Giorni",
+    "discord_order_bot_step_2_hosting_duration_2_lable": "90 Giorni",
+    "discord_order_bot_step_2_hosting_duration_3_lable": "180 Giorni",
+    "discord_order_bot_step_2_hosting_duration_4_lable": "365 Giorni",
+
+    "discord_order_bot_step_3_description": "## {community_developer} Fase di Configurazione - III/V\n> Vuoi acquistare un pacchetto Su di Me?\n\n__Cosa è il Pacchetto Su di Me?__\n- **Vetrina Visiva:** Guarda l'anteprima a destra per un'anteprima.\n- **Biografia Personalizzata:** Il tuo bot verrà fornito con una biografia predefinita professionale. Con questo pacchetto, ottieni la flessibilità di personalizzare la descrizione a tuo piacimento.\n- **Prezzo:** Il pacchetto è disponibile per soli __0.50€ al mese__.",
+    "discord_order_bot_step_3_about_me_pack_1_lable": "Sì, per favore!",
+    "discord_order_bot_step_3_about_me_pack_2_lable": "No, grazie.",
+
+    "discord_order_bot_step_4_description": "## {community_developer} Fase di Configurazione - IV/V\n> Di seguito ti verrà chiesto un certo numero di dettagli relativi al tuo bot, tra cui:\n\n- Nome del bot\n- Stato del bot `(sta giocando/sta guardando/sta ascoltando/sta trasmettendo/sta competendo)`\n\nClicca sul pulsante qui sotto per **iniziare a configurare il tuo bot.**",
+    "discord_order_bot_step_4_configure_lable": "Configura Bot",
+    "discord_order_bot_step_4_configure_modal_title": "Inserisci i dettagli del tuo bot",
+    "discord_order_bot_step_4_configure_modal_name_lable": "Nome del Bot",
+    "discord_order_bot_step_4_configure_modal_status_lable": "Stato del Bot",
+    "discord_order_bot_step_4_configure_modal_status_placeholder": "ad es., {sta guardando} sulla sicurezza degli utenti",
+
+    "discord_order_bot_step_5_description": "## {community_developer} Passaggio di configurazione - V/V\n> Infine, **controlla che tu abbia inserito tutto correttamente** e **accetta i termini e le condizioni** per l'uso del Bot.\n\n__I tuoi dettagli inseriti:__\n- **Tipo di bot:** {bot_type}\n- **Nome del bot:** {bot_name}\n- **Stato del bot:** {bot_status}\n- **Possibili utenti del bot:** {bot_users}\n- **About Me Pack:** {about_me_pack_status}{about_me_pack_cost_text}\n- **Costi di configurazione:** {setup_fees_formatted}\n- **Prezzo di hosting al mese:** {bot_user_pricing}\n- **Durata dell'hosting:** {bot_hosting_duration} {hosting_duration_month}\n### {plant_plant} L'importo totale da pagare è __{total_price_formatted}__\n**Nota:** Accettando i [termini e condizioni](https://discord.com/channels/1216127716970070128/1216346561601339474/1222872839187857582), verrà creato automaticamente un __ticket__ e il nostro __Team__ ti contatterà a breve.",
+    "discord_order_bot_step_5_accept_rules_lable": "Accetta le Condizioni & Ordina a Costo",
+
+    "discord_order_bot_thread_ping_message": "Grazie per aver richiesto un bot {user}. Il nostro {staff} sarà presto con te.",
+    "discord_order_bot_user_message": "Grazie per la tua richiesta di acquisto. Un membro del nostro team sarà presto in contatto con te. Visualizza il tuo ticket e aggiungi eventuali informazioni aggiuntive qui >> {thread}",
+    "discord_order_bot_thread_message": "## {plant_plant} Richiesta di bot - {user}\n> Grazie per aver acquistato uno dei nostri bot! - Siamo qui per realizzare la tua idea! **Il nostro team sta lavorando ora per creare il tuo bot** in base ai dettagli che ci hai fornito.\n\n__Cosa ci hai detto:__\n- **Tipo di bot:** {bot_type}\n- **Nome del bot:** {bot_name}\n- **Stato del bot:** {bot_status}\n- **Possibili utenti del bot:** {bot_users}\n- **About Me Pack:** {about_me_pack_status}{about_me_pack_cost_text}\n- **Costi di configurazione:** {setup_fees_formatted}\n- **Prezzo di hosting mensile:** {bot_user_pricing}\n- **Durata dell'hosting:** {bot_hosting_duration} {hosting_duration_month}\n### {plant_plant} Il pagamento totale è di __{total_price_formatted}__\n**Nota:** Accettiamo PayPal, carta di credito/debito, boost Discord Nitro e offerte promozionali.",
+    "discord_order_bot_personalized_thread_message": "## {plant_plant} Richiesta di bot - {user}\n> Grazie per la tua decisione di acquistare un bot Discord personalizzato. - Siamo qui per dare vita alla tua visione!\n\n__Condividi le tue idee con noi qui in chat__\n- Sentiti libero di iniziare con il nome del bot Discord, il suo stato e una breve descrizione.\n- Inoltre, facci sapere i colori principali che desideri incorporare nel design del tuo bot.\n- Non esitare a descrivere le funzionalità o le caratteristiche specifiche che hai in mente per il tuo bot.\n- Se ci sono emoji o icone specifiche che desideri includere, ti preghiamo di menzionarle anche.\n- Non esitare a fornire altri dettagli o preferenze che hai per il design e la funzionalità del tuo bot. Siamo qui per dare vita alla tua visione!\n### {community_advisor} Il nostro team ti contatterà a breve per discutere di tutto.\n\n**Nota :** I nostri metodi di pagamento attuali includono PayPal, carta di credito/debito, boost Discord Nitro e offerte promozionali.",
+    "discord_order_bot_thread_price_button": "Informazioni sui Prezzi",
+    "discord_order_bot_thread_close_button": "Chiudi Ordine",
+
+    "discord_order_bot_pricing_information": "## {plantbig_plant} Informazioni sui Prezzi per lo Sviluppo di Bot Discord\n\n### Ciao e benvenuto!\n> Grazie per il tuo interesse nei nostri servizi di sviluppo di bot Discord. Vorremmo mostrarti come funziona la nostra tariffazione per lo sviluppo personalizzato di bot Discord prima di iniziare a lavorare sul tuo progetto.\n## {log_memberjoin} Tariffa Oraria\n- La tariffa oraria che addebitiamo è di 55€. Questo si basa sull'esperienza, sull'expertise e sulle condizioni di mercato regionali.\n## {log_memberjoin} Ambito del Progetto\n- La tariffazione è influenzata dalla complessità e dall'ambito del bot desiderato. Un bot semplice con funzionalità di base richiede meno ore di lavoro rispetto a un bot più complesso con funzionalità avanzate e integrazioni.\n## {log_memberjoin} Servizi Aggiuntivi\n- Se sono necessarie funzionalità o integrazioni aggiuntive per il bot, queste verranno considerate nella tariffazione.\n## {log_memberjoin} Carico di Lavoro Variabile\n- Lo sviluppo di bot Discord può variare notevolmente, rendendo difficile stabilire un calendario fisso in anticipo. Tuttavia, la nostra esperienza nello sviluppo di bot ci aiuta ad essere realistici riguardo al carico di lavoro.\n## {log_memberjoin} Ore Extra\n- Viene allocato un buffer di ore aggiuntive per coprire eventuali problemi imprevisti o requisiti aggiuntivi al di là dell'ambito originale del progetto. Queste ore aggiuntive vengono addebitate alla tariffa oraria.\n\n> {community_admin} **-** Se sei interessato a questi servizi o hai domande sulla tariffazione, non esitare a contattarci. Non esitare a contattarci."
+  },
+  "ja": {
+    "discord_bot_products_description": "## {plantbig_plant} ボットのタイプを選択\n- 自分のニーズに合った **事前に作成された** または **カスタムボット** を選択します。\n- **即時の解決策** を手に入れるか、 **パーソナライズされたクリエーション** を選択してください。\n- 事前作成されたボットの価格は1.50€から\n\n{community_admin} **- あなたのボット、あなたの方法。** __今すぐあなたのものを選んでください！__",
+    "discord_select_bot_options_placeholder": "ボットを選択してください...",
+
+    "discord_personalized_bot_label": "パーソナライズボット",
+    "discord_personalized_bot_description": "あなたの特定のニーズと好みに合わせたカスタマイズされたDiscordボットを作成します。",
+    "discord_modmail_bot_label": "ModMailボット",
+    "discord_modmail_bot_description": "サーバーのモデレーションメールシステムを管理するためのボット。",
+    "discord_music_bot_label": "24/7 音楽ボット",
+    "discord_music_bot_description": "サーバーで音楽再生を中断することなく楽しむことができます。",
+    "discord_admin_bot_label": "管理ボット",
+    "discord_admin_bot_description": "このボットでサーバー管理のタスクを簡素化します。",
+    "discord_tempvoice_bot_label": "TempVoiceボット",
+    "discord_tempvoice_bot_description": "一時的な音声チャンネルを簡単に作成します。",
+    "discord_studies_bot_label": "作業＆勉強ボット",
+    "discord_studies_bot_description": "作業と勉強用にカスタマイズされたツールで生産性を向上させます。",
+
+    "discord_order_personalized_bot_description": "## {plant_plant} - あなたのパーソナライズされたDiscordボットの準備はできていますか？\n> こんにちは！あなたが独自のパーソナライズされたDiscordボットを手に入れることを検討してくれていることを本当に嬉しく思います。\n\n### あなたのために作られたもの！\n- **カスタマイズされたソリューション：** あなたのサーバーの要件に合わせて作られました。\n- **ユニークなアイデンティティ：** コミュニティの個性とスタイルを反映しています。\n- **機能の強化：** 事前に作成されたボットでは利用できない機能やコマンドを解除します。\n- **価格：** 50€から\n\n> パーソナライズされたボットで、あなたは単なるツールを手に入れるだけではありません - サーバーの成長と成功に投資しています。\n\n[利用規約](https://discord.com/channels/1216127716970070128/1216346561601339474/1222872839187857582)を確認して、今日カスタムボットを入手するプロセスを開始してください！",
+    "discord_order_personalized_bot_lable": "利用規約を受け入れて注文する",
+
+    "discord_order_bot_step_1_description": "## {community_developer} 設定ステップ - I/V\n> Discordサーバーにいる人数を選択してください。\n\n**注意：** これはホスティングの理由から必要です。ボットを使用するユーザーの数に応じて、割り当てられたリソースを増やす必要がある場合があります。",
+    "discord_order_bot_step_1_user_amount_1_lable": "< 1k",
+    "discord_order_bot_step_1_user_amount_2_lable": "1k-2.5k",
+    "discord_order_bot_step_1_user_amount_3_lable": "2.5k-5k",
+    "discord_order_bot_step_1_user_amount_4_lable": "> 5k",
+
+    "discord_order_bot_step_2_description": "## {community_developer} 設定ステップ - II/V\n> 下記から**ボットを注文する期間**を選択してください。後で製品をいつでも延長できます。\n### {log_memberjoin} 一度のセットアップ料金は以下の通りです:\n- 30日: €5 一度のセットアップ料金\n- 90日: €4 一度のセットアップ料金\n- 180日: €2.50 一度のセットアップ料金\n- 365日: **セットアップ料金はかかりません。**\n\n**注意:** __24時間の無料トライアルを提供しています.__",
+    "discord_order_bot_step_2_hosting_duration_1_lable": "30 日",
+    "discord_order_bot_step_2_hosting_duration_2_lable": "90 日",
+    "discord_order_bot_step_2_hosting_duration_3_lable": "180 日",
+    "discord_order_bot_step_2_hosting_duration_4_lable": "365 日",
+
+    "discord_order_bot_step_3_description": "## {community_developer} 設定ステップ - III/V\n> 「自己紹介パッケージ」を購入しますか？\n\n__自己紹介パッケージとは？__\n- **ビジュアルショーケース：** 右のサムネイルを参照してプレビューします。\n- **カスタムバイオ：** あなたのボットには、プロフェッショナルに作成された事前に作成されたバイオが付属しています。このパッケージでは、説明を好みにカスタマイズできます。\n- **価格：** パッケージはわずか __0.50€ 月額__ で利用できます。",
+    "discord_order_bot_step_3_about_me_pack_1_lable": "はい！",
+    "discord_order_bot_step_3_about_me_pack_2_lable": "いいえ、結構です。",
+
+    "discord_order_bot_step_4_description": "## {community_developer} 設定ステップ - IV/V\n> ボットの名前、ボットのステータス `(再生中/視聴中/聞いている/ストリーミング中/競技中)` を含む、ボットに関するいくつかの詳細が以下に求められます。\n\nボットの設定を開始するには、以下のボタンをクリックしてください **ボットの設定**。",
+    "discord_order_bot_step_4_configure_lable": "ボットを構成する",
+    "discord_order_bot_step_4_configure_modal_title": "ボットの詳細を入力してください",
+    "discord_order_bot_step_4_configure_modal_name_lable": "ボットの名前",
+    "discord_order_bot_step_4_configure_modal_status_lable": "ボットのステータス",
+    "discord_order_bot_step_4_configure_modal_status_placeholder": "例：ユーザーの安全を見守る {watching}",
+
+    "discord_order_bot_step_5_description": "## {community_developer} 設定ステップ - V/V\n> 最後に、**入力した内容を再確認**し、**ボットの利用規約に同意**してください。\n\n__入力された詳細：__\n- **ボットのタイプ：** {bot_type}\n- **ボットの名前：** {bot_name}\n- **ボットのステータス：** {bot_status}\n- **可能なボットユーザー：** {bot_users}\n- **About Meパック：** {about_me_pack_status}{about_me_pack_cost_text}\n- **セットアップ料金：** {setup_fees_formatted}\n- **月額ホスティング価格：** {bot_user_pricing}\n- **ホスティング期間：** {bot_hosting_duration} {hosting_duration_month}\n### {plant_plant} 支払総額は __{total_price_formatted}__ です\n**注意：** [利用規約](https://discord.com/channels/1216127716970070128/1216346561601339474/1222872839187857582)に同意することで、自動的に __チケットが作成__ され、__スタッフチーム__ がすぐに連絡します。",
+    "discord_order_bot_step_5_accept_rules_lable": "利用規約を受け入れて注文する",
+
+    "discord_order_bot_thread_ping_message": "ボットをリクエストしていただき、ありがとうございます {user}。当社の {staff} がすぐにお手伝いします。",
+    "discord_order_bot_user_message": "ご購入リクエストありがとうございます。当社のチームのメンバーがすぐにご連絡いたします。チケットを表示して、ここに追加情報を追加してください >> {thread}",
+    "discord_order_bot_thread_message": "## {plant_plant} Botリクエスト - {user}\n> 当社のボットの購入ありがとうございます！- あなたのアイデアを実現するためにここにいます！ **弊社チームは、お客様が提供された詳細に基づいて現在、ボットの作成に取り組んでいます**。\n\n__あなたが教えてくれたこと：__\n- **ボットタイプ：** {bot_type}\n- **ボット名：** {bot_name}\n- **ボットステータス：** {bot_status}\n- **可能なボットユーザー：** {bot_users}\n- **About Meパック：** {about_me_pack_status}{about_me_pack_cost_text}\n- **セットアップ料金：** {setup_fees_formatted}\n- **月額ホスティング価格：** {bot_user_pricing}\n- **ホスティング期間：** {bot_hosting_duration} {hosting_duration_month}\n### {plant_plant} 合計金額は __{total_price_formatted}__ です\n**注意：** PayPal、クレジット/デビットカード、Discord Nitroブースト、プロモーションオファーをご利用いただけます。",
+    "discord_order_bot_personalized_thread_message": "## {plant_plant} ボットリクエスト - {user}\n> カスタムdiscordボットを購入していただき、ありがとうございます。 - 私たちはあなたのビジョンを実現するためにここにいます！\n\n__チャットでアイデアを共有してください__\n- Discordボットの名前、ステータス、簡単な説明から始めることができます。\n- さらに、ボットのデザインに取り入れたい主要な色について教えてください。\n- ボットのデザインや機能に関する具体的な機能がある場合は、お知らせください。\n- 含めたい特定の絵文字やアイコンがある場合は、それをメンションしてください。\n- ボットのデザインと機能に関する他の詳細や希望があれば、遠慮なくご提供ください。私たちはあなたのビジョンを実現するためにここにいます！\n### {community_advisor} 当社のチームがすぐにあなたと話し合うために連絡します。\n\n**注意：** 当社の現在の支払い方法には、PayPal、クレジット/デビットカード、Discord Nitroブースト、プロモーションオファーが含まれます。",
+    "discord_order_bot_thread_price_button": "価格情報",
+    "discord_order_bot_thread_close_button": "注文を閉じる",
+
+    "discord_order_bot_pricing_information": "## {plantbig_plant} Discordボット開発の価格情報\n\n### こんにちは、ようこそ！\n> 当社のDiscordボット開発サービスにご興味をお持ちいただき、ありがとうございます。プロジェクトに取り組む前に、カスタムDiscordボット開発の価格設定方法をご紹介いたします。\n\n## {log_memberjoin} 時間単価\n- 私たちが請求する時間単価は€55です。これは経験、専門知識、地域の市場状況に基づいています。\n## {log_memberjoin} プロジェクトのスコープ\n- 価格は、望ましいボットの複雑さと範囲に影響を受けます。基本的な機能を備えたシンプルなボットは、高度な機能や統合を備えたより複雑なボットよりも少ない作業時間が必要です。\n## {log_memberjoin} 追加サービス\n- ボットに追加の機能や統合が必要な場合、これらも価格に影響します。\n## {log_memberjoin} 可変作業量\n- Discordボットの開発は大幅に異なる場合があり、事前に固定された時間枠を設定するのが難しい場合があります。ただし、ボット開発の経験により、作業量について現実的に判断できます。\n## {log_memberjoin} 追加時間\n- 予期しない問題や元のプロジェクト範囲を超える追加要件をカバーするために、追加時間のバッファが割り当てられます。これらの追加時間は、時間単価で請求されます。\n\n> {community_admin} **-** これらのサービスに興味がある場合や価格に関するご質問がある場合は、お気軽にお問い合わせください。お問い合わせはお待ちしています。"
+  },
+  "zh": {
+    "discord_bot_products_description": "## {plantbig_plant} 选择你的机器人类型\n- 选择 **预制** 或 **定制机器人** 来满足你的需求。\n- 获取 **即时解决方案** 或选择 **量身定制的创意** ，让你的机器人个性化。\n- 预制机器人起价1.50€\n\n{community_admin} **- 你的机器人，你的方式。** __立即选择！__",
+    "discord_select_bot_options_placeholder": "选择一个机器人...",
+
+    "discord_personalized_bot_label": "定制机器人",
+    "discord_personalized_bot_description": "创建一个根据你的特定需求和偏好定制的Discord机器人。",
+    "discord_modmail_bot_label": "ModMail机器人",
+    "discord_modmail_bot_description": "用于管理您服务器的modmail系统的机器人。",
+    "discord_music_bot_label": "24/7音乐机器人",
+    "discord_music_bot_description": "在您的服务器上享受不间断的音乐播放。",
+    "discord_admin_bot_label": "管理机器人",
+    "discord_admin_bot_description": "使用此机器人简化服务器管理任务。",
+    "discord_tempvoice_bot_label": "TempVoice机器人",
+    "discord_tempvoice_bot_description": "轻松创建临时语音频道。",
+    "discord_studies_bot_label": "工作与学习机器人",
+    "discord_studies_bot_description": "通过专为工作和学习定制的工具提高生产力。",
+
+    "discord_order_personalized_bot_description": "## {plant_plant} - 准备好你的个性化Discord机器人了吗？\n> 嘿！我们非常高兴您考虑要获取您自己的个性化Discord机器人。\n\n### 为你量身定制！\n- **定制解决方案：**专为您的服务器需求量身定制。\n- **独特身份：**反映您社区的个性和风格。\n- **增强功能：**解锁预制机器人中不可用的功能和命令。\n- **定价：**起价 €50\n\n> 通过个性化的机器人，您不仅仅得到了一个工具 - 您是在投资您服务器的增长和成功。\n\n查看 [服务条款](https://discord.com/channels/1216127716970070128/1216346561601339474/1222872839187857582) 并 **立即开始获取您的定制机器人！**",
+    "discord_order_personalized_bot_lable": "接受条款并提交购买请求",
+
+    "discord_order_bot_step_1_description": "## {community_developer} 配置步骤 - I/V\n> 选择您的Discord服务器上有多少人。\n\n**注意：** 这对于托管原因是必要的。根据使用该机器人的用户数量，我们可能需要增加分配的资源以确保最佳性能。",
+    "discord_order_bot_step_1_user_amount_1_lable": "< 1k",
+    "discord_order_bot_step_1_user_amount_2_lable": "1k-2.5k",
+    "discord_order_bot_step_1_user_amount_3_lable": "2.5k-5k",
+    "discord_order_bot_step_1_user_amount_4_lable": "> 5k",
+
+    "discord_order_bot_step_2_description": "## {community_developer} 구성 단계 - II/V\n> 아래에서 **당신이 보트를 주문하고 싶은 기간**을 선택하십시오. 나중에 제품을 언제든지 연장할 수 있습니다.\n### {log_memberjoin} 일회성 설치 수수료는 다음과 같습니다:\n- 30 일: €5 일회성 설치 수수료\n- 90 일: €4 일회성 설치 수수료\n- 180 일: €2.50 일회성 설치 수수료\n- 365 일: **설치 수수료 없음.**\n\n**참고 사항:** __24 시간 무료 평가판을 제공합니다.__",
+    "discord_order_bot_step_2_hosting_duration_1_lable": "30天",
+    "discord_order_bot_step_2_hosting_duration_2_lable": "90天",
+    "discord_order_bot_step_2_hosting_duration_3_lable": "180天",
+    "discord_order_bot_step_2_hosting_duration_4_lable": "365天",
+
+    "discord_order_bot_step_3_description": "## {community_developer} 配置步骤 - III/V\n> 您想购买关于我的包吗？\n\n__什么是关于我的包？__\n- **视觉展示：**请参见右侧缩略图进行预览。\n- **自定义简介：**您的机器人将附带专业制作的预制简介。通过此包，您可以根据自己的喜好自定义描述。\n- **定价：**该包仅需 __0.50€ 每月__。",
+    "discord_order_bot_step_3_about_me_pack_1_lable": "是的！",
+    "discord_order_bot_step_3_about_me_pack_2_lable": "不用了，谢谢。",
+
+    "discord_order_bot_step_4_description": "## {community_developer} 配置步骤 - IV/V\n> 下面将根据您的机器人询问一些详细信息，包括：\n\n- 机器人名称\n- 机器人状态 `(playing/watching/listening/streaming/competing)`\n\n点击下面的按钮 **开始配置您的机器人。**",
+    "discord_order_bot_step_4_configure_lable": "配置机器人",
+    "discord_order_bot_step_4_configure_modal_title": "输入您的机器人详细信息",
+    "discord_order_bot_step_4_configure_modal_name_lable": "机器人名称",
+    "discord_order_bot_step_4_configure_modal_status_lable": "机器人状态",
+    "discord_order_bot_step_4_configure_modal_status_placeholder": "例如，{watching} 守护用户的安全",
+
+    "discord_order_bot_step_5_description": "## {community_developer} 配置步骤 - V/V\n> 最后，请**确认你输入的信息是否正确**，并**同意使用该机器人的条款和条件**。\n\n__你输入的详情：__\n- **机器人类型：** {bot_type}\n- **机器人名称：** {bot_name}\n- **机器人状态：** {bot_status}\n- **可能的机器人用户：** {bot_users}\n- **关于我的包：** {about_me_pack_status}{about_me_pack_cost_text}\n- **设置费用：** {setup_fees_formatted}\n- **每月托管价格：** {bot_user_pricing}\n- **托管期限：** {bot_hosting_duration} {hosting_duration_month}\n### {plant_plant} 总支付金额为 __{total_price_formatted}__\n**注意：** 通过接受[条款和条件](https://discord.com/channels/1216127716970070128/1216346561601339474/1222872839187857582)，将自动创建一个 __工单__，我们的 __工作人员团队__ 将尽快与您联系。",
+    "discord_order_bot_step_5_accept_rules_lable": "接受条款并支付费用",
+
+    "discord_order_bot_thread_ping_message": "感谢您请求机器人 {user}。我们的 {staff} 将会尽快与您联系。",
+    "discord_order_bot_user_message": "感谢您的购买请求。我们的团队成员将很快与您联系。在这里查看您的票据并添加任何其他信息 >> {thread}",
+    "discord_order_bot_thread_message": "## {plant_plant} 机器人请求 - {user}\n> 感谢您购买我们的一个机器人！ - 我们在这里为您实现您的想法！ **我们的团队现在正忙于根据您给我们的细节来创建您的机器人**。\n\n__您告诉我们的：__\n- **机器人类型：** {bot_type}\n- **机器人名称：** {bot_name}\n- **机器人状态：** {bot_status}\n- **可能的机器人用户：** {bot_users}\n- **关于我的包：** {about_me_pack_status}{about_me_pack_cost_text}\n- **设置费用：** {setup_fees_formatted}\n- **每月托管价格：** {bot_user_pricing}\n- **托管期限：** {bot_hosting_duration} {hosting_duration_month}\n### {plant_plant} 总付款金额为 __{total_price_formatted}__\n**注意：** 我们接受 PayPal、信用卡/借记卡、Discord Nitro 提升和促销优惠。",
+    "discord_order_bot_personalized_thread_message": "## {plant_plant} 机器人请求 - {user}\n> 感谢您决定购买定制的Discord机器人。 - 我们在这里为您实现您的愿景！\n\n__请在此处与我们分享您的想法__\n- 请随时从Discord机器人名称、其状态和简要描述开始。\n- 此外，请告诉我们您想要融入机器人设计的主要颜色。\n- 如有任何特定功能或功能，请随时告诉我们。\n- 如果有任何特定的表情符号或图标，也请提及。\n- 不要犹豫，提供您对机器人设计和功能的其他详细信息或偏好。我们在这里为您实现您的愿景！\n### {community_advisor} 我们的团队将很快与您联系，讨论一切。\n\n**注意：** 我们目前的支付方法包括 PayPal、信用卡/借记卡、Discord Nitro提升和促销优惠。",
+    "discord_order_bot_thread_price_button": "价格信息",
+    "discord_order_bot_thread_close_button": "关闭订单",
+
+    "discord_order_bot_pricing_information": "## {plantbig_plant} Discord机器人开发价格信息\n\n### 您好，欢迎光临！\n> 感谢您对我们的Discord机器人开发服务感兴趣。在我们开始您的项目之前，我们想向您展示我们的定制Discord机器人开发定价如何运作。\n\n## {log_memberjoin} 每小时费率\n- 我们收取的每小时费率为 €55。这基于经验、专业知识和地区市场条件。\n## {log_memberjoin} 项目范围\n- 定价受所需机器人的复杂性和范围的影响。具有基本功能的简单机器人需要的工作小时数较少，而具有高级功能和集成的更复杂的机器人需要的工作小时数较多。\n## {log_memberjoin} 附加服务\n- 如果需要为机器人提供其他功能或集成，这些功能也将纳入定价。\n## {log_memberjoin} 工作量的变化\n- Discord机器人开发可能差异很大，很难提前确定一个固定的时间范围。然而，我们在机器人开发方面的经验帮助我们对工作量保持现实。\n## {log_memberjoin} 额外小时\n- 额外的小时被分配用于处理意外问题或原始项目范围之外的附加要求。这些额外的小时按每小时费率收费。\n\n> {community_admin} **-** 如果您对这些服务感兴趣或对定价有任何疑问，请随时联系。请随时与我们联系，如果您对这些服务感兴趣或对定价有任何疑问。"
+  },
+  "ko": {
+    "discord_bot_products_description": "## {plantbig_plant} 당신의 봇 유형 선택하기\n- **Pre-made** 또는 **Custom bot** 중에서 선택하여 필요에 맞게 선택하세요.\n- **즉시 해결책**을 얻거나 **맞춤형 작품**을 선택하여 개인적인 터치를 더하세요.\n- 1.50€부터 시작하는 사전 제작된 봇\n\n{community_admin} **- 당신의 봇, 당신의 방식.** __지금 선택하세요!__",
+    "discord_select_bot_options_placeholder": "봇을 선택하세요...",
+
+    "discord_personalized_bot_label": "개인화된 봇",
+    "discord_personalized_bot_description": "귀하의 특정한 요구사항과 선호도에 맞게 맞춤형 Discord 봇을 만드세요.",
+    "discord_modmail_bot_label": "ModMail 봇",
+    "discord_modmail_bot_description": "서버의 모드메일 시스템을 관리하는 봇입니다.",
+    "discord_music_bot_label": "24/7 음악 봇",
+    "discord_music_bot_description": "서버에서 중단 없는 음악 재생을 즐기세요.",
+    "discord_admin_bot_label": "관리 봇",
+    "discord_admin_bot_description": "이 봇을 사용하여 서버 관리 작업을 간소화하세요.",
+    "discord_tempvoice_bot_label": "임시 음성 채널 봇",
+    "discord_tempvoice_bot_description": "쉽게 임시 음성 채널을 만드세요.",
+    "discord_studies_bot_label": "작업 및 공부 봇",
+    "discord_studies_bot_description": "작업 및 공부에 특화된 도구로 생산성을 높이세요.",
+
+    "discord_order_personalized_bot_description": "## {plant_plant} - 개인화된 Discord 봇을 준비하셨나요?\n> 여기에 있어요! 당신만의 개인화된 Discord 봇을 고려해주셔서 정말 감사합니다.\n\n### 당신을 위해 만들어졌어요!\n- **맞춤형 솔루션:** 당신의 서버 요구에 맞게 특별히 제작됩니다.\n- **고유한 아이덴티티:** 당신의 커뮤니티의 개성과 스타일을 반영합니다.\n- **향상된 기능:** 사전 제작된 봇에서 사용할 수 없는 기능 및 명령을 해제하세요.\n- **가격:** €50부터 시작\n\n> 개인화된 봇을 통해 당신은 단순히 도구를 얻는 것이 아니라 서버의 성장과 성공에 투자하고 있습니다.\n\n[서비스 약관](https://discord.com/channels/1216127716970070128/1216346561601339474/1222872839187857582)을 검토하고 오늘 맞춤형 봇을 구매하는 과정을 시작하세요!",
+    "discord_order_personalized_bot_lable": "약관 수락 및 구매 요청 제출",
+
+    "discord_order_bot_step_1_description": "## {community_developer} 구성 단계 - I/V\n> Discord 서버에 있는 사람 수를 선택하세요.\n\n**참고:** 이것은 호스팅 이유로 필요합니다. 봇을 사용하는 사용자 수에 따라 할당된 리소스를 증가시켜 최적의 성능을 보장할 수 있습니다.",
+    "discord_order_bot_step_1_user_amount_1_lable": "< 1k",
+    "discord_order_bot_step_1_user_amount_2_lable": "1k-2.5k",
+    "discord_order_bot_step_1_user_amount_3_lable": "2.5k-5k",
+    "discord_order_bot_step_1_user_amount_4_lable": "> 5k",
+
+    "discord_order_bot_step_2_description": "## {community_developer} 구성 단계 - II/V\n> 아래에서 봇을 얼마나 오랫동안 주문하고 싶은지 선택하세요. 그 후에 언제든지 제품을 연장할 수 있습니다.\n### {log_memberjoin} 일회성 설치 수수료는 다음과 같이 적용됩니다:\n- 30일: €5의 일회성 설치 수수료\n- 90일: €4의 일회성 설치 수수료\n- 180일: €2.50의 일회성 설치 수수료\n- 365일: 설치 수수료 없음.\n\n주의: 24시간 무료 평가판을 제공합니다.",
+    "discord_order_bot_step_2_hosting_duration_1_lable": "30일",
+    "discord_order_bot_step_2_hosting_duration_2_lable": "90일",
+    "discord_order_bot_step_2_hosting_duration_3_lable": "180일",
+    "discord_order_bot_step_2_hosting_duration_4_lable": "365일",
+
+    "discord_order_bot_step_3_description": "## {community_developer} 구성 단계 - III/V\n> About Me 패키지를 구매하시겠습니까?\n\n__About Me 패키지란?__\n- **시각적 쇼케이스:** 미리보기를 위해 오른쪽에 썸네일을 확인하세요.\n- **사용자 지정 바이오:** 귀하의 봇은 전문가가 제작한 사전 제작 바이오와 함께 제공됩니다. 이 패키지로 인해 설명을 원하는대로 사용자 지정할 수 있습니다.\n- **가격:** 패키지는 월 __0.50€__에 제공됩니다.",
+    "discord_order_bot_step_3_about_me_pack_1_lable": "네!",
+    "discord_order_bot_step_3_about_me_pack_2_lable": "아니요, 괜찮아요.",
+
+    "discord_order_bot_step_4_description": "## {community_developer} 구성 단계 - IV/V\n> 아래에서는 봇 이름 및 봇 상태 (재생 중/보고 있음/듣는 중/스트리밍 중/경쟁 중)를 비롯한 여러 세부 정보를 입력해야 합니다.\n\n봇 구성을 시작하려면 아래 버튼을 클릭하세요.",
+    "discord_order_bot_step_4_configure_lable": "봇 구성",
+    "discord_order_bot_step_4_configure_modal_title": "봇 세부 정보 입력",
+    "discord_order_bot_step_4_configure_modal_name_lable": "봇 이름",
+    "discord_order_bot_step_4_configure_modal_status_lable": "봇 상태",
+    "discord_order_bot_step_4_configure_modal_status_placeholder": "예: 사용자의 안전을 {watching}중",
+
+    "discord_order_bot_step_5_description": "## {community_developer} 구성 단계 - V/V\n> 마지막으로 **입력한 내용을 다시 확인하고**, **봇 사용 조건을 수락**하십시오.\n\n__입력한 세부 정보:__\n- **봇 유형:** {bot_type}\n- **봇 이름:** {bot_name}\n- **봇 상태:** {bot_status}\n- **가능한 봇 사용자:** {bot_users}\n- **나에 대해 팩:** {about_me_pack_status}{about_me_pack_cost_text}\n- **설치 비용:** {setup_fees_formatted}\n- **월별 호스팅 가격:** {bot_user_pricing}\n- **호스팅 기간:** {bot_hosting_duration} {hosting_duration_month}\n### {plant_plant} 지불해야 할 총액은 __{total_price_formatted}__입니다.\n**참고:** [이용 약관](https://discord.com/channels/1216127716970070128/1216346561601339474/1222872839187857582)에 동의함으로써 __티켓이 자동으로 생성__되며, __스태프 팀__이 곧 연락드릴 것입니다.",
+    "discord_order_bot_step_5_accept_rules_lable": "약관 수락 및 비용으로 주문",
+
+    "discord_order_bot_thread_ping_message": "{user}님, 봇을 요청해주셔서 감사합니다. 저희 {staff}가 곧 연락드릴 예정입니다.",
+    "discord_order_bot_user_message": "봇 구매 요청해 주셔서 감사합니다. 저희 팀원 중 한 분이 곧 연락 드리겠습니다. 티켓을 확인하고 여기에 추가 정보를 추가하세요 >> {thread}",
+    "discord_order_bot_thread_message": "## {plant_plant} Bot 요청 - {user}\n> 저희 봇 중 하나를 구매해 주셔서 감사합니다! - 우리는 당신의 아이디어를 실현하기 위해 여기 있습니다! **우리 팀은 당신이 제공한 세부 정보에 기초하여 지금 당신의 봇을 만들고 있습니다**.\n\n__당신이 말한 것들:__\n- **봇 유형:** {bot_type}\n- **봇 이름:** {bot_name}\n- **봇 상태:** {bot_status}\n- **가능한 봇 사용자:** {bot_users}\n- **About Me Pack:** {about_me_pack_status}{about_me_pack_cost_text}\n- **설치 비용:** {setup_fees_formatted}\n- **월별 호스팅 가격:** {bot_user_pricing}\n- **호스팅 기간:** {bot_hosting_duration} {hosting_duration_month}\n### {plant_plant} 총 결제 금액은 __{total_price_formatted}__입니다\n**참고:** PayPal, 신용카드/직불카드, Discord Nitro 부스트 및 프로모션 제공을 통해 현재 결제 방법을 제공하고 있습니다.",
+    "discord_order_bot_personalized_thread_message": "## {plant_plant} 봇 요청 - {user}\n> 사용자 정의 디스코드 봇을 구매해 주셔서 감사합니다. - 우리는 당신의 비전을 실현하기 위해 여기 있습니다!\n\n__채팅에서 여러분의 아이디어를 공유하세요.__\n- 디스코드 봇 이름, 상태 및 간단한 설명부터 시작하세요.\n- 봇 디자인에 통합하고 싶은 주요 색상에 대해 알려주세요.\n- 봇에 대해 생각하는 특정 기능이나 기능을 설명해주세요.\n- 포함하고 싶은 특정 이모티콘이나 아이콘이 있는 경우 언급해주세요.\n- 봇의 디자인과 기능에 대한 다른 세부 정보나 기호가 있으면 망설이지 마세요. 우리는 당신의 비전을 실현하기 위해 여기 있습니다!\n### {community_advisor} 저희 팀은 곧 여러분과 모든 것에 대해 논의하려고 할 것입니다.\n\n**참고:** 저희의 현재 결제 방법에는 PayPal, 신용/직불 카드, Discord Nitro 부스트 및 프로모션 제공이 포함됩니다.",
+    "discord_order_bot_thread_price_button": "가격 정보",
+    "discord_order_bot_thread_close_button": "주문 닫기",
+
+    "discord_order_bot_pricing_information": "## {plantbig_plant} Discord 봇 개발 가격 정보\n\n### 안녕하세요! 환영합니다!\n> 저희의 Discord 봇 개발 서비스에 관심을 가져 주셔서 감사합니다. 우리가 귀하의 프로젝트에 착수하기 전에 사용자 정의 Discord 봇 개발 가격 책정 방법을 보여 드리고 싶습니다.\n\n## {log_memberjoin} 시간 당 요금\n- 저희가 청구하는 시간당 요금은 €55입니다. 이것은 경험, 전문성 및 지역 시장 조건을 기반으로 합니다.\n## {log_memberjoin} 프로젝트 범위\n- 가격은 원하는 봇의 복잡성과 범위에 영향을 받습니다. 기본 기능을 갖춘 간단한 봇은 고급 기능과 통합이 필요한 복잡한 봇에 비해 적은 작업 시간이 필요합니다.\n## {log_memberjoin} 추가 서비스\n- 봇에 추가 기능이나 통합이 필요한 경우 이를 가격에 반영합니다.\n## {log_memberjoin} 가변적인 작업량\n- Discord 봇 개발은 크게 다를 수 있으므로 미리 고정된 시간을 설정하기가 어려울 수 있습니다. 그러나 봇 개발 경험을 바탕으로 작업량을 현실적으로 파악할 수 있습니다.\n## {log_memberjoin} 추가 시간\n- 예기치 못한 문제나 원래 프로젝트 범위를 벗어나는 추가 요구 사항을 커버하기 위해 추가 시간이 할당됩니다. 이러한 추가 시간은 시간당 요금으로 청구됩니다.\n\n> {community_admin} **-** 이러한 서비스에 관심이 있거나 가격에 대한 질문이 있으시면 언제든지 연락하십시오. 문의 사항이 있으시면 언제든지 연락 주시기 바랍니다."
+  }
+}
