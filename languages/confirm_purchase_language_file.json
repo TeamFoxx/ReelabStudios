@@ -1,0 +1,20 @@
+{
+  "en": {
+    "modal_title": "Confirm Product Purchase",
+
+    "customer_name_modal_lable": "Customer Name",
+    "customer_name_modal_placeholder": "Insert customer name here.",
+
+    "discord_user_id_modal_lable": "Discord UID",
+    "discord_user_id_modal_placeholder": "Enter 17 - 18 digit user ID in here.",
+
+    "product_type_modal_lable": "Product Type",
+    "product_type_modal_placeholder": "What type of product is being paid for.",
+
+    "product_price_modal_lable": "Product Price",
+    "product_price_modal_placeholder": "Enter the total price of the product.",
+
+    "discount_modal_lable": "Discount Value",
+    "discount_modal_placeholder": "Insert the value of the discount here."
+  }
+}
