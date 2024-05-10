@@ -1,15 +1,16 @@
 # Build basic python-alpine image
 FROM python:3.10-alpine as base
 MAINTAINER Aurel Hoxha
-LABEL maintainer="hello@aurelhoxha.de"
+LABEL maintainer="info@aurelhoxha.de"
 
 WORKDIR /svc
-COPY requirements.txt /
-# RUN apk add --no-cache libjpeg-turbo g++ curl && pip install --no-cache-dir --no-index --find-links=/svc/wheels -r requirements.txt
+COPY . /
+RUN apk add --no-cache libjpeg-turbo g++ curl build-base musl-dev linux-headers python3-dev
+# RUN pip install --no-cache-dir --no-index -r requirements.txt
 
 # add missing packages into stage image
 FROM python:3.10-alpine as stage
-RUN apk add git
+RUN apk add git gcc musl-dev linux-headers python3-dev
 COPY --from=base /svc /usr/local
 COPY --from=base /usr/local/lib/python3.10/site-packages /usr/local/lib/python3.10/site-packages
 COPY requirements.txt /
@@ -34,5 +35,5 @@ USER 1000:1000
 
 # Start Image
 # ENTRYPOINT [ "tail", "-f", "/dev/null" ]
-MAINTAINER Aurel Hoxha hello@aurelhoxha.de
+MAINTAINER Aurel Hoxha info@aurelhoxha.de
 ENTRYPOINT ["python3", "main.py"]

@@ -1,0 +1,50 @@
+{
+  "en": {
+    "support_thread_ping_message": "Thanks for reaching out to us {user}. Our {staff} & {support} will be with you shortly.",
+    "support_user_message": "Thank you for reaching out to us. Your inquiry has been received, and a member of our team will be contacting you shortly. To view the progress of your request or to add any additional information, please click here: {thread}",
+    "support_thread_message": "## {plant_plant} Customer Support Request - {user}\n> We're here to help! Please feel free to share your inquiry or concern here in the chat. Your satisfaction is our priority.\n\n{community_advisor} **Our dedicated team is ready to assist you promptly.**\n\n** Please note:** In case of translation, there may be longer waiting times.",
+    "support_thread_close_button": "Close thread"
+  },
+  "de": {
+    "support_thread_ping_message": "Danke, dass du dich an uns wendest {user}. Unser {staff} & {support} wird sich bald bei dir melden.",
+    "support_user_message": "Danke, dass du dich an uns gewendet hast. Wir haben deine Anfrage erhalten, und ein Mitglied unseres Teams wird sich bald bei dir melden. Um den Fortschritt deiner Anfrage zu sehen oder weitere Informationen hinzuzufügen, klicke bitte hier: {thread}",
+    "support_thread_message": "## {plant_plant} Kundenunterstützung Anfrage - {user}\n> Wir sind hier, um zu helfen! Bitte teile deine Anfrage oder dein Anliegen hier im Chat mit. Deine Zufriedenheit ist unsere Priorität.\n\n{community_advisor} **Unser engagiertes Team ist bereit, dir umgehend zu helfen.**\n\n** Bitte beachte:** Bei Übersetzungen kann es zu längeren Wartezeiten kommen.",
+    "support_thread_close_button": "Thread schließen"
+  },
+  "tr": {
+    "support_thread_ping_message": "{user}, bize ulaştığın için teşekkürler. {staff} & {support} ekibimiz kısa süre içinde seninle ilgilenecek.",
+    "support_user_message": "Bize ulaştığın için teşekkür ederiz. Sorunun alındı ve ekibimizden bir üye yakında seninle iletişime geçecek. Talebinin durumunu görmek veya ek bilgi eklemek için lütfen buraya tıkla: {thread}",
+    "support_thread_message": "## {plant_plant} Müşteri Destek Talebi - {user}\n> Yardımcı olmak için buradayız! Lütfen sorununu veya endişeni burada chat üzerinden paylaş. Memnuniyetin bizim için önceliklidir.\n\n{community_advisor} **Adanmış ekibimiz sana hızlıca yardımcı olmaya hazır.**\n\n** Lütfen dikkat:** Çeviri gerektiğinde bekleme süreleri uzayabilir.",
+    "support_thread_close_button": "Thread'i kapat"
+  },
+  "fr": {
+    "support_thread_ping_message": "Merci de nous avoir contactés {user}. Notre {staff} & {support} te répondra sous peu.",
+    "support_user_message": "Merci de nous avoir contactés. Nous avons reçu ta demande et un membre de notre équipe te contactera bientôt. Pour suivre le progrès de ta demande ou ajouter des informations supplémentaires, clique ici : {thread}",
+    "support_thread_message": "## Demande de support client {plant_plant} - {user}\n> Nous sommes là pour aider ! N'hésite pas à partager ici dans le chat ta demande ou tes préoccupations. Ta satisfaction est notre priorité.\n\n{community_advisor} **Notre équipe dédiée est prête à t'assister rapidement.**\n\n** Veuillez noter :** En cas de traduction, les temps d'attente peuvent être plus longs.",
+    "support_thread_close_button": "Fermer le fil"
+  },
+  "it": {
+    "support_thread_ping_message": "Grazie per averci contattato {user}. Il nostro {staff} & {support} sarà con te a breve.",
+    "support_user_message": "Grazie per averci contattato. Abbiamo ricevuto la tua richiesta e un membro del nostro team ti contatterà a breve. Per visualizzare il progresso della tua richiesta o aggiungere ulteriori informazioni, clicca qui: {thread}",
+    "support_thread_message": "## Richiesta di Assistenza Clienti {plant_plant} - {user}\n> Siamo qui per aiutarti! Non esitare a condividere qui in chat la tua richiesta o le tue preoccupazioni. La tua soddisfazione è la nostra priorità.\n\n{community_advisor} **Il nostro team dedicato è pronto ad assisterti prontamente.**\n\n** Si prega di notare:** In caso di traduzione, i tempi di attesa potrebbero essere più lunghi.",
+    "support_thread_close_button": "Chiudi thread"
+  },
+  "ja": {
+    "support_thread_ping_message": "{user}、お問い合わせありがとう。すぐに{staff} & {support}が対応します。",
+    "support_user_message": "お問い合わせいただきありがとうございます。お問い合わせが受け付けられ、弊社チームのメンバーが間もなく連絡いたします。リクエストの進行状況を確認するか、追加情報を追加するには、ここをクリックしてください：{thread}",
+    "support_thread_message": "## {plant_plant} お客様サポートリクエスト - {user}\n> お手伝いします！こちらのチャットでお気軽にご相談ください。お客様の満足が私たちの優先事項です。\n\n{community_advisor} **専任チームが迅速に対応します。**\n\n** 注意してください:** 翻訳が必要な場合、待ち時間が長くなることがあります。",
+    "support_thread_close_button": "スレッドを閉じる"
+  },
+  "zh": {
+    "support_thread_ping_message": "感谢你联系我们{user}。我们的{staff} & {support}将很快与你联系。",
+    "support_user_message": "感谢你联系我们。我们已经收到了你的询问，我们团队的一员将很快与你联系。要查看你的请求进度或添加任何额外信息，请点击这里：{thread}",
+    "support_thread_message": "## {plant_plant} 客户支持请求 - {user}\n> 我们在这里帮助你！请随时在聊天中分享你的询问或关切。你的满意是我们的优先事项。\n\n{community_advisor} **我们的专职团队随时准备迅速协助你。**\n\n** 请注意:** 如果需要翻译，可能需要更长的等待时间。",
+    "support_thread_close_button": "关闭话题"
+  },
+  "ko": {
+    "support_thread_ping_message": "{user}, 우리에게 연락해 주셔서 감사합니다. {staff} & {support}가 곧 당신을 도울 것입니다.",
+    "support_user_message": "연락해 주셔서 감사합니다. 귀하의 문의 사항을 받았으며, 우리 팀의 한 구성원이 곧 연락을 드릴 것입니다. 귀하의 요청 진행 상황을 확인하거나 추가 정보를 추가하려면 여기를 클릭하십시오: {thread}",
+    "support_thread_message": "## {plant_plant} 고객 지원 요청 - {user}\n> 도움이 필요하세요? 채팅에서 귀하의 문의 사항이나 우려 사항을 자유롭게 공유하세요. 귀하의 만족이 우리의 우선 순위입니다.\n\n{community_advisor} **우리의 전담 팀이 신속하게 도와드릴 준비가 되어 있습니다.**\n\n** 참고하세요:** 번역이 필요한 경우 대기 시간이 길어질 수 있습니다.",
+    "support_thread_close_button": "스레드 닫기"
+  }
+}

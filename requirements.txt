@@ -1,1 +1,3 @@
 git+https://github.com/mccoderpy/discord.py-message-components.git@developer
+psutil
+tqdm

@@ -2,12 +2,21 @@
 # »› Developed by Foxx
 # »› Copyright © 2024 Aurel Hoxha. All rights reserved.
 # »› GitHub: https://github.com/TeamFoxx
-# »› For support and inquiries, please contact hello@aurelhoxha.de
-# »› Use of this program is subject to the terms of the All Rights Reserved License.
+# »› For support and inquiries, please contact info@aurelhoxha.de
+# »› Use of this program is subject to the terms the terms of the MIT licence.
 # »› A copy of the license can be found in the "LICENSE" file in the root directory of this project.
 # ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 #
 # ⏤ { config } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
+
+# Version information
+version = "v1.4-pre"
+
+# List of Developer
+developer = {599204513722662933}
+
+# Supported languages
+supported_languages = "de, tr, fr, it, ja, zh, ko"
 
 # General color for all messages
 EMBED_COLOR = 0x48689b
@@ -24,6 +33,8 @@ EMOJIS = {
     "community_planner": 1217203741279653968,
     "function_tick": 1217203424425152582,
     "function_cross": 1217203796065648691,
+    "log_link": 1217203432906297414,
+    "promo": 1231695279200272435,
     "log_timeoutremoved": 1217203449654018128,
     "log_membershipscreening": 1217203998659055797,
     "log_memberjoin": 1217203966450860093,
@@ -32,13 +43,19 @@ EMOJIS = {
 }
 
 # General Pricing for Pre-Made Discord Bots
-discord_bot_user_based_pricing_1 = "1.50€"  # Price for less than 1000
-discord_bot_user_based_pricing_2 = "2.00€"  # Price for 1000-2499 users
-discord_bot_user_based_pricing_3 = "2.50€"  # Price for 2500-4999 users
-discord_bot_user_based_pricing_4 = "3.00€"  # Price for 5000 or more users
+discord_bot_user_based_pricing_1 = "2.00€"  # Price for less than 1000
+discord_bot_user_based_pricing_2 = "2.50€"  # Price for 1000-2499 users
+discord_bot_user_based_pricing_3 = "3.00€"  # Price for 2500-4999 users
+discord_bot_user_based_pricing_4 = "3.50€"  # Price for 5000 or more users
 
 # Cost of fees for one-time set-up
 setup_fee_1_month = 5  # Fees for 1 month hosting.
 setup_fee_3_month = 4  # Fees for 3 month hosting.
 setup_fee_6_month = 2.50  # Fees for 6 month hosting.
 setup_fee_12_month = 0  # Fees for 12 month hosting.
+
+# Discount & Promo Codes
+DISCOUNT_CODES = {
+    'lifeservices_reelab': 5,
+    '0000': 0,
+}

@@ -4,15 +4,24 @@
 # »› Copyright © 2024 Aurel Hoxha. All rights reserved.
 # »› GitHub: https://github.com/TeamFoxx
 # »› For support and inquiries, please contact hello@aurelhoxha.de
-# »› Use of this program is subject to the terms of the All Rights Reserved License.
+# »› Use of this program is subject to the terms the terms of the MIT licence.
 # »› A copy of the license can be found in the "LICENSE" file in the root directory of this project.
 # ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 #
 # ⏤ { imports } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
+from pathlib import Path
 
-from cogs import *
+import discord
+from colorama import Fore, Style, init
+from discord.ext import commands
+from tqdm import tqdm
+import time
+
+from my_secrets import key
 
 # ⏤ { settings } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
+
+init(autoreset=True)
 
 reelab = commands.Bot(
     intents=discord.Intents.all(),
@@ -23,26 +32,81 @@ reelab = commands.Bot(
 reelab.remove_command("help")
 
 
-# ⏤ { core } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
-hallo = "012121"
+# ⏤ { codebase } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
+
+def load_cogs():
+    """
+    Loads all cogs, excluding '__init__.py' files, and handles errors during the load process.
+    This function updates the loading progress and reports any issues encountered.
+    """
+    cog_directory = './cogs'
+    cog_paths = [path for path in Path(cog_directory).rglob('*.py') if path.stem != '__init__']
+    start_time = time.time()
+    loaded_cogs_count = 0
+    failed_cogs = []
+
+    progress_bar_format = (
+        f"{Fore.GREEN}Loaded {Fore.WHITE}{{desc}}{Fore.GREEN}:{{percentage:3.0f}}% "
+        f"{Fore.WHITE}|{{bar:25}}{Fore.WHITE}| "
+        f"{Fore.GREEN}{{n_fmt}}/{Fore.GREEN}{{total_fmt}}"
+    )
+
+    with tqdm(total=len(cog_paths), desc="Loading cogs", leave=False, bar_format=progress_bar_format) as progress:
+        for path in cog_paths:
+            cog_module = str(path).replace('/', '.').replace('\\', '.')[:-3]
+            try:
+                reelab.load_extension(cog_module)
+                progress.set_description(f"{cog_module}")
+                progress.update(1)
+                loaded_cogs_count += 1
+                time.sleep(0.2)
+            except Exception as e:
+                failed_cogs.append((cog_module, str(e)))
+
+    load_duration = time.time() - start_time
+    report_loading_results(failed_cogs, loaded_cogs_count, len(cog_paths), load_duration)
+
+
+def report_loading_results(failed_cogs, loaded_cogs_count, total_cogs, load_duration):
+    """
+    Reports the results of the cog loading process, indicating success or failure details.
+    """
+    cog_label = "cog" if len(failed_cogs) == 1 else "cogs"
+    if failed_cogs:
+        print(f"{Fore.RED}Failed {Fore.WHITE}to load {Fore.RED}{len(failed_cogs)} {cog_label} "
+              f"{Fore.WHITE}out of {total_cogs}.")
+        for cog, error in failed_cogs:
+            print(f"{Fore.RED}Error in {Fore.WHITE}{cog}: {Fore.LIGHTBLACK_EX}{error}")
+        print(f"{Fore.GREEN}Successfully {Fore.WHITE}loaded {Fore.GREEN}{loaded_cogs_count}"
+              f"{Fore.WHITE}/{Fore.GREEN}{total_cogs} {Fore.WHITE}cogs in {load_duration:.2f} seconds.")
+    else:
+        print(f"{Fore.WHITE}All {Fore.GREEN}{total_cogs} cogs "
+              f"{Fore.WHITE}loaded successfully in {load_duration:.2f} seconds.")
+
+
+def display_startup_info(bot_user):
+    """Displays startup information once the bot is ready."""
+    border = f"{Fore.LIGHTBLACK_EX}{'━' * 54}"
+    print(f"{Fore.LIGHTBLACK_EX}»› {Style.BRIGHT}{Fore.MAGENTA}Ready Information")
+    print(border)
+    print(f"{Fore.LIGHTBLACK_EX}»› {Fore.WHITE}Logged in as: {Fore.MAGENTA}{bot_user.name}")
+    print(f"{Fore.LIGHTBLACK_EX}»› {Fore.WHITE}Developed with {Fore.RED}♥ {Fore.WHITE}by {Fore.MAGENTA}Foxx")
+    print(f"{Fore.LIGHTBLACK_EX}»› {Fore.WHITE}For inquiries, please contact: {Fore.MAGENTA}hello@aurelhoxha.de")
+    print(f"{Fore.LIGHTBLACK_EX}»› {Fore.WHITE}Check out my GitHub: {Fore.MAGENTA}https://github.com/TeamFoxx")
+    print(f"{Fore.LIGHTBLACK_EX}»› {Fore.WHITE}Join my Discord server: {Fore.MAGENTA}https://discord.gg/nQEwwyJ")
+    print(border)
 
 
 @reelab.event
 async def on_ready():
-    print(f"{Fore.GREEN}━━━ {Fore.WHITE}Ready Information {Fore.GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━")
-    print(f"{Fore.GREEN}»› {Fore.WHITE}Logged in as {Fore.MAGENTA}{reelab.user}")
-    print(f"{Fore.GREEN}»› {Fore.WHITE}Developed with {Fore.RED}<3 {Fore.MAGENTA}by Foxx")
-    print(f"{Fore.GREEN}»› {Fore.WHITE}For inquiries, reach out to {Fore.MAGENTA}hello@aurelhoxha.de")
-    print(f"{Fore.GREEN}»› {Fore.WHITE}Check out the code on {Fore.MAGENTA}GitHub: https://github.com/TeamFoxx")
-    print(f"{Fore.GREEN}»› {Fore.WHITE}Join my {Fore.MAGENTA}Discord server: https://discord.gg/nQEwwyJ")
-
-    activity = discord.Activity(name=f"www.reelab.studio", type=discord.ActivityType.watching)
+    """Event handler for when the bot is ready."""
+    activity = discord.Activity(name="www.reelab.studio", type=discord.ActivityType.watching)
     await reelab.change_presence(activity=activity)
-
-_cogs = [p.stem for p in Path('./cogs').glob('*.py') if p.stem != '__init__']
-[(reelab.load_extension(f'cogs.{ext}'), print(f'\033[32m{ext}\033[0m was loaded successfully')) for ext in _cogs]
+    display_startup_info(reelab.user)
+    load_cogs()
 
 
 # ⏤ { settings } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
-reelab.run(my_secrets.key.token)
+if __name__ == '__main__':
+    reelab.run(key.token)
