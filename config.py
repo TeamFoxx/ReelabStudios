@@ -58,4 +58,5 @@ setup_fee_12_month = 0  # Fees for 12 month hosting.
 DISCOUNT_CODES = {
     'lifeservices_reelab': 5,
     '0000': 0,
+    'newcomer': 20
 }
