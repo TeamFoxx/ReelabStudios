@@ -29,7 +29,7 @@ def load_language(user_id):
     # Define user language and load language data
     user_info = user_data.get(user_id, {})
     user_language = user_info.get('user_language', 'en')
-    script_directory = Path(__file__).resolve().parent.parent
+    script_directory = Path(__file__).resolve().parent.parent.parent
     file_path = script_directory / "languages/order_graphic_language_file.json"
     language = load_language_data(file_path, user_language)
     return language
@@ -120,7 +120,7 @@ class BuyGraphic(commands.Cog):
             user_language = user_info.get('user_language', 'en')
 
             # Define the file path for language data
-            script_directory = Path(__file__).resolve().parent.parent
+            script_directory = Path(__file__).resolve().parent.parent.parent
             file_path = script_directory / "languages/order_graphic_language_file.json"
 
             # Load language data based on the user's language preference
@@ -273,7 +273,7 @@ class BuyGraphic(commands.Cog):
         # Define user language and load language data
         user_info = user_data.get(user.id, {})
         user_language = user_info.get('user_language', 'en')
-        script_directory = Path(__file__).resolve().parent.parent
+        script_directory = Path(__file__).resolve().parent.parent.parent
         file_path = script_directory / "languages/order_graphic_language_file.json"
         language = load_language_data(file_path, user_language)
 

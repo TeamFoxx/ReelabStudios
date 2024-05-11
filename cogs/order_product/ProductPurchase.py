@@ -151,7 +151,7 @@ class ProductPurchase(commands.Cog):
         buy_message.set_footer(text="~ The official Reelab Studio Discord Bot")
 
         # Load attachments
-        banner_file, icon_file, footer_file = attachments()
+        banner_file, icon_file, footer_file = await attachments()
 
         # Add options to the select menu
         select_options = [
@@ -316,7 +316,7 @@ class ProductPurchase(commands.Cog):
         user_language = user_info.get('language', 'en')
 
         # Load language data
-        script_directory = Path(__file__).resolve().parent.parent
+        script_directory = Path(__file__).resolve().parent.parent.parent
         file_path = script_directory / "languages/products_language_file.json"
         language = load_language_data(file_path, user_language)
 

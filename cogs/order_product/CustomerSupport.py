@@ -93,7 +93,7 @@ class CustomerSupport(commands.Cog):
             user_language = user_info.get('user_language', 'en')
 
             # Define the file path for language data
-            script_directory = Path(__file__).resolve().parent.parent
+            script_directory = Path(__file__).resolve().parent.parent.parent
             file_path = script_directory / "languages/customer_support_language_file.json"
 
             # Load language data based on the user's language preference

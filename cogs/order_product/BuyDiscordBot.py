@@ -31,7 +31,7 @@ def load_language(user_id):
     # Define user language and load language data
     user_info = user_data.get(user_id, {})
     user_language = user_info.get('user_language', 'en')
-    script_directory = Path(__file__).resolve().parent.parent
+    script_directory = Path(__file__).resolve().parent.parent.parent
     file_path = script_directory / "languages/order_discord_bot_language_file.json"
     language = load_language_data(file_path, user_language)
     return language
@@ -48,7 +48,7 @@ def load_language_data(file_path: Path, user_language: str) -> dict:
             if user_language in language_data:
                 return language_data[user_language]
             else:
-                logging.warning(f"Language '{user_language}' not found in language file.")
+                print(f"Warning: Language code '{user_language}' not found. Falling back to English.")
                 return {}
     except FileNotFoundError:
         logging.error(f"Language file '{file_path}' not found.")
@@ -161,7 +161,7 @@ class BuyDiscordBot(commands.Cog):
             user_language = user_info.get('user_language', 'en')
 
             # Define the file path for language data
-            script_directory = Path(__file__).resolve().parent.parent
+            script_directory = Path(__file__).resolve().parent.parent.parent
             file_path = script_directory / "languages/order_discord_bot_language_file.json"
 
             # Load language data based on the user's language preference
@@ -957,7 +957,7 @@ class BuyDiscordBot(commands.Cog):
         # Define user language and load language data
         user_info = user_data.get(user.id, {})
         user_language = user_info.get('user_language', 'en')
-        script_directory = Path(__file__).resolve().parent.parent
+        script_directory = Path(__file__).resolve().parent.parent.parent
         file_path = script_directory / "languages/order_discord_bot_language_file.json"
         language = load_language_data(file_path, user_language)
 
@@ -1074,7 +1074,7 @@ class BuyDiscordBot(commands.Cog):
         # Define user language and load language data
         user_info = user_data.get(user.id, {})
         user_language = user_info.get('user_language', 'en')
-        script_directory = Path(__file__).resolve().parent.parent
+        script_directory = Path(__file__).resolve().parent.parent.parent
         file_path = script_directory / "languages/order_discord_bot_language_file.json"
         language = load_language_data(file_path, user_language)
 
