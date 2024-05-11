@@ -22,7 +22,7 @@
 > With regular updates, new features are continually added to meet the needs of our users and keep up with the latest trends in technology and design.
 
 ### 🚀Special Offer - 'Newcomer' Discount Code:
-> To celebrate the launch, we’re offering an exclusive 20% discount on all purchases made through the bot. Just use the discount code NEWCOMER at checkout to take advantage of this great offer.
+> To celebrate the launch, we’re offering an exclusive 20% discount on all purchases made through the bot. Just use the discount code "newcomer" at checkout to take advantage of this great offer.
 
 
 🪴We warmly invite you to be part of this innovative experience and look forward to seeing you on the Reelab Studios Discord server. For more information, please visit our website or contact us directly at info@reelab.studio.
