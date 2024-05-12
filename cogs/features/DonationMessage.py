@@ -60,16 +60,16 @@ class DonationMessage(commands.Cog):
         )
         donation_msg.set_image(url="attachment://reelab_banner_blue.png")
 
-        banner_path = "./pictures/reelab_banner_white.gif"
+        banner_path = "./data/pictures/reelab_banner_white.gif"
         banner_file = discord.File(banner_path, filename="reelab_banner_white.gif")
 
-        icon_path = "./pictures/reelab_logo_white.png"
+        icon_path = "./data/pictures/reelab_logo_white.png"
         icon_file = discord.File(icon_path, filename="reelab_logo_white.png")
 
-        footer_path = "./pictures/reelab_banner_blue.png"
+        footer_path = "./data/pictures/reelab_banner_blue.png"
         footer_file = discord.File(footer_path, filename="reelab_banner_blue.png")
 
-        pink_footer_path = "./pictures/reelab_banner_pink.png"
+        pink_footer_path = "./data/pictures/reelab_banner_pink.png"
         pink_footer_file = discord.File(pink_footer_path, filename="reelab_banner_pink.png")
 
         await ctx.respond(embeds=[donation_head, booster_msg, donation_msg],

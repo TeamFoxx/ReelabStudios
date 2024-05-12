@@ -8,18 +8,23 @@
 # ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 #
 # ⏤ { imports } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
-
+import json
 import logging
+import uuid
+from pathlib import Path
+
 import discord
 import config
 
 
 # ⏤ { settings } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
-logging.basicConfig(filename='bot.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(filename='../bot.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+user_data = {}
 
 
-# ⏤ { functions } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
+# ⏤ { text functions } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
 async def processing_response(interaction: discord.ComponentInteraction):
     """
@@ -32,7 +37,7 @@ async def processing_response(interaction: discord.ComponentInteraction):
         icon_url="attachment://reelab_logo_white.png"
     )
 
-    icon_path = "./pictures/reelab_logo_white.png"
+    icon_path = "./data/pictures/reelab_logo_white.png"
     icon_file = discord.File(icon_path, filename="reelab_logo_white.png")
 
     await interaction.edit(embed=website_embed, attachments=[icon_file], components=[])
@@ -58,13 +63,36 @@ async def attachments():
     """
     Prepares and returns the attachments for the Reelab Studio message.
     """
-    banner_path = "./pictures/reelab_banner_white.gif"
+    banner_path = "./data/pictures/reelab_banner_white.gif"
     banner_file = discord.File(banner_path, filename="reelab_banner_white.gif")
 
-    icon_path = "./pictures/reelab_logo_white.png"
+    icon_path = "./data/pictures/reelab_logo_white.png"
     icon_file = discord.File(icon_path, filename="reelab_logo_white.png")
 
-    footer_path = "./pictures/reelab_banner_blue.png"
+    footer_path = "./data/pictures/reelab_banner_blue.png"
     footer_file = discord.File(footer_path, filename="reelab_banner_blue.png")
 
     return banner_file, icon_file, footer_file
+
+
+# ⏤ { language functions } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
+
+def load_language_data(user_language: str) -> dict:
+    """
+    Loads the language data from the specified file and selects the language based on user_language.
+    Returns the language dictionary if found, otherwise returns an empty dictionary.
+    """
+    script_directory = Path(__file__).resolve().parent.parent
+    file_path = script_directory / "data/languages/order_discord_bot_language_file.json"
+    try:
+        with open(file_path, "r", encoding="utf-8") as file:
+            language_data = json.load(file)
+            if user_language in language_data:
+                return language_data[user_language]
+            else:
+                print(f"Warning: Language code '{user_language}' not found. Falling back to English.")
+                return {}
+    except FileNotFoundError:
+        logging.error(f"Language file '{file_path}' not found.")
+        return {}
+

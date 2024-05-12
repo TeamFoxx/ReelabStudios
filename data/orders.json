@@ -1,0 +1,20 @@
+{
+  "order_data": {
+    "user_id": 0,
+    "user_language": "",
+    "user_name": "",
+    "products": {
+      "discord_bot": {
+        "type": null,
+        "predicted_user": 0,
+        "hosting_duration": 0,
+        "about_me": true,
+        "bot_name": "",
+        "bot_status": ""
+      },
+      "bundle": {
+        "type": null
+      }
+    }
+  }
+}

@@ -9,15 +9,16 @@
 # ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 #
 # ⏤ { imports } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
+import platform
+import time
 from pathlib import Path
 
 import discord
 from colorama import Fore, Style, init
 from discord.ext import commands
 from tqdm import tqdm
-import time
 
-from my_secrets import key
+from data.secrets import token
 
 # ⏤ { settings } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
@@ -30,6 +31,7 @@ reelab = commands.Bot(
     auto_check_for_updates=True
 )
 reelab.remove_command("help")
+reelab.user_info = []
 
 
 # ⏤ { codebase } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
@@ -46,9 +48,9 @@ def load_cogs():
     failed_cogs = []
 
     progress_bar_format = (
-        f"{Fore.GREEN}Loaded {Fore.WHITE}{{desc}}{Fore.GREEN}:{{percentage:3.0f}}% "
-        f"{Fore.WHITE}|{{bar:25}}{Fore.WHITE}| "
-        f"{Fore.GREEN}{{n_fmt}}/{Fore.GREEN}{{total_fmt}}"
+        f"{Fore.GREEN}Loaded:{{percentage:3.0f}}%{Fore.WHITE}|{{bar:25}}{Fore.WHITE}| "
+        f"{Fore.GREEN}{{n_fmt}}/{Fore.GREEN}{{total_fmt}} "
+        f"{Fore.WHITE}{{desc}}"
     )
 
     with tqdm(total=len(cog_paths), desc="Loading cogs", leave=False, bar_format=progress_bar_format) as progress:
@@ -59,7 +61,7 @@ def load_cogs():
                 progress.set_description(f"{cog_module}")
                 progress.update(1)
                 loaded_cogs_count += 1
-                time.sleep(0.2)
+                time.sleep(0.1)
             except Exception as e:
                 failed_cogs.append((cog_module, str(e)))
 
@@ -91,7 +93,7 @@ def display_startup_info(bot_user):
     print(border)
     print(f"{Fore.LIGHTBLACK_EX}»› {Fore.WHITE}Logged in as: {Fore.MAGENTA}{bot_user.name}")
     print(f"{Fore.LIGHTBLACK_EX}»› {Fore.WHITE}Developed with {Fore.RED}♥ {Fore.WHITE}by {Fore.MAGENTA}Foxx")
-    print(f"{Fore.LIGHTBLACK_EX}»› {Fore.WHITE}For inquiries, please contact: {Fore.MAGENTA}hello@aurelhoxha.de")
+    print(f"{Fore.LIGHTBLACK_EX}»› {Fore.WHITE}For inquiries, please contact: {Fore.MAGENTA}info@aurelhoxha.de")
     print(f"{Fore.LIGHTBLACK_EX}»› {Fore.WHITE}Check out my GitHub: {Fore.MAGENTA}https://github.com/TeamFoxx")
     print(f"{Fore.LIGHTBLACK_EX}»› {Fore.WHITE}Join my Discord server: {Fore.MAGENTA}https://discord.gg/nQEwwyJ")
     print(border)
@@ -104,9 +106,15 @@ async def on_ready():
     await reelab.change_presence(activity=activity)
     display_startup_info(reelab.user)
     load_cogs()
-
+    reelab.user_info = list(reelab.get_all_members())
 
 # ⏤ { settings } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
 if __name__ == '__main__':
-    reelab.run(key.token)
+    system = platform.system()
+
+    print(f"Running on {system}. Performing actions for {system}")
+    if system == 'Windows':
+        reelab.run(token.WINDOWS, log_handler=None)
+    else:
+        reelab.run(token.LINUX, log_handler=None)

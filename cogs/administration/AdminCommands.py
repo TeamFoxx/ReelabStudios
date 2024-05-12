@@ -8,7 +8,7 @@
 # ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 #
 # ⏤ { imports } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
-from utils import attachments
+from utlis.utils import attachments
 
 import logging
 import os
@@ -153,7 +153,7 @@ class AdminCommands(commands.Cog):
         # Attachments
         _, _, footer_file = await attachments()
 
-        bot_server_working_path = "./pictures/bot_server_working_whitebackground.png"
+        bot_server_working_path = "./data/pictures/bot_server_working_whitebackground.png"
         bot_server_working_file = discord.File(bot_server_working_path, filename="bot_server_working_whitebackground.png")
 
         # Sending the metrics embed as a response
@@ -213,7 +213,7 @@ class AdminCommands(commands.Cog):
         # Attachments
         banner_file, icon_file, footer_file = await attachments()
 
-        bot_server_working_path = "./pictures/bot_server_working_transparent.png"
+        bot_server_working_path = "./data/pictures/bot_server_working_transparent.png"
         bot_server_working_file = discord.File(bot_server_working_path,
                                                filename="bot_server_working_transparent.png")
 

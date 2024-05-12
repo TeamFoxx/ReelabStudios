@@ -17,7 +17,9 @@ from discord import Button, ButtonStyle, SelectOption, SelectMenu
 from discord.ext import commands
 
 import config
-from utils import header, attachments
+from utlis.orders import Order
+from utlis.utils import header, attachments
+from stuff import reelab
 
 # ⏤ { configurations } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
@@ -131,6 +133,10 @@ class ProductPurchase(commands.Cog):
     # Order product section.
     @commands.Cog.on_click('^order_product$')
     async def order_product(self, ctx: discord.ComponentInteraction, button):
+        # Create order
+        order = Order(user_id=ctx.author.id, user_name=ctx.author.name)
+        reelab.orders.append(order)
+
         # Retrieve emojis
         community_advisor = self.bot.get_emoji(config.EMOJIS["community_advisor"])
         community_member = self.bot.get_emoji(config.EMOJIS["community_member"])
@@ -159,31 +165,31 @@ class ProductPurchase(commands.Cog):
                 label='Order Discord Bot',
                 description="Enhance your server with a Discord bot.",
                 emoji=community_member,
-                value='order_discord_bot'
+                value=f'order_discord_bot:{order.order_id}'
             ),
             SelectOption(
                 label='Order Website',
                 description="Establish your online presence with a sleek site.",
                 emoji=community_member,
-                value='order_website'
+                value=f'order_website:{order.order_id}'
             ),
             SelectOption(
                 label='Order Graphics',
                 description="Enhance your brand with custom graphics.",
                 emoji=community_member,
-                value='order_graphics'
+                value=f'order_graphics:{order.order_id}'
             ),
             SelectOption(
                 label='Order Bundle',
                 description="Unlock savings by bundling services.",
                 emoji=community_eventhost,
-                value='order_bundle'
+                value=f'order_bundle:{order.order_id}'
             ),
             SelectOption(
                 label='Get Customer Support',
                 description="Get timely help from our support team.",
                 emoji=community_advisor,
-                value='customer_support'
+                value=f'customer_support:{order.order_id}'
             )
         ]
 
@@ -284,10 +290,10 @@ class ProductPurchase(commands.Cog):
 
     @commands.Cog.on_select('^language_select_options$')
     async def language_selection_confirmed(self, interaction, select_menu):
-        user_id = interaction.author.id
+        user = interaction.author
 
         # Log the selected bot type
-        logging.info(f'{str(user_id)} - Selected Language to proceed purchase.')
+        logging.info(f'{str(user.id)} - Selected Language to proceed purchase.')
 
         # Retrieve emojis
         plantbig_plant = self.bot.get_emoji(config.EMOJIS["plantbig_plant"])
@@ -304,20 +310,13 @@ class ProductPurchase(commands.Cog):
         else:
             user_language = 'en'
 
-        # Retrieve user data from the database or initialize an empty dictionary if not found
-        user_info = user_lang.get(user_id, {})
-
-        # Update user information with the selected language
-        user_info["language"] = user_language
-
-        # Update user data in the database
-        user_lang[user_id] = user_info
-
-        user_language = user_info.get('language', 'en')
+        # Create order with selected user language
+        order = Order(user_id=user.id, user_name=user.name, user_language=user_language)
+        reelab.orders.append(order)
 
         # Load language data
         script_directory = Path(__file__).resolve().parent.parent.parent
-        file_path = script_directory / "languages/products_language_file.json"
+        file_path = script_directory / "data/languages/products_language_file.json"
         language = load_language_data(file_path, user_language)
 
         # Embedded message to be sent
@@ -339,7 +338,7 @@ class ProductPurchase(commands.Cog):
                 label=language["language_selection_order_bot_lable"],
                 description=language["language_selection_order_bot_description"],
                 emoji=community_member,
-                value='order_discord_bot'
+                value=f'order_discord_bot:{order.order_id}'
             ),
             SelectOption(
                 label=language["language_selection_order_website_lable"],

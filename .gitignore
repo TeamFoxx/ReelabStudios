@@ -3,7 +3,7 @@
 config.py
 
 # secrets
-my_secrets
+data/secrets
 
 >>>>>>> ed15e58 (Foxx | v1.1.0)
 # Byte-compiled / optimized / DLL files

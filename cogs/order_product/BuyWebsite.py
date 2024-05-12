@@ -17,7 +17,8 @@ from discord import Button, ButtonStyle, Modal, TextInput
 from discord.ext import commands
 
 import config
-from utils import header, attachments, processing_response
+from stuff import reelab
+from utlis.utils import header, attachments, processing_response
 
 # ⏤ { configurations } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
@@ -88,44 +89,20 @@ class BuyWebsite(commands.Cog):
 
     @commands.Cog.on_select('^products$')
     async def website_products(self, interaction, select_menu):
+        selected = select_menu.values[0].split(":")
+
         # Check if the selected value of the select menu is "order_discord_bot"
-        if select_menu.values[0] == "order_website":
-            # Import required modules
-            from cogs.order_product.ProductPurchase import user_lang
-
-            # Get the user ID from the interaction
-            user = interaction.author
-
-            # Retrieve user language information from user_lang
-            user_info = user_lang.get(user.id, {})
-
-            # Get the language attribute from user_info, default to 'en' if not found
-            user_language = user_info.get('language', 'en')
-
-            # Retrieve user data from the database or initialize an empty dictionary if not found
-            user_info = user_data.get(user.id, {})
-
-            # Update user information with the user_language
-            user_info["user_language"] = user_language
-
-            # Delete user data after processing
-            if user.id in user_lang:
-                del user_lang[user.id]
-            else:
-                pass
-
-            # Update user data in the database
-            user_data[user.id] = user_info
-
-            # Retrieve the user's language preference
-            user_language = user_info.get('user_language', 'en')
+        if selected[0] == "order_website":
+            order_id = selected[1]
+            order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
+            print(order)
 
             # Define the file path for language data
             script_directory = Path(__file__).resolve().parent.parent.parent
-            file_path = script_directory / "languages/order_website_language_file.json"
+            file_path = script_directory / "data/languages/order_website_language_file.json"
 
             # Load language data based on the user's language preference
-            language = load_language_data(file_path, user_language)
+            language = load_language_data(file_path, order.user_language)
 
             # Retrieve emojis
             log_membershipscreening = self.bot.get_emoji(config.EMOJIS["log_membershipscreening"])

@@ -8,7 +8,7 @@
 # ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 #
 # ⏤ { imports } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
-import json
+
 import logging
 from pathlib import Path
 
@@ -17,7 +17,8 @@ from discord import SelectOption, SelectMenu, Button, ButtonStyle, Modal, TextIn
 from discord.ext import commands
 
 import config
-from utils import attachments, processing_response
+from stuff import reelab
+from utlis.utils import attachments, processing_response, load_language_data
 
 # ⏤ { configurations } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 user_data = {}
@@ -27,60 +28,16 @@ counting_file_path = "data/counting.json"
 
 # ⏤ { function definitions } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
-def load_language(user_id):
-    # Define user language and load language data
-    user_info = user_data.get(user_id, {})
-    user_language = user_info.get('user_language', 'en')
-    script_directory = Path(__file__).resolve().parent.parent.parent
-    file_path = script_directory / "languages/order_discord_bot_language_file.json"
-    language = load_language_data(file_path, user_language)
-    return language
-
-
-def load_language_data(file_path: Path, user_language: str) -> dict:
-    """
-    Loads the language data from the specified file and selects the language based on user_language.
-    Returns the language dictionary if found, otherwise returns an empty dictionary.
-    """
-    try:
-        with open(file_path, "r", encoding="utf-8") as file:
-            language_data = json.load(file)
-            if user_language in language_data:
-                return language_data[user_language]
-            else:
-                print(f"Warning: Language code '{user_language}' not found. Falling back to English.")
-                return {}
-    except FileNotFoundError:
-        logging.error(f"Language file '{file_path}' not found.")
-        return {}
-
-
-def calculate_price(user_amount_pricing: int, user_id: int) -> str:
+def calculate_price(user_amount_pricing: int) -> dict:
     """
     Calculates the price based on the user's amount pricing and updates user data accordingly.
     Returns the calculated price as a string.
     """
-    user_info = user_data.get(user_id, {})
-    if user_amount_pricing == 1:
-        price = config.discord_bot_user_based_pricing_1
-        user_info["user_amount_pricing"] = price
-        user_info["bot_users"] = "> 1k"
-    elif user_amount_pricing == 2:
-        price = config.discord_bot_user_based_pricing_2
-        user_info["user_amount_pricing"] = price
-        user_info["bot_users"] = "1k-2.5k"
-    elif user_amount_pricing == 3:
-        price = config.discord_bot_user_based_pricing_3
-        user_info["user_amount_pricing"] = price
-        user_info["bot_users"] = "2.5k-5k"
-    elif user_amount_pricing == 4:
-        price = config.discord_bot_user_based_pricing_4
-        user_info["user_amount_pricing"] = price
-        user_info["bot_users"] = "< 5k"
-    else:
-        price = "Invalid user count"
-    user_data[user_id] = user_info
-    return price
+    user_info = {}
+    amount = {1: "> 1k", 2: "1k-2.5k", 3: "2.5k-5k", 4: "< 5k"}
+    price = {1: config.discord_bot_user_based_pricing_1, 2: config.discord_bot_user_based_pricing_2,
+             3: config.discord_bot_user_based_pricing_3, 4: config.discord_bot_user_based_pricing_4}
+    return {"bot_users": amount.get(user_amount_pricing, 0), "user_amount_pricing": price.get(user_amount_pricing, 0)}
 
 
 def format_price(price):
@@ -124,48 +81,20 @@ class BuyDiscordBot(commands.Cog):
         self.order_product_channel_id = 1216178294458814526
         self.official_staff_id = 1216137762537996479
 
-# ⏤ { codebase } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
+    # ⏤ { codebase } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
     @commands.Cog.on_select('^products$')
     async def discord_bot_products(self, interaction, select_menu):
+        selected = select_menu.values[0].split(":")
+
         # Check if the selected value of the select menu is "order_discord_bot"
-        if select_menu.values[0] == "order_discord_bot":
-            # Import required modules
-            from cogs.order_product.ProductPurchase import user_lang
-
-            # Get the user ID from the interaction
-            user = interaction.author
-
-            # Retrieve user language information from user_lang
-            user_info = user_lang.get(user.id, {})
-
-            # Get the language attribute from user_info, default to 'en' if not found
-            user_language = user_info.get('language', 'en')
-
-            # Retrieve user data from the database or initialize an empty dictionary if not found
-            user_info = user_data.get(user.id, {})
-
-            # Update user information with the user_language
-            user_info["user_language"] = user_language
-
-            # Delete user data after processing
-            if user.id in user_lang:
-                del user_lang[user.id]
-            else:
-                pass
-
-            # Update user data in the database
-            user_data[user.id] = user_info
-
-            # Retrieve the user's language preference
-            user_language = user_info.get('user_language', 'en')
-
-            # Define the file path for language data
-            script_directory = Path(__file__).resolve().parent.parent.parent
-            file_path = script_directory / "languages/order_discord_bot_language_file.json"
+        if selected[0] == "order_discord_bot":
+            order_id = selected[1]
+            order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
+            print(order)
 
             # Load language data based on the user's language preference
-            language = load_language_data(file_path, user_language)
+            language = load_language_data(order.user_language)
 
             # Retrieve emojis
             community_developer = self.bot.get_emoji(config.EMOJIS["community_developer"])
@@ -185,12 +114,13 @@ class BuyDiscordBot(commands.Cog):
             header.set_image(
                 url="attachment://choose_your_bot_type_white.png"
             )
-            header_path = "./pictures/choose_your_bot_type_white.png"
+            header_path = "./data/pictures/choose_your_bot_type_white.png"
             header_file = discord.File(header_path, filename="choose_your_bot_type_white.png")
 
             # Create Discord bot selection description
             description = discord.Embed(
-                description=language["discord_bot_products_description"].format(plantbig_plant=plantbig_plant, community_admin=community_admin),
+                description=language["discord_bot_products_description"].format(plantbig_plant=plantbig_plant,
+                                                                                community_admin=community_admin),
                 color=config.EMBED_COLOR,
             )
             description.set_image(url="attachment://reelab_banner_blue.png")
@@ -243,7 +173,7 @@ class BuyDiscordBot(commands.Cog):
             bot_select_menu = SelectMenu(
                 placeholder=language["discord_select_bot_options_placeholder"],
                 options=select_options,
-                custom_id='select_bot_options',
+                custom_id=f'select_bot_options:{order_id}',
                 max_values=1
             )
 
@@ -252,8 +182,14 @@ class BuyDiscordBot(commands.Cog):
                                    attachments=[header_file, icon_file, footer_file],
                                    components=[[bot_select_menu]])
 
-    @commands.Cog.on_select('^select_bot_options$')
+    @commands.Cog.on_select('^select_bot_options:(.*)$')
     async def order_bot_step_1(self, interaction, select_menu):
+        order_id = select_menu.custom_id.split(":")[1]
+        order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
+
+        # Load selected language
+        language = load_language_data(order.user_language)
+
         bot_type_mapping = {
             "modmail_bot": "Modmail Bot",
             "music_bot": "Music Bot",
@@ -261,11 +197,6 @@ class BuyDiscordBot(commands.Cog):
             "tempvoice_bot": "TempVoice Bot",
             "studies_bot": "Studies Bot"
         }
-
-        user = interaction.author
-
-        # Load selected language
-        language = load_language(user.id)
 
         # Retrieve emojis
         community_advisor = self.bot.get_emoji(config.EMOJIS["community_advisor"])
@@ -288,7 +219,7 @@ class BuyDiscordBot(commands.Cog):
             header.set_image(
                 url="attachment://building_bot_whitebackground.png"
             )
-            header_path = "./pictures/building_bot_whitebackground.png"
+            header_path = "./data/pictures/building_bot_whitebackground.png"
             header_file = discord.File(header_path, filename="building_bot_whitebackground.png")
 
             # Create Discord bot selection description
@@ -313,22 +244,24 @@ class BuyDiscordBot(commands.Cog):
             ]
 
             # Edit interaction with new embed and components
-            await interaction.edit(embeds=[header, description_personalized],
-                                   attachments=[header_file, icon_file, footer_file],
-                                   components=[buttons_personalized]
-                                   )
-            return
+            return await interaction.edit(embeds=[header, description_personalized],
+                                          attachments=[header_file, icon_file, footer_file],
+                                          components=[buttons_personalized]
+                                          )
 
         # Getting user ID to fetch stored information
-        user_id = interaction.author.id
         selected_value = select_menu.values[0]
         bot_type = bot_type_mapping.get(selected_value)
 
-        # Storing bot type to the user ID
-        if bot_type:
-            user_info = user_data.get(user_id, {})
-            user_info["bot_type"] = bot_type
-            user_data[user_id] = user_info
+        order.products["discord_bot"] = {
+            "type": bot_type,
+            "bot_users": 0,
+            "user_amount_pricing": 0,
+            "hosting_duration": 0,
+            "about_me": None,
+            "bot_name": "",
+            "bot_status": ""
+        }
 
         # remove old message
         await processing_response(interaction)
@@ -343,12 +276,13 @@ class BuyDiscordBot(commands.Cog):
         header.set_image(
             url="attachment://config-step_1-5.png"
         )
-        header_path = "./pictures/bot_config_steps/config-step_1-5.png"
+        header_path = "./data/pictures/bot_config_steps/config-step_1-5.png"
         header_file = discord.File(header_path, filename="config-step_1-5.png")
 
         # Create Discord bot selection description
         description = discord.Embed(
-            description=language["discord_order_bot_step_1_description"].format(community_developer=community_developer),
+            description=language["discord_order_bot_step_1_description"].format(
+                community_developer=community_developer),
             color=config.EMBED_COLOR,
         )
         description.set_image(url="attachment://reelab_banner_blue.png")
@@ -363,25 +297,25 @@ class BuyDiscordBot(commands.Cog):
                 style=ButtonStyle.grey,
                 emoji=community_advisor,
                 label=language["discord_order_bot_step_1_user_amount_1_lable"],
-                custom_id="users:1",
+                custom_id=f"users:1:{order_id}",
             ),
             Button(
                 style=ButtonStyle.grey,
                 emoji=community_advisor,
                 label=language["discord_order_bot_step_1_user_amount_2_lable"],
-                custom_id="users:2",
+                custom_id=f"users:2:{order_id}",
             ),
             Button(
                 style=ButtonStyle.grey,
                 emoji=community_advisor,
                 label=language["discord_order_bot_step_1_user_amount_3_lable"],
-                custom_id="users:3",
+                custom_id=f"users:3:{order_id}",
             ),
             Button(
                 style=ButtonStyle.grey,
                 emoji=community_advisor,
                 label=language["discord_order_bot_step_1_user_amount_4_lable"],
-                custom_id="users:4",
+                custom_id=f"users:4:{order_id}",
             )
         ]
 
@@ -391,16 +325,16 @@ class BuyDiscordBot(commands.Cog):
                                components=[buttons]
                                )
 
-    @commands.Cog.on_click('^users:(\d+)$')
+    @commands.Cog.on_click('^users:(.*)$')
     async def order_bot_part_2(self, ctx: discord.ComponentInteraction, button):
-        # Extract the selection made by the user from the button's custom ID
-        user_amount_pricing = int(button.custom_id.split(":")[1])
-
-        # Extract user ID from the interaction context
-        user = ctx.author
+        order_id = button.custom_id.split(":")[2]
+        order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
 
         # Load selected language
-        language = load_language(user.id)
+        language = load_language_data(order.user_language)
+
+        # Extract the selection made by the user from the button's custom ID
+        user_amount_pricing = int(button.custom_id.split(":")[1])
 
         # Retrieve emojis
         log_timeoutremoved = self.bot.get_emoji(config.EMOJIS["log_timeoutremoved"])
@@ -408,10 +342,17 @@ class BuyDiscordBot(commands.Cog):
         log_memberjoin = self.bot.get_emoji(config.EMOJIS["log_memberjoin"])
 
         # Calculate the price based on the hosting duration and user ID
-        price = calculate_price(user_amount_pricing, user.id)
+        price = calculate_price(user_amount_pricing)
 
         # Convert the price to a numeric value for further processing
-        price_numeric = float(price.replace("€", "").replace(",", "."))
+        price_numeric = float(price.get("user_amount_pricing").replace("€", "").replace(",", "."))
+
+        order.products["discord_bot"]["bot_users"] = price.get("bot_users")
+        order.products["discord_bot"]["user_amount_pricing"] = price.get("user_amount_pricing")
+
+        print(order.products.get('discord_bot').get('type'))
+
+        print(order)
 
         # Format the price for single month hosting
         price_single_month = format_price(price_numeric)
@@ -434,7 +375,7 @@ class BuyDiscordBot(commands.Cog):
         header.set_image(
             url="attachment://config-step_2-5.png"
         )
-        header_path = "./pictures/bot_config_steps/config-step_2-5.png"
+        header_path = "./data/pictures/bot_config_steps/config-step_2-5.png"
         header_file = discord.File(header_path, filename="config-step_2-5.png")
 
         # Discord bot selection.
@@ -455,25 +396,25 @@ class BuyDiscordBot(commands.Cog):
                 style=ButtonStyle.grey,
                 emoji=log_timeoutremoved,
                 label=f'{language["discord_order_bot_step_2_hosting_duration_1_lable"]} - {price_single_month}',
-                custom_id="months:1",
+                custom_id=f"months:1",
             ),
             Button(
                 style=ButtonStyle.grey,
                 emoji=log_timeoutremoved,
                 label=f'{language["discord_order_bot_step_2_hosting_duration_2_lable"]} - {price_3_months}',
-                custom_id="months:3",
+                custom_id=f"months:3",
             ),
             Button(
                 style=ButtonStyle.grey,
                 emoji=log_timeoutremoved,
                 label=f'{language["discord_order_bot_step_2_hosting_duration_3_lable"]} - {price_6_months}',
-                custom_id="months:6",
+                custom_id=f"months:6",
             ),
             Button(
                 style=ButtonStyle.grey,
                 emoji=log_timeoutremoved,
                 label=f'{language["discord_order_bot_step_2_hosting_duration_4_lable"]} - {price_12_months}',
-                custom_id="months:12",
+                custom_id=f"months:12",
             )
         ]
 
@@ -492,7 +433,7 @@ class BuyDiscordBot(commands.Cog):
         user = ctx.author
 
         # Load selected language
-        language = load_language(user.id)
+        language = load_language_data(user.id)
 
         # Retrieve emojis
         function_tick = self.bot.get_emoji(config.EMOJIS["function_tick"])
@@ -537,12 +478,13 @@ class BuyDiscordBot(commands.Cog):
         header.set_image(
             url="attachment://config-step_3-5.png"
         )
-        header_path = "./pictures/bot_config_steps/config-step_3-5.png"
+        header_path = "./data/pictures/bot_config_steps/config-step_3-5.png"
         header_file = discord.File(header_path, filename="config-step_3-5.png")
 
         # About Me Pack message
         description = discord.Embed(
-            description=language["discord_order_bot_step_3_description"].format(community_developer=community_developer),
+            description=language["discord_order_bot_step_3_description"].format(
+                community_developer=community_developer),
             color=config.EMBED_COLOR,
         )
         description.set_image(url="attachment://reelab_banner_blue.png")
@@ -550,7 +492,7 @@ class BuyDiscordBot(commands.Cog):
         description.set_footer(text="~ The official Reelab Studio Discord Bot")
 
         # Load About Me Pack thumbnail
-        about_me_pack_path = "./pictures/about_me_pack.png"
+        about_me_pack_path = "./data/pictures/about_me_pack.png"
         about_me_pack_file = discord.File(about_me_pack_path, filename="about_me_pack.png")
 
         # Load other attachments
@@ -587,7 +529,7 @@ class BuyDiscordBot(commands.Cog):
         user = ctx.author
 
         # Load selected language
-        language = load_language(user.id)
+        language = load_language_data(user.id)
 
         # Retrieve emojis
         community_developer = self.bot.get_emoji(config.EMOJIS["community_developer"])
@@ -615,12 +557,13 @@ class BuyDiscordBot(commands.Cog):
         header.set_image(
             url="attachment://config-step_4-5.png"
         )
-        header_path = "./pictures/bot_config_steps/config-step_4-5.png"
+        header_path = "./data/pictures/bot_config_steps/config-step_4-5.png"
         header_file = discord.File(header_path, filename="config-step_4-5.png")
 
         # Create the bot message
         description = discord.Embed(
-            description=language["discord_order_bot_step_4_description"].format(community_developer=community_developer),
+            description=language["discord_order_bot_step_4_description"].format(
+                community_developer=community_developer),
             color=config.EMBED_COLOR,
         )
         description.set_image(url="attachment://reelab_banner_blue.png")
@@ -651,7 +594,7 @@ class BuyDiscordBot(commands.Cog):
         user = ctx.author
 
         # Load selected language
-        language = load_language(user.id)
+        language = load_language_data(user.id)
 
         # Retrieve user data if available, otherwise set default values
         user_info = user_data.get(user.id, {})
@@ -692,7 +635,7 @@ class BuyDiscordBot(commands.Cog):
         user = ctx.author
 
         # Load selected language
-        language = load_language(user.id)
+        language = load_language_data(user.id)
 
         # Retrieve emojis
         log_membershipscreening = self.bot.get_emoji(config.EMOJIS["log_membershipscreening"])
@@ -726,7 +669,9 @@ class BuyDiscordBot(commands.Cog):
             setup_fees_formatted = f"{setup_fees:.2f}€"
 
         # Calculate total price
-        total_price = setup_fees + price_about_me_pack + (float(user_info.get('user_amount_pricing', '0').replace('€', '').replace(',', '.')) * int(user_info.get('hosting_duration', '1')))
+        total_price = setup_fees + price_about_me_pack + (
+                float(user_info.get('user_amount_pricing', '0').replace('€', '').replace(',', '.')) * int(
+            user_info.get('hosting_duration', '1')))
         total_price_formatted = f"{total_price:.2f}€"
 
         # Get all user information for the further embed
@@ -746,7 +691,7 @@ class BuyDiscordBot(commands.Cog):
             icon_url="attachment://reelab_logo_white.png"
         )
         header.set_image(url="attachment://config-step_final.png")
-        header_path = "./pictures/bot_config_steps/config-step_final.png"
+        header_path = "./data/pictures/bot_config_steps/config-step_final.png"
         header_file = discord.File(header_path, filename="config-step_final.png")
 
         formatted_description = language["discord_order_bot_step_5_description"].format(
@@ -798,7 +743,7 @@ class BuyDiscordBot(commands.Cog):
         user_info = user_data.get(user.id, {})
 
         # Load selected language
-        language = load_language(user.id)
+        language = load_language_data(user.id)
 
         # Get Order Product channel for thread creation
         channel = ctx.guild.get_channel(self.order_product_channel_id)
@@ -828,7 +773,9 @@ class BuyDiscordBot(commands.Cog):
         price_about_me_pack = about_me_pack_total_cost if about_me_pack_status == 'Selected' else 0
 
         # Calculate total price
-        total_price = setup_fees + price_about_me_pack + (float(user_info.get('user_amount_pricing', '0').replace('€', '').replace(',', '.')) * int(user_info.get('hosting_duration', '1')))
+        total_price = setup_fees + price_about_me_pack + (
+                float(user_info.get('user_amount_pricing', '0').replace('€', '').replace(',', '.')) * int(
+            user_info.get('hosting_duration', '1')))
         total_price_formatted = f"{total_price:.2f}€"
 
         # Get all user information for the further embed
@@ -902,11 +849,12 @@ class BuyDiscordBot(commands.Cog):
 
         # Attachments
         banner_file, icon_file, footer_file = await attachments()
-        header_path = "./pictures/bot_server_working_whitebackground.png"
+        header_path = "./data/pictures/bot_server_working_whitebackground.png"
         header_file = discord.File(header_path, filename="bot_server_working_whitebackground.png")
 
         # Send the bot summary message with buttons for pricing information and closing the order
-        await thread.send(language["discord_order_bot_thread_ping_message"].format(user=user.mention, staff=staff.mention))
+        await thread.send(
+            language["discord_order_bot_thread_ping_message"].format(user=user.mention, staff=staff.mention))
         await thread.send(embeds=[thread_header, description],
                           files=[header_file, icon_file, footer_file],
                           components=[[
@@ -959,7 +907,7 @@ class BuyDiscordBot(commands.Cog):
         user_language = user_info.get('user_language', 'en')
         script_directory = Path(__file__).resolve().parent.parent.parent
         file_path = script_directory / "languages/order_discord_bot_language_file.json"
-        language = load_language_data(file_path, user_language)
+        language = load_language_data(user_language)
 
         # Get Order Product channel for thread creation
         channel = ctx.guild.get_channel(self.order_product_channel_id)
@@ -1021,11 +969,12 @@ class BuyDiscordBot(commands.Cog):
 
         # Attachments
         banner_file, icon_file, footer_file = await attachments()
-        header_path = "./pictures/bot_server_working_whitebackground.png"
+        header_path = "./data/pictures/bot_server_working_whitebackground.png"
         header_file = discord.File(header_path, filename="bot_server_working_whitebackground.png")
 
         # Send the bot summary message with buttons for pricing information and closing the order
-        await thread.send(language["discord_order_bot_thread_ping_message"].format(user=user.mention, staff=staff.mention))
+        await thread.send(
+            language["discord_order_bot_thread_ping_message"].format(user=user.mention, staff=staff.mention))
         await thread.send(embeds=[thread_header, description],
                           files=[header_file, icon_file, footer_file],
                           components=[[
@@ -1076,7 +1025,7 @@ class BuyDiscordBot(commands.Cog):
         user_language = user_info.get('user_language', 'en')
         script_directory = Path(__file__).resolve().parent.parent.parent
         file_path = script_directory / "languages/order_discord_bot_language_file.json"
-        language = load_language_data(file_path, user_language)
+        language = load_language_data(user_language)
 
         # Retrieve emojis
         plantbig_plant = self.bot.get_emoji(config.EMOJIS["plantbig_plant"])
@@ -1086,7 +1035,9 @@ class BuyDiscordBot(commands.Cog):
         # Send pricing information in chat.
         response_message = discord.Embed(
             color=config.EMBED_COLOR,
-            description=language["discord_order_bot_pricing_information"].format(plantbig_plant=plantbig_plant, log_memberjoin=log_memberjoin, community_admin=community_admin)
+            description=language["discord_order_bot_pricing_information"].format(plantbig_plant=plantbig_plant,
+                                                                                 log_memberjoin=log_memberjoin,
+                                                                                 community_admin=community_admin)
         )
         await ctx.respond(embed=response_message, hidden=True)
 
@@ -1096,7 +1047,7 @@ class BuyDiscordBot(commands.Cog):
         user = ctx.author
 
         # Load selected language
-        language = load_language(user.id)
+        language = load_language_data(user.id)
 
         # Define the modal with input fields for bot name and status
         modal = Modal(
@@ -1124,7 +1075,7 @@ class BuyDiscordBot(commands.Cog):
         user = ctx.author
 
         # Load selected language
-        language = load_language(user.id)
+        language = load_language_data(user.id)
 
         # Retrieve emojis
         promo = self.bot.get_emoji(config.EMOJIS["promo"])

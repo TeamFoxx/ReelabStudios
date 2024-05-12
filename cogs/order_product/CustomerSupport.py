@@ -17,7 +17,7 @@ from discord import Button, ButtonStyle
 from discord.ext import commands
 
 import config
-from utils import header, processing_response, attachments
+from utlis.utils import header, processing_response, attachments
 
 # ⏤ { configurations } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
