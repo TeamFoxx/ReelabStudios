@@ -1,4 +1,5 @@
 import dataclasses
+from datetime import datetime, timedelta
 from typing import Optional
 from uuid import uuid4
 
@@ -7,7 +8,8 @@ from uuid import uuid4
 class Order:
     user_id: int
     user_name: str
-    user_language: str = "de"
+    status: str
+    user_language: str = "en"
     order_id: Optional[str] = dataclasses.field(
         default_factory=lambda: str(uuid4()))
     products: dict = dataclasses.field(default_factory=dict)

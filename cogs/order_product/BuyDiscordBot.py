@@ -8,7 +8,7 @@
 # ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 #
 # ⏤ { imports } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
-
+import json
 import logging
 from pathlib import Path
 
@@ -17,11 +17,10 @@ from discord import SelectOption, SelectMenu, Button, ButtonStyle, Modal, TextIn
 from discord.ext import commands
 
 import config
-from stuff import reelab
-from utlis.utils import attachments, processing_response, load_language_data
+from main import reelab
+from utils.utils import attachments, processing_response, load_language_data
 
 # ⏤ { configurations } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
-user_data = {}
 
 counting_file_path = "data/counting.json"
 
@@ -33,11 +32,10 @@ def calculate_price(user_amount_pricing: int) -> dict:
     Calculates the price based on the user's amount pricing and updates user data accordingly.
     Returns the calculated price as a string.
     """
-    user_info = {}
     amount = {1: "> 1k", 2: "1k-2.5k", 3: "2.5k-5k", 4: "< 5k"}
     price = {1: config.discord_bot_user_based_pricing_1, 2: config.discord_bot_user_based_pricing_2,
              3: config.discord_bot_user_based_pricing_3, 4: config.discord_bot_user_based_pricing_4}
-    return {"bot_users": amount.get(user_amount_pricing, 0), "user_amount_pricing": price.get(user_amount_pricing, 0)}
+    return {"bot_users": amount.get(user_amount_pricing, "Unknown"), "user_amount_pricing": price.get(user_amount_pricing, 0)}
 
 
 def format_price(price):
@@ -45,7 +43,7 @@ def format_price(price):
     Formats the given price to display as a string with Euro symbol.
     Returns the formatted price string.
     """
-    if price.is_integer():
+    if isinstance(price, int) or price.is_integer():
         return f"{int(price)}€"
     else:
         return f"{price:.2f}€"
@@ -91,7 +89,6 @@ class BuyDiscordBot(commands.Cog):
         if selected[0] == "order_discord_bot":
             order_id = selected[1]
             order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
-            print(order)
 
             # Load language data based on the user's language preference
             language = load_language_data(order.user_language)
@@ -239,7 +236,7 @@ class BuyDiscordBot(commands.Cog):
                     style=ButtonStyle.green,
                     emoji=log_membershipscreening,
                     label=language["discord_order_personalized_bot_lable"],
-                    custom_id="personalized_bot_accept_tos",
+                    custom_id=f"personalized_bot_accept_tos:{order_id}",
                 )
             ]
 
@@ -254,13 +251,17 @@ class BuyDiscordBot(commands.Cog):
         bot_type = bot_type_mapping.get(selected_value)
 
         order.products["discord_bot"] = {
-            "type": bot_type,
-            "bot_users": 0,
-            "user_amount_pricing": 0,
-            "hosting_duration": 0,
-            "about_me": None,
-            "bot_name": "",
-            "bot_status": ""
+            "type": bot_type,  # Type of the bot, e.g., "Studies Bot"
+            "bot_users": 0,  # Number of bot users, e.g., "> 1k"
+            "user_amount_pricing": 0,  # Pricing per user
+            "setup_fees": 0,  # Setup fee
+            "hosting_duration": 0,  # Hosting duration in months
+            "about_me_pack": None,  # Whether an 'About Me' pack is included
+            "bot_name": "",  # Name of the bot
+            "bot_status": "",  # Status of the bot
+            "total_price": 0,  # Total price
+            "start_date": "Awaiting Payment",  # Start date, initially as "Awaiting Payment" or a specific date
+            "expire_date": "Pending Activation"  # Expiry date
         }
 
         # remove old message
@@ -342,25 +343,22 @@ class BuyDiscordBot(commands.Cog):
         log_memberjoin = self.bot.get_emoji(config.EMOJIS["log_memberjoin"])
 
         # Calculate the price based on the hosting duration and user ID
-        price = calculate_price(user_amount_pricing)
+        price_details = calculate_price(user_amount_pricing)
 
         # Convert the price to a numeric value for further processing
-        price_numeric = float(price.get("user_amount_pricing").replace("€", "").replace(",", "."))
+        user_amount_pricing = price_details.get("user_amount_pricing")
+        bot_users = price_details.get("bot_users")
 
-        order.products["discord_bot"]["bot_users"] = price.get("bot_users")
-        order.products["discord_bot"]["user_amount_pricing"] = price.get("user_amount_pricing")
-
-        print(order.products.get('discord_bot').get('type'))
-
-        print(order)
+        order.products["discord_bot"]["bot_users"] = bot_users
+        order.products["discord_bot"]["user_amount_pricing"] = user_amount_pricing
 
         # Format the price for single month hosting
-        price_single_month = format_price(price_numeric)
+        price_single_month = format_price(user_amount_pricing)
 
         # Format the prices for multiple month hosting
-        price_3_months = format_price(price_numeric * 3)
-        price_6_months = format_price(price_numeric * 6)
-        price_12_months = format_price(price_numeric * 12)
+        price_3_months = format_price(user_amount_pricing * 3)
+        price_6_months = format_price(user_amount_pricing * 6)
+        price_12_months = format_price(user_amount_pricing * 12)
 
         # remove old message
         await processing_response(ctx)
@@ -396,25 +394,25 @@ class BuyDiscordBot(commands.Cog):
                 style=ButtonStyle.grey,
                 emoji=log_timeoutremoved,
                 label=f'{language["discord_order_bot_step_2_hosting_duration_1_lable"]} - {price_single_month}',
-                custom_id=f"months:1",
+                custom_id=f"months:1:{order_id}",
             ),
             Button(
                 style=ButtonStyle.grey,
                 emoji=log_timeoutremoved,
                 label=f'{language["discord_order_bot_step_2_hosting_duration_2_lable"]} - {price_3_months}',
-                custom_id=f"months:3",
+                custom_id=f"months:3:{order_id}",
             ),
             Button(
                 style=ButtonStyle.grey,
                 emoji=log_timeoutremoved,
                 label=f'{language["discord_order_bot_step_2_hosting_duration_3_lable"]} - {price_6_months}',
-                custom_id=f"months:6",
+                custom_id=f"months:6:{order_id}",
             ),
             Button(
                 style=ButtonStyle.grey,
                 emoji=log_timeoutremoved,
                 label=f'{language["discord_order_bot_step_2_hosting_duration_4_lable"]} - {price_12_months}',
-                custom_id=f"months:12",
+                custom_id=f"months:12:{order_id}",
             )
         ]
 
@@ -424,27 +422,21 @@ class BuyDiscordBot(commands.Cog):
                        components=[buttons]
                        )
 
-    @commands.Cog.on_click('^months:(\d+)$')
+    @commands.Cog.on_click('^months:(.*)$')
     async def order_bot_part_3(self, ctx: discord.ComponentInteraction, button):
         # Extract the selection made by the user from the button's custom ID
         hosting_duration = int(button.custom_id.split(":")[1])
 
-        # Extract user ID from the interaction context
-        user = ctx.author
+        order_id = button.custom_id.split(":")[2]
+        order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
 
         # Load selected language
-        language = load_language_data(user.id)
+        language = load_language_data(order.user_language)
 
         # Retrieve emojis
         function_tick = self.bot.get_emoji(config.EMOJIS["function_tick"])
         function_cross = self.bot.get_emoji(config.EMOJIS["function_cross"])
         community_developer = self.bot.get_emoji(config.EMOJIS["community_developer"])
-
-        # Retrieve user data from the database or initialize an empty dictionary if not found
-        user_info = user_data.get(user.id, {})
-
-        # Update user information with the selected hosting duration
-        user_info["hosting_duration"] = hosting_duration
 
         # Set default setup_fee
         setup_fees = 0
@@ -459,11 +451,9 @@ class BuyDiscordBot(commands.Cog):
         elif hosting_duration == 12:
             setup_fees = config.setup_fee_12_month
 
-        # Retrieve user data from the database or initialize an empty dictionary if not found
-        user_info = user_data.get(user.id, {})
-
         # Update user information with the selected hosting duration
-        user_info["setup_fees"] = setup_fees
+        order.products["discord_bot"]["hosting_duration"] = hosting_duration
+        order.products["discord_bot"]["setup_fees"] = setup_fees
 
         # Remove old message
         await processing_response(ctx)
@@ -504,13 +494,13 @@ class BuyDiscordBot(commands.Cog):
                 style=ButtonStyle.grey,
                 emoji=function_tick,
                 label=language["discord_order_bot_step_3_about_me_pack_1_lable"],
-                custom_id="about_me_pack_yes",
+                custom_id=f"about_me_pack:yes:{order_id}",
             ),
             Button(
                 style=ButtonStyle.grey,
                 emoji=function_cross,
                 label=language["discord_order_bot_step_3_about_me_pack_2_lable"],
-                custom_id="about_me_pack_no",
+                custom_id=f"about_me_pack:no:{order_id}",
             )
         ]
 
@@ -520,29 +510,23 @@ class BuyDiscordBot(commands.Cog):
                        components=[buttons]
                        )
 
-    @commands.Cog.on_click('^about_me_pack_(yes|no)$')
+    @commands.Cog.on_click('^about_me_pack:(.*)$')
     async def order_bot_part_4(self, ctx: discord.ComponentInteraction, button):
         # Extract the selection made by the user from the button's custom ID
-        about_me_pack = button.custom_id.split("_")[-1]
+        about_me_pack = button.custom_id.split(":")[1]
 
-        # Extract user ID from the interaction context
-        user = ctx.author
+        order_id = button.custom_id.split(":")[2]
+        order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
 
         # Load selected language
-        language = load_language_data(user.id)
+        language = load_language_data(order.user_language)
 
         # Retrieve emojis
         community_developer = self.bot.get_emoji(config.EMOJIS["community_developer"])
         community_owner = self.bot.get_emoji(config.EMOJIS["community_owner"])
 
-        # Retrieve user data from the database or initialize an empty dictionary if not found
-        user_info = user_data.get(user.id, {})
-
-        # Update user information with the selected about me pack
-        user_info["about_me_pack"] = about_me_pack
-
-        # Update user data in the database
-        user_data[user.id] = user_info
+        # Update user information with the selected hosting duration
+        order.products["discord_bot"]["about_me_pack"] = about_me_pack
 
         # Remove the old message
         await processing_response(ctx)
@@ -578,7 +562,7 @@ class BuyDiscordBot(commands.Cog):
                 style=ButtonStyle.grey,
                 emoji=community_owner,
                 label=language["discord_order_bot_step_4_configure_lable"],
-                custom_id="configure_bot",
+                custom_id=f"configure_bot:{order_id}",
             )
         ]
 
@@ -588,22 +572,22 @@ class BuyDiscordBot(commands.Cog):
                        components=[buttons]
                        )
 
-    @commands.Cog.on_click("^configure_bot$")
+    @commands.Cog.on_click("^configure_bot:(.*)$")
     async def order_bot_part_4_modal(self, ctx: discord.ComponentInteraction, button):
-        # Extract user ID from the interaction context
-        user = ctx.author
+        # Extract the selection made by the user from the button's custom ID
+        order_id = button.custom_id.split(":")[1]
+        order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
 
         # Load selected language
-        language = load_language_data(user.id)
+        language = load_language_data(order.user_language)
 
         # Retrieve user data if available, otherwise set default values
-        user_info = user_data.get(user.id, {})
-        bot_type = user_info.get('bot_type', 'Not entered')
+        bot_type = order.products.get('discord_bot').get('type')
 
         # Define the modal with input fields for bot name and status
         modal = Modal(
             title=language["discord_order_bot_step_4_configure_modal_title"],
-            custom_id=f'bot_details',
+            custom_id=f'bot_details:{order_id}',
             components=[
                 [
                     TextInput(
@@ -629,13 +613,14 @@ class BuyDiscordBot(commands.Cog):
         # Respond to the interaction with the modal
         await ctx.respond_with_modal(modal)
 
-    @commands.Cog.on_submit('^bot_details')
+    @commands.Cog.on_submit('^bot_details:(.*)$')
     async def order_bot_part_5(self, ctx: discord.ModalSubmitInteraction):
-        # Extract user ID from the interaction context
-        user = ctx.author
+        # Extract the selection made by the user from the button's custom ID
+        order_id = ctx.custom_id.split(":")[1]
+        order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
 
         # Load selected language
-        language = load_language_data(user.id)
+        language = load_language_data(order.user_language)
 
         # Retrieve emojis
         log_membershipscreening = self.bot.get_emoji(config.EMOJIS["log_membershipscreening"])
@@ -646,39 +631,40 @@ class BuyDiscordBot(commands.Cog):
         bot_name = ctx.get_field('bot_name').value or None
         bot_status = ctx.get_field('bot_status').value or None
 
-        # Update user data with bot name and status
-        user_info = user_data.get(user.id, {})
-        user_info["bot_name"] = bot_name
-        user_info["bot_status"] = bot_status
-        user_data[user.id] = user_info
+        # Update user information
+        order.products["discord_bot"]["bot_name"] = bot_name
+        order.products["discord_bot"]["bot_status"] = bot_status
+
+        # Get Order details for further respond.
+        hosting_duration = order.products.get('discord_bot').get('hosting_duration')
+        about_me_pack = order.products.get('discord_bot').get('about_me_pack')
+        setup_fees = order.products.get('discord_bot').get('setup_fees')
+        user_amount_pricing = order.products.get('discord_bot').get('user_amount_pricing')
+        bot_type = order.products.get('discord_bot').get('type')
+        bot_users = order.products.get('discord_bot').get('bot_users')
 
         # Determine hosting duration ending
-        hosting_duration_month = "month" if user_info.get('hosting_duration', 'Not entered') == 1 else "months"
+        hosting_duration_month = "month" if hosting_duration == 1 else "months"
 
         # Determine about me pack status and cost
-        about_me_pack_status = 'Selected' if user_info.get('about_me_pack') == 'yes' else 'Not selected'
-        about_me_pack_total_cost = 0.50 * int(user_info.get('hosting_duration', 1))
+        about_me_pack_status = 'Selected' if about_me_pack == 'yes' else 'Not selected'
+        about_me_pack_total_cost = 0.50 * int(hosting_duration)
         about_me_pack_cost_text = f" (Cost: {format_price(about_me_pack_total_cost)})" if about_me_pack_status == 'Selected' else ""
         price_about_me_pack = about_me_pack_total_cost if about_me_pack_status == 'Selected' else 0
 
         # Determine setup_fees
-        setup_fees = user_info.get('setup_fees', 0)
+        setup_fees = setup_fees
         if setup_fees == 0:
             setup_fees_formatted = "No fees"
         else:
             setup_fees_formatted = f"{setup_fees:.2f}€"
 
-        # Calculate total price
-        total_price = setup_fees + price_about_me_pack + (
-                float(user_info.get('user_amount_pricing', '0').replace('€', '').replace(',', '.')) * int(
-            user_info.get('hosting_duration', '1')))
-        total_price_formatted = f"{total_price:.2f}€"
+        # format user_amount_pricing
+        user_amount_pricing_formatted = f"{user_amount_pricing:.2f}€"
 
-        # Get all user information for the further embed
-        bot_type = user_info.get('bot_type', 'Not entered')
-        bot_users = user_info.get('bot_users', 'Not entered')
-        bot_user_pricing = user_info.get('user_amount_pricing', 'Not entered')
-        bot_hosting_duration = user_info.get('hosting_duration', 'Not entered')
+        # Calculate total price
+        total_price = setup_fees + price_about_me_pack + (user_amount_pricing * int(hosting_duration))
+        total_price_formatted = f"{total_price:.2f}€"
 
         # Remove old message
         await processing_response(ctx)
@@ -703,8 +689,8 @@ class BuyDiscordBot(commands.Cog):
             about_me_pack_status=about_me_pack_status,
             about_me_pack_cost_text=about_me_pack_cost_text,
             setup_fees_formatted=setup_fees_formatted,
-            bot_user_pricing=bot_user_pricing,
-            bot_hosting_duration=bot_hosting_duration,
+            bot_user_pricing=user_amount_pricing_formatted,
+            bot_hosting_duration=hosting_duration,
             hosting_duration_month=hosting_duration_month,
             total_price_formatted=total_price_formatted,
             plant_plant=plant_plant
@@ -729,26 +715,28 @@ class BuyDiscordBot(commands.Cog):
                                style=ButtonStyle.green,
                                emoji=log_membershipscreening,
                                label=language["discord_order_bot_step_5_accept_rules_lable"],
-                               custom_id="pre_made_bot_accept_tos",
+                               custom_id=f"pre_made_bot_accept_tos:{order_id}",
                            )
                        ]]
                        )
 
-    @commands.Cog.on_click("^pre_made_bot_accept_tos$")
+    @commands.Cog.on_click("^pre_made_bot_accept_tos:(.*)$")
     async def order_pre_made_bot_open_thread(self, ctx: discord.ComponentInteraction, button):
-        # Extract user ID from the interaction context
+        # Extract the selection made by the user from the button's custom ID
+        order_id = button.custom_id.split(":")[1]
+        order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
+
+        # Change order status
+        order.status = "Pending Payment"
+
+        # Get user
         user = ctx.author
 
-        # Get user data
-        user_info = user_data.get(user.id, {})
-
         # Load selected language
-        language = load_language_data(user.id)
+        language = load_language_data(order.user_language)
 
-        # Get Order Product channel for thread creation
+        # Get Order Product channel for thread creation and Staff role
         channel = ctx.guild.get_channel(self.order_product_channel_id)
-
-        # Get Official Staff role
         staff = ctx.guild.get_role(self.official_staff_id)
 
         # Retrieve emojis
@@ -756,35 +744,41 @@ class BuyDiscordBot(commands.Cog):
         promo = self.bot.get_emoji(config.EMOJIS["promo"])
         function_cross = self.bot.get_emoji(config.EMOJIS["function_cross"])
 
+        # Get Order details for further respond.
+        hosting_duration = order.products.get('discord_bot').get('hosting_duration')
+        about_me_pack = order.products.get('discord_bot').get('about_me_pack')
+        setup_fees = order.products.get('discord_bot').get('setup_fees')
+        user_amount_pricing = order.products.get('discord_bot').get('user_amount_pricing')
+        bot_type = order.products.get('discord_bot').get('type')
+        bot_name = order.products.get('discord_bot').get('bot_name')
+        bot_status = order.products.get('discord_bot').get('bot_status')
+        bot_users = order.products.get('discord_bot').get('bot_users')
+
         # Determine hosting duration ending
-        hosting_duration_month = "month" if user_info.get('hosting_duration', 'Not entered') == 1 else "months"
+        hosting_duration_month = "month" if hosting_duration == 1 else "months"
 
         # Determine setup_fees
-        setup_fees = user_info.get('setup_fees', 0)
+        setup_fees = setup_fees
         if setup_fees == 0:
             setup_fees_formatted = "No fees"
         else:
             setup_fees_formatted = f"{setup_fees:.2f}€"
 
+        # format user_amount_pricing
+        user_amount_pricing_formatted = f"{user_amount_pricing:.2f}€"
+
         # Determine about me pack status and cost
-        about_me_pack_status = 'Selected' if user_info.get('about_me_pack') == 'yes' else 'Not selected'
-        about_me_pack_total_cost = 0.50 * int(user_info.get('hosting_duration', 1))
+        about_me_pack_status = 'Selected' if about_me_pack == 'yes' else 'Not selected'
+        about_me_pack_total_cost = 0.50 * int(hosting_duration)
         about_me_pack_cost_text = f" (Cost: {format_price(about_me_pack_total_cost)})" if about_me_pack_status == 'Selected' else ""
         price_about_me_pack = about_me_pack_total_cost if about_me_pack_status == 'Selected' else 0
 
         # Calculate total price
-        total_price = setup_fees + price_about_me_pack + (
-                float(user_info.get('user_amount_pricing', '0').replace('€', '').replace(',', '.')) * int(
-            user_info.get('hosting_duration', '1')))
+        total_price = setup_fees + price_about_me_pack + (user_amount_pricing * int(hosting_duration))
         total_price_formatted = f"{total_price:.2f}€"
 
-        # Get all user information for the further embed
-        bot_type = user_info.get('bot_type', 'Not entered')
-        bot_name = user_info.get('bot_name', 'Not entered')
-        bot_status = user_info.get('bot_status', 'Not entered')
-        bot_users = user_info.get('bot_users', 'Not entered')
-        bot_user_pricing = user_info.get('user_amount_pricing', 'Not entered')
-        bot_hosting_duration = user_info.get('hosting_duration', 'Not entered')
+        # Update user information
+        order.products["discord_bot"]["total_price"] = total_price
 
         # Remove old message
         await processing_response(ctx)
@@ -818,8 +812,8 @@ class BuyDiscordBot(commands.Cog):
             about_me_pack_status=about_me_pack_status,
             about_me_pack_cost_text=about_me_pack_cost_text,
             setup_fees_formatted=setup_fees_formatted,
-            bot_user_pricing=bot_user_pricing,
-            bot_hosting_duration=bot_hosting_duration,
+            bot_user_pricing=user_amount_pricing_formatted,
+            bot_hosting_duration=hosting_duration,
             hosting_duration_month=hosting_duration_month,
             total_price_formatted=total_price_formatted
         )
@@ -862,13 +856,13 @@ class BuyDiscordBot(commands.Cog):
                                   style=ButtonStyle.blurple,
                                   emoji=promo,
                                   label=language["discord_order_bot_thread_code_button"],
-                                  custom_id="discord_bot_discount_code",
+                                  custom_id=f"discord_bot_discount_code:{order_id}",
                               ),
                               Button(
                                   style=ButtonStyle.grey,
                                   emoji=plant_plant,
                                   label=language["discord_order_bot_thread_price_button"],
-                                  custom_id="discord_bot_pricing_information",
+                                  custom_id=f"discord_bot_pricing_information:{order_id}",
                               ),
                               Button(
                                   style=ButtonStyle.grey,
@@ -894,25 +888,45 @@ class BuyDiscordBot(commands.Cog):
                        attachments=[banner_file, icon_file, footer_file],
                        )
 
-        # Delete user data after processing
-        del user_data[user.id]
+        # Load Order into json file
+        script_directory = Path(__file__).resolve().parent.parent.parent
+        file_path = script_directory / "data/orders.json"
+        with open(file_path, 'r+', encoding='utf-8') as file:
+            # Read the existing data
+            filedata = json.load(file)
 
-    @commands.Cog.on_click("^personalized_bot_accept_tos$")
+            # Update the data
+            filedata[order.order_id] = order.__dict__
+
+            # Reset file position to the beginning
+            file.seek(0)
+
+            # Write the modified data
+            json.dump(filedata, file)
+
+            # Truncate the file to the new size
+            file.truncate()
+
+    @commands.Cog.on_click("^personalized_bot_accept_tos:(.*)$")
     async def order_personalized_bot_open_thread(self, ctx: discord.ComponentInteraction, button):
-        # Extract user ID from the interaction context
+        # Extract the selection made by the user from the button's custom ID
+        order_id = button.custom_id.split(":")[1]
+        order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
+
+        # Add bot type to order
+        order.products["discord_bot"] = {
+            "type": 'Personalized Bot',
+        }
+        order.status = "Pending Payment"
+
+        # Get user
         user = ctx.author
 
-        # Define user language and load language data
-        user_info = user_data.get(user.id, {})
-        user_language = user_info.get('user_language', 'en')
-        script_directory = Path(__file__).resolve().parent.parent.parent
-        file_path = script_directory / "languages/order_discord_bot_language_file.json"
-        language = load_language_data(user_language)
+        # Load selected language
+        language = load_language_data(order.user_language)
 
-        # Get Order Product channel for thread creation
+        # Get Order Product channel and Staff role
         channel = ctx.guild.get_channel(self.order_product_channel_id)
-
-        # Get Official Staff role
         staff = ctx.guild.get_role(self.official_staff_id)
 
         # Retrieve emojis
@@ -982,13 +996,13 @@ class BuyDiscordBot(commands.Cog):
                                   style=ButtonStyle.blurple,
                                   emoji=promo,
                                   label=language["discord_order_bot_thread_code_button"],
-                                  custom_id="discord_bot_discount_code",
+                                  custom_id=f"discord_bot_discount_code:{order_id}",
                               ),
                               Button(
                                   style=ButtonStyle.grey,
                                   emoji=plant_plant,
                                   label=language["discord_order_bot_thread_price_button"],
-                                  custom_id="discord_bot_pricing_information",
+                                  custom_id=f"discord_bot_pricing_information:{order_id}",
                               ),
                               Button(
                                   style=ButtonStyle.grey,
@@ -1015,17 +1029,33 @@ class BuyDiscordBot(commands.Cog):
                        attachments=[banner_file, icon_file, footer_file],
                        )
 
-    @commands.Cog.on_click("^discord_bot_pricing_information$")
-    async def order_bot_pricing_information(self, ctx: discord.ComponentInteraction, button):
-        # Extract user ID from the interaction context
-        user = ctx.author
-
-        # Define user language and load language data
-        user_info = user_data.get(user.id, {})
-        user_language = user_info.get('user_language', 'en')
+        # Load Order into json file
         script_directory = Path(__file__).resolve().parent.parent.parent
-        file_path = script_directory / "languages/order_discord_bot_language_file.json"
-        language = load_language_data(user_language)
+        file_path = script_directory / "data/orders.json"
+        with open(file_path, 'r+', encoding='utf-8') as file:
+            # Read the existing data
+            filedata = json.load(file)
+
+            # Update the data
+            filedata[order.order_id] = order.__dict__
+
+            # Reset file position to the beginning
+            file.seek(0)
+
+            # Write the modified data
+            json.dump(filedata, file)
+
+            # Truncate the file to the new size
+            file.truncate()
+
+    @commands.Cog.on_click("^discord_bot_pricing_information:(.*)$")
+    async def order_bot_pricing_information(self, ctx: discord.ComponentInteraction, button):
+        # Extract the selection made by the user from the button's custom ID
+        order_id = button.custom_id.split(":")[1]
+        order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
+
+        # Load selected language
+        language = load_language_data(order.user_language)
 
         # Retrieve emojis
         plantbig_plant = self.bot.get_emoji(config.EMOJIS["plantbig_plant"])
@@ -1041,18 +1071,19 @@ class BuyDiscordBot(commands.Cog):
         )
         await ctx.respond(embed=response_message, hidden=True)
 
-    @commands.Cog.on_click("^discord_bot_discount_code$")
+    @commands.Cog.on_click("^discord_bot_discount_code:(.*)$")
     async def order_bot_discount_code(self, ctx: discord.ComponentInteraction, button):
-        # Extract user ID from the interaction context
-        user = ctx.author
+        # Extract the selection made by the user from the button's custom ID
+        order_id = button.custom_id.split(":")[1]
+        order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
 
         # Load selected language
-        language = load_language_data(user.id)
+        language = load_language_data(order.user_language)
 
         # Define the modal with input fields for bot name and status
         modal = Modal(
             title=language["discord_order_bot_discount_code_modal_title"],
-            custom_id=f'bot_discount_code',
+            custom_id=f'bot_discount_code:{order_id}',
             components=[
                 [
                     TextInput(
@@ -1069,13 +1100,14 @@ class BuyDiscordBot(commands.Cog):
         # Respond to the interaction with the modal
         await ctx.respond_with_modal(modal)
 
-    @commands.Cog.on_submit('^bot_discount_code$')
+    @commands.Cog.on_submit('^bot_discount_code:(.*)$')
     async def order_bot_submit_discount_code(self, ctx: discord.ModalSubmitInteraction):
-        # Extract user ID from the interaction context
-        user = ctx.author
+        # Extract the selection made by the user from the button's custom ID
+        order_id = ctx.custom_id.split(":")[1]
+        order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
 
         # Load selected language
-        language = load_language_data(user.id)
+        language = load_language_data(order.user_language)
 
         # Retrieve emojis
         promo = self.bot.get_emoji(config.EMOJIS["promo"])
@@ -1141,12 +1173,6 @@ class BuyDiscordBot(commands.Cog):
 
         # Archive the thread
         await thread.edit(archived=True)
-
-        # Delete user data after processing
-        if user_data.get(user.id):
-            del user_data[user.id]
-        else:
-            return
 
 
 # ⏤ { settings } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤

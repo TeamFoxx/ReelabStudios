@@ -10,6 +10,7 @@
 # ⏤ { imports } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 import json
 import logging
+from datetime import datetime, timedelta
 from pathlib import Path
 
 import discord
@@ -17,13 +18,9 @@ from discord import Button, ButtonStyle, SelectOption, SelectMenu
 from discord.ext import commands
 
 import config
-from utlis.orders import Order
-from utlis.utils import header, attachments
-from stuff import reelab
-
-# ⏤ { configurations } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
-
-user_lang = {}
+from utils.orders import Order
+from utils.utils import header, attachments
+from main import reelab
 
 
 # ⏤ { function definitions } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
@@ -49,8 +46,8 @@ def load_language_data(file_path: Path, user_language: str) -> dict:
 # ⏤ { settings } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
 class ProductPurchase(commands.Cog):
-    def __init__(self, bot):
-        self.bot: commands.Bot = bot
+    def __init__(self, reelab):
+        self.bot: commands.Bot = reelab
 
 # ⏤ { codebase } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
@@ -109,7 +106,7 @@ class ProductPurchase(commands.Cog):
             Button(
                 style=ButtonStyle.green,
                 emoji="🛍️",
-                label="Order a Product",
+                label="Explore all Products",
                 custom_id="order_product",
                 disabled=False
             ),
@@ -134,7 +131,7 @@ class ProductPurchase(commands.Cog):
     @commands.Cog.on_click('^order_product$')
     async def order_product(self, ctx: discord.ComponentInteraction, button):
         # Create order
-        order = Order(user_id=ctx.author.id, user_name=ctx.author.name)
+        order = Order(user_id=ctx.author.id, user_name=ctx.author.name, status="Configuration Pending")
         reelab.orders.append(order)
 
         # Retrieve emojis

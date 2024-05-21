@@ -43,7 +43,7 @@
     "discord_order_bot_step_4_configure_modal_status_placeholder": "e.g., {watching} over the safety of users",
 
     "discord_order_bot_step_5_description": "## {community_developer} Configuration Step - V/V\n> Last but not least, **double-check what you've entered** and **accept the terms and conditions** for Using the Bot.\n\n__Your Entered Details:__\n- **Bot Type:** {bot_type}\n- **Bot Name:** {bot_name}\n- **Bot Status:** {bot_status}\n- **Possible bot users:** {bot_users}\n- **About Me Pack:** {about_me_pack_status}{about_me_pack_cost_text}\n- **Setup fees:** {setup_fees_formatted}\n- **Hosting price a month:** {bot_user_pricing}\n- **Hosting duration:** {bot_hosting_duration} {hosting_duration_month}\n### {plant_plant} The total amount to be paid is __{total_price_formatted}__\n**Note:** By accepting the [terms and conditions](https://discord.com/channels/1216127716970070128/1216346561601339474/1222872839187857582), a __ticket will be created automatically__ and our __Staff Team__ will contact you shortly.",
-    "discord_order_bot_step_5_accept_rules_lable": "Accept Terms & Order At Cost",
+    "discord_order_bot_step_5_accept_rules_lable": "Accept terms & start 24 hour trial",
 
     "discord_order_bot_thread_ping_message": "Thanks for requesting a bot {user}. Our {staff} will be with you shortly.",
     "discord_order_bot_user_message": "Thank you for your purchase request. A member of our team will be in touch with you shortly. View your ticket and add any additional information here >> {thread}",
@@ -105,7 +105,7 @@
     "discord_order_bot_step_4_configure_modal_status_placeholder": "z. B. {beobachtet} die Sicherheit der Benutzer",
 
     "discord_order_bot_step_5_description": "## {community_developer} Konfigurationsschritt - V/V\n> Zu guter Letzt, **überprüfe bitte, ob du alles richtig eingegeben hast** und **akzeptiere die Nutzungsbedingungen** für die Verwendung des Bots.\n\n__Deine eingegebenen Details:__\n- **Bot-Typ:** {bot_type}\n- **Bot-Name:** {bot_name}\n- **Bot-Status:** {bot_status}\n- **Mögliche Bot-Benutzer:** {bot_users}\n- **Über mich-Paket:** {about_me_pack_status}{about_me_pack_cost_text}\n- **Einrichtungsgebühren:** {setup_fees_formatted}\n- **Monatlicher Hosting-Preis:** {bot_user_pricing}\n- **Hosting-Dauer:** {bot_hosting_duration} {hosting_duration_month}\n### {plant_plant} Der Gesamtbetrag beträgt __{total_price_formatted}__\n**Hinweis:** Durch die Zustimmung zu den [Nutzungsbedingungen](https://discord.com/channels/1216127716970070128/1216346561601339474/1222872839187857582) wird automatisch ein __Ticket erstellt__ und unser __Team__ wird sich bald bei dir melden.",
-    "discord_order_bot_step_5_accept_rules_lable": "Nutzungsbedingungen akzeptieren und zum Preis bestellen",
+    "discord_order_bot_step_5_accept_rules_lable": "Nutzungsbedingungen akzeptieren & 24-Stunden-Testversion starten",
 
     "discord_order_bot_thread_ping_message": "Danke für die Bot-Anfrage {user}. Unser {staff} wird sich in Kürze bei dir melden.",
     "discord_order_bot_user_message": "Vielen Dank für deine Kaufanfrage. Ein Mitglied unseres Teams wird sich in Kürze bei dir melden. Sieh dir dein Ticket an und füge hier weitere Informationen hinzu >> {thread}",
@@ -167,7 +167,7 @@
     "discord_order_bot_step_4_configure_modal_status_placeholder": "örn., {izliyor} kullanıcıların güvenliğini sağlar",
 
     "discord_order_bot_step_5_description": "## {community_developer} Yapılandırma Adımı - V/V\n> Son olarak, **girdiklerini doğru olduğundan emin ol** ve Bota İlişkin Kullanım Koşullarını kabul et**.\n\n__Girdiğin Detaylar:__\n- **Bot Türü:** {bot_type}\n- **Bot Adı:** {bot_name}\n- **Bot Durumu:** {bot_status}\n- **Olası bot kullanıcıları:** {bot_users}\n- **Hakkımda Paketi:** {about_me_pack_status}{about_me_pack_cost_text}\n- **Kurulum ücreti:** {setup_fees_formatted}\n- **Aylık Barındırma Ücreti:** {bot_user_pricing}\n- **Barındırma Süresi:** {bot_hosting_duration} {hosting_duration_month}\n### {plant_plant} Ödenecek toplam tutar __{total_price_formatted}__\n**Not:** [Kullanım Koşullarını](https://discord.com/channels/1216127716970070128/1216346561601339474/1222872839187857582) kabul ederek otomatik olarak bir __bilet oluşturulur__ ve __Ekibimiz__ kısa süre içinde seninle iletişime geçecektir.",
-    "discord_order_bot_step_5_accept_rules_lable": "Koşulları Kabul Edin ve Maliyetle Sipariş Verin",
+    "discord_order_bot_step_5_accept_rules_lable": "Şartları kabul edin ve 24 saatlik denemeye başlayın",
 
     "discord_order_bot_thread_ping_message": "Bot talebiniz için teşekkürler {user}. {staff} ekibimiz yakında sizinle iletişime geçecektir.",
     "discord_order_bot_user_message": "Satın alma talebiniz için teşekkür ederiz. Ekibimizden bir üye yakında sizinle iletişime geçecektir. Biletinizi görüntüleyin ve buraya ek bilgi ekleyin >> {thread}",
@@ -229,7 +229,7 @@
     "discord_order_bot_step_4_configure_modal_status_placeholder": "par ex., {regarde} la sécurité des utilisateurs",
 
     "discord_order_bot_step_5_description": "## {community_developer} Étape de configuration - V/V\n> Enfin, **vérifie que tu as bien entré toutes les informations correctement** et **accepte les conditions générales d'utilisation** pour utiliser le bot.\n\n__Vos détails saisis :__\n- **Type de bot :** {bot_type}\n- **Nom du bot :** {bot_name}\n- **Statut du bot :** {bot_status}\n- **Utilisateurs potentiels du bot :** {bot_users}\n- **À propos de moi Pack :** {about_me_pack_status}{about_me_pack_cost_text}\n- **Frais de configuration :** {setup_fees_formatted}\n- **Prix d'hébergement par mois :** {bot_user_pricing}\n- **Durée d'hébergement :** {bot_hosting_duration} {hosting_duration_month}\n### {plant_plant} Le montant total à payer est de __{total_price_formatted}__\n**Remarque :** En acceptant les [conditions générales d'utilisation](https://discord.com/channels/1216127716970070128/1216346561601339474/1222872839187857582), un __ticket sera automatiquement créé__ et notre __équipe__ vous contactera sous peu.",
-    "discord_order_bot_step_5_accept_rules_lable": "Accepter les Conditions & Commander au Coût",
+    "discord_order_bot_step_5_accept_rules_lable": "Accepter les conditions et commencer la période d'essai de 24 heures",
 
     "discord_order_bot_thread_ping_message": "Merci d'avoir demandé un bot {user}. Notre {staff} sera bientôt avec vous.",
     "discord_order_bot_user_message": "Merci pour votre demande d'achat. Un membre de notre équipe prendra bientôt contact avec vous. Consultez votre ticket et ajoutez toute information supplémentaire ici >> {thread}",
@@ -291,7 +291,7 @@
     "discord_order_bot_step_4_configure_modal_status_placeholder": "ad es., {sta guardando} sulla sicurezza degli utenti",
 
     "discord_order_bot_step_5_description": "## {community_developer} Passaggio di configurazione - V/V\n> Infine, **controlla che tu abbia inserito tutto correttamente** e **accetta i termini e le condizioni** per l'uso del Bot.\n\n__I tuoi dettagli inseriti:__\n- **Tipo di bot:** {bot_type}\n- **Nome del bot:** {bot_name}\n- **Stato del bot:** {bot_status}\n- **Possibili utenti del bot:** {bot_users}\n- **About Me Pack:** {about_me_pack_status}{about_me_pack_cost_text}\n- **Costi di configurazione:** {setup_fees_formatted}\n- **Prezzo di hosting al mese:** {bot_user_pricing}\n- **Durata dell'hosting:** {bot_hosting_duration} {hosting_duration_month}\n### {plant_plant} L'importo totale da pagare è __{total_price_formatted}__\n**Nota:** Accettando i [termini e condizioni](https://discord.com/channels/1216127716970070128/1216346561601339474/1222872839187857582), verrà creato automaticamente un __ticket__ e il nostro __Team__ ti contatterà a breve.",
-    "discord_order_bot_step_5_accept_rules_lable": "Accetta le Condizioni & Ordina a Costo",
+    "discord_order_bot_step_5_accept_rules_lable": "Accettare le condizioni e avviare una prova di 24 ore",
 
     "discord_order_bot_thread_ping_message": "Grazie per aver richiesto un bot {user}. Il nostro {staff} sarà presto con te.",
     "discord_order_bot_user_message": "Grazie per la tua richiesta di acquisto. Un membro del nostro team sarà presto in contatto con te. Visualizza il tuo ticket e aggiungi eventuali informazioni aggiuntive qui >> {thread}",
@@ -353,7 +353,7 @@
     "discord_order_bot_step_4_configure_modal_status_placeholder": "例：ユーザーの安全を見守る {watching}",
 
     "discord_order_bot_step_5_description": "## {community_developer} 設定ステップ - V/V\n> 最後に、**入力した内容を再確認**し、**ボットの利用規約に同意**してください。\n\n__入力された詳細：__\n- **ボットのタイプ：** {bot_type}\n- **ボットの名前：** {bot_name}\n- **ボットのステータス：** {bot_status}\n- **可能なボットユーザー：** {bot_users}\n- **About Meパック：** {about_me_pack_status}{about_me_pack_cost_text}\n- **セットアップ料金：** {setup_fees_formatted}\n- **月額ホスティング価格：** {bot_user_pricing}\n- **ホスティング期間：** {bot_hosting_duration} {hosting_duration_month}\n### {plant_plant} 支払総額は __{total_price_formatted}__ です\n**注意：** [利用規約](https://discord.com/channels/1216127716970070128/1216346561601339474/1222872839187857582)に同意することで、自動的に __チケットが作成__ され、__スタッフチーム__ がすぐに連絡します。",
-    "discord_order_bot_step_5_accept_rules_lable": "利用規約を受け入れて注文する",
+    "discord_order_bot_step_5_accept_rules_lable": "利用規約に同意し、24 時間のトライアルを開始してください",
 
     "discord_order_bot_thread_ping_message": "ボットをリクエストしていただき、ありがとうございます {user}。当社の {staff} がすぐにお手伝いします。",
     "discord_order_bot_user_message": "ご購入リクエストありがとうございます。当社のチームのメンバーがすぐにご連絡いたします。チケットを表示して、ここに追加情報を追加してください >> {thread}",
@@ -415,7 +415,7 @@
     "discord_order_bot_step_4_configure_modal_status_placeholder": "例如，{watching} 守护用户的安全",
 
     "discord_order_bot_step_5_description": "## {community_developer} 配置步骤 - V/V\n> 最后，请**确认你输入的信息是否正确**，并**同意使用该机器人的条款和条件**。\n\n__你输入的详情：__\n- **机器人类型：** {bot_type}\n- **机器人名称：** {bot_name}\n- **机器人状态：** {bot_status}\n- **可能的机器人用户：** {bot_users}\n- **关于我的包：** {about_me_pack_status}{about_me_pack_cost_text}\n- **设置费用：** {setup_fees_formatted}\n- **每月托管价格：** {bot_user_pricing}\n- **托管期限：** {bot_hosting_duration} {hosting_duration_month}\n### {plant_plant} 总支付金额为 __{total_price_formatted}__\n**注意：** 通过接受[条款和条件](https://discord.com/channels/1216127716970070128/1216346561601339474/1222872839187857582)，将自动创建一个 __工单__，我们的 __工作人员团队__ 将尽快与您联系。",
-    "discord_order_bot_step_5_accept_rules_lable": "接受条款并支付费用",
+    "discord_order_bot_step_5_accept_rules_lable": "接受条款并开始 24 小时试用",
 
     "discord_order_bot_thread_ping_message": "感谢您请求机器人 {user}。我们的 {staff} 将会尽快与您联系。",
     "discord_order_bot_user_message": "感谢您的购买请求。我们的团队成员将很快与您联系。在这里查看您的票据并添加任何其他信息 >> {thread}",
@@ -477,7 +477,7 @@
     "discord_order_bot_step_4_configure_modal_status_placeholder": "예: 사용자의 안전을 {watching}중",
 
     "discord_order_bot_step_5_description": "## {community_developer} 구성 단계 - V/V\n> 마지막으로 **입력한 내용을 다시 확인하고**, **봇 사용 조건을 수락**하십시오.\n\n__입력한 세부 정보:__\n- **봇 유형:** {bot_type}\n- **봇 이름:** {bot_name}\n- **봇 상태:** {bot_status}\n- **가능한 봇 사용자:** {bot_users}\n- **나에 대해 팩:** {about_me_pack_status}{about_me_pack_cost_text}\n- **설치 비용:** {setup_fees_formatted}\n- **월별 호스팅 가격:** {bot_user_pricing}\n- **호스팅 기간:** {bot_hosting_duration} {hosting_duration_month}\n### {plant_plant} 지불해야 할 총액은 __{total_price_formatted}__입니다.\n**참고:** [이용 약관](https://discord.com/channels/1216127716970070128/1216346561601339474/1222872839187857582)에 동의함으로써 __티켓이 자동으로 생성__되며, __스태프 팀__이 곧 연락드릴 것입니다.",
-    "discord_order_bot_step_5_accept_rules_lable": "약관 수락 및 비용으로 주문",
+    "discord_order_bot_step_5_accept_rules_lable": "약관에 동의하고 24시간 평가판을 시작하세요",
 
     "discord_order_bot_thread_ping_message": "{user}님, 봇을 요청해주셔서 감사합니다. 저희 {staff}가 곧 연락드릴 예정입니다.",
     "discord_order_bot_user_message": "봇 구매 요청해 주셔서 감사합니다. 저희 팀원 중 한 분이 곧 연락 드리겠습니다. 티켓을 확인하고 여기에 추가 정보를 추가하세요 >> {thread}",

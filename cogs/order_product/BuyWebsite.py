@@ -17,8 +17,8 @@ from discord import Button, ButtonStyle, Modal, TextInput
 from discord.ext import commands
 
 import config
-from stuff import reelab
-from utlis.utils import header, attachments, processing_response
+from main import reelab
+from utils.utils import header, attachments, processing_response, load_language_data
 
 # ⏤ { configurations } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
@@ -27,33 +27,6 @@ counting_file_path = "data/counting.json"
 
 
 # ⏤ { function definitions } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
-def load_language(user_id):
-    # Define user language and load language data
-    user_info = user_data.get(user_id, {})
-    user_language = user_info.get('user_language', 'en')
-    script_directory = Path(__file__).resolve().parent.parent.parent
-    file_path = script_directory / "languages/order_website_language_file.json"
-    language = load_language_data(file_path, user_language)
-    return language
-
-
-def load_language_data(file_path: Path, user_language: str) -> dict:
-    """
-    Loads the language data from the specified file and selects the language based on user_language.
-    Returns the language dictionary if found, otherwise returns an empty dictionary.
-    """
-    try:
-        with open(file_path, "r", encoding="utf-8") as file:
-            language_data = json.load(file)
-            if user_language in language_data:
-                return language_data[user_language]
-            else:
-                logging.warning(f"Language '{user_language}' not found in language file.")
-                return {}
-    except FileNotFoundError:
-        logging.error(f"Language file '{file_path}' not found.")
-        return {}
-
 
 def load_counting():
     """
@@ -95,14 +68,9 @@ class BuyWebsite(commands.Cog):
         if selected[0] == "order_website":
             order_id = selected[1]
             order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
-            print(order)
-
-            # Define the file path for language data
-            script_directory = Path(__file__).resolve().parent.parent.parent
-            file_path = script_directory / "data/languages/order_website_language_file.json"
 
             # Load language data based on the user's language preference
-            language = load_language_data(file_path, order.user_language)
+            language = load_language_data(order.user_language)
 
             # Retrieve emojis
             log_membershipscreening = self.bot.get_emoji(config.EMOJIS["log_membershipscreening"])
@@ -131,7 +99,7 @@ class BuyWebsite(commands.Cog):
                     style=ButtonStyle.green,
                     emoji=log_membershipscreening,
                     label=language["order_website_accept_tos"],
-                    custom_id="website_accept_tos",
+                    custom_id=f"website_accept_tos:{order_id}",
                 )
             ]
 
@@ -141,24 +109,19 @@ class BuyWebsite(commands.Cog):
                                    components=[buttons]
                                    )
 
-    @commands.Cog.on_click("^website_accept_tos$")
+    @commands.Cog.on_click("^website_accept_tos:(.*)$")
     async def order_website_open_thread(self, ctx: discord.ComponentInteraction, button):
+        order_id = button.custom_id.split(":")[1]
+        order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
+
+        # Load language data based on the user's language preference
+        language = load_language_data(order.user_language)
+
         # Extract user ID from the interaction context
         user = ctx.author
 
-        # Define user language and load language data
-        user_info = user_data.get(user.id, {})
-
-        # Load selected language
-        language = load_language(user.id)
-
-        # Log all user information that have been saved
-        logging.info(f'{str(user.id)} - Website ordered by user: %s', user_info)
-
-        # Get Order Product channel for thread creation
+        # Get Order Product channel and Staff role
         channel = ctx.guild.get_channel(self.order_product_channel_id)
-
-        # Get Official Staff role
         staff = ctx.guild.get_role(self.official_staff_id)
 
         # Retrieve emojis
@@ -210,13 +173,13 @@ class BuyWebsite(commands.Cog):
                                   style=ButtonStyle.blurple,
                                   emoji=promo,
                                   label=language["order_website_thread_code_button"],
-                                  custom_id="website_discount_code",
+                                  custom_id=f"website_discount_code:{order_id}",
                               ),
                               Button(
                                   style=ButtonStyle.grey,
                                   emoji=plant_plant,
                                   label=language["order_website_thread_price_button"],
-                                  custom_id="website_pricing_information",
+                                  custom_id=f"website_pricing_information:{order_id}",
                               ),
                               Button(
                                   style=ButtonStyle.grey,
@@ -243,16 +206,13 @@ class BuyWebsite(commands.Cog):
                        attachments=[banner_file, icon_file, footer_file],
                        )
 
-    @commands.Cog.on_click("^website_pricing_information$")
+    @commands.Cog.on_click("^website_pricing_information:(.*)$")
     async def website_pricing_information(self, ctx: discord.ComponentInteraction, button):
-        # Extract user ID from the interaction context
-        user = ctx.author
+        order_id = button.custom_id.split(":")[1]
+        order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
 
-        # Load selected language
-        language = load_language(user.id)
-
-        # Log pricing information
-        logging.info(f'{str(user.id)} - Pricing information called by: %s', user.name)
+        # Load language data based on the user's language preference
+        language = load_language_data(order.user_language)
 
         # Retrieve emojis
         plantbig_plant = self.bot.get_emoji(config.EMOJIS["plantbig_plant"])
@@ -268,21 +228,18 @@ class BuyWebsite(commands.Cog):
         )
         await ctx.respond(embed=response_message, hidden=True)
 
-    @commands.Cog.on_click("^website_discount_code$")
+    @commands.Cog.on_click("^website_discount_code:(.*)$")
     async def website_discount_code(self, ctx: discord.ComponentInteraction, button):
-        # Extract user ID from the interaction context
-        user = ctx.author
+        order_id = button.custom_id.split(":")[1]
+        order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
 
-        # Load selected language
-        language = load_language(user.id)
-
-        # Log pricing information
-        logging.info(f'{str(user.id)} - Pricing information called by: %s', user.name)
+        # Load language data based on the user's language preference
+        language = load_language_data(order.user_language)
 
         # Define the modal with input fields for bot name and status
         modal = Modal(
             title=language["order_website_discount_code_modal_title"],
-            custom_id=f'website_discount_code',
+            custom_id=f'website_discount_code:{order_id}',
             components=[
                 [
                     TextInput(
@@ -299,13 +256,13 @@ class BuyWebsite(commands.Cog):
         # Respond to the interaction with the modal
         await ctx.respond_with_modal(modal)
 
-    @commands.Cog.on_submit('^website_discount_code$')
+    @commands.Cog.on_submit('^website_discount_code:(.*)$')
     async def website_submit_discount_code(self, ctx: discord.ModalSubmitInteraction):
-        # Extract user ID from the interaction context
-        user = ctx.author
+        order_id = ctx.custom_id.split(":")[1]
+        order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
 
-        # Load selected language
-        language = load_language(user.id)
+        # Load language data based on the user's language preference
+        language = load_language_data(order.user_language)
 
         # Retrieve emojis
         promo = self.bot.get_emoji(config.EMOJIS["promo"])

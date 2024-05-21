@@ -24,8 +24,8 @@ import config
 
 
 class ReloadFunction(commands.Cog):
-    def __init__(self, bot):
-        self.bot = bot
+    def __init__(self, reelab):
+        self.bot = reelab
         self.developer = config.developer
 
 # ⏤ { codebase } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤

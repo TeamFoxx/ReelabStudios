@@ -3,7 +3,7 @@
 # »› Developed by Foxx
 # »› Copyright © 2024 Aurel Hoxha. All rights reserved.
 # »› GitHub: https://github.com/TeamFoxx
-# »› For support and inquiries, please contact hello@aurelhoxha.de
+# »› For support and inquiries, please contact info@aurelhoxha.de
 # »› Use of this program is subject to the terms the terms of the MIT licence.
 # »› A copy of the license can be found in the "LICENSE" file in the root directory of this project.
 # ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -20,21 +20,30 @@ from tqdm import tqdm
 
 from data.secrets import token
 
+
 # ⏤ { settings } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
-init(autoreset=True)
+class Reelab(commands.Bot):
+    def __init__(self):
+        super(Reelab, self).__init__(
+            intents=discord.Intents.all(),
+            command_prefix=commands.when_mentioned_or("."),
+            sync_commands=True,
+            auto_check_for_updates=True
+        )
+        self.remove_command("help")
+        self.orders = []
+        self.basepath = Path(__file__).resolve().parent
 
-reelab = commands.Bot(
-    intents=discord.Intents.all(),
-    command_prefix=commands.when_mentioned_or("."),
-    sync_commands=True,
-    auto_check_for_updates=True
-)
-reelab.remove_command("help")
-reelab.user_info = []
+        # Reset color formatting from colorama
+        init(autoreset=True)
 
 
 # ⏤ { codebase } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
+
+# Instantiate the bot
+reelab = Reelab()
+
 
 def load_cogs():
     """
@@ -79,7 +88,7 @@ def report_loading_results(failed_cogs, loaded_cogs_count, total_cogs, load_dura
               f"{Fore.WHITE}out of {total_cogs}.")
         for cog, error in failed_cogs:
             print(f"{Fore.RED}Error in {Fore.WHITE}{cog}: {Fore.LIGHTBLACK_EX}{error}")
-        print(f"{Fore.GREEN}Successfully {Fore.WHITE}loaded {Fore.GREEN}{loaded_cogs_count}"
+        print(f"{Fore.GREEN}Successfully {Fore.WHITE}loaded {Fore.GREEN}{loaded_cogs_count} "
               f"{Fore.WHITE}/{Fore.GREEN}{total_cogs} {Fore.WHITE}cogs in {load_duration:.2f} seconds.")
     else:
         print(f"{Fore.WHITE}All {Fore.GREEN}{total_cogs} cogs "
@@ -102,11 +111,16 @@ def display_startup_info(bot_user):
 @reelab.event
 async def on_ready():
     """Event handler for when the bot is ready."""
+    # Set the bot's activity to "Watching www.reelab.studio"
     activity = discord.Activity(name="www.reelab.studio", type=discord.ActivityType.watching)
     await reelab.change_presence(activity=activity)
+
+    # Display startup information in the console
     display_startup_info(reelab.user)
+
+    # Load all cogs (extensions) for the bot
     load_cogs()
-    reelab.user_info = list(reelab.get_all_members())
+
 
 # ⏤ { settings } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 

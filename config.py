@@ -10,7 +10,7 @@
 # ⏤ { config } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
 # Version information
-version = "v1.4-pre"
+version = "v1.6-pre"
 
 # List of Developer
 developer = {599204513722662933}
@@ -43,10 +43,10 @@ EMOJIS = {
 }
 
 # General Pricing for Pre-Made Discord Bots
-discord_bot_user_based_pricing_1 = "2.00€"  # Price for less than 1000
-discord_bot_user_based_pricing_2 = "2.50€"  # Price for 1000-2499 users
-discord_bot_user_based_pricing_3 = "3.00€"  # Price for 2500-4999 users
-discord_bot_user_based_pricing_4 = "3.50€"  # Price for 5000 or more users
+discord_bot_user_based_pricing_1 = 2  # Price for less than 1000
+discord_bot_user_based_pricing_2 = 2.50  # Price for 1000-2499 users
+discord_bot_user_based_pricing_3 = 3.00  # Price for 2500-4999 users
+discord_bot_user_based_pricing_4 = 3.50  # Price for 5000 or more users
 
 # Cost of fees for one-time set-up
 setup_fee_1_month = 5  # Fees for 1 month hosting.

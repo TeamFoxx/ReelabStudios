@@ -8,7 +8,7 @@
 # ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 #
 # ⏤ { imports } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
-from utlis.utils import attachments
+from utils.utils import attachments
 
 import logging
 import os

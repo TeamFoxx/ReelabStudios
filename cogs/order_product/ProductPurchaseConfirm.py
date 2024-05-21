@@ -88,7 +88,7 @@ class ProductPurchaseConfirmation(commands.Cog):
         description='Send confirmation message for product purchase.',
         default_required_permissions=discord.Permissions(administrator=True)
     )
-    async def send_confirmation_of_product_purchase(self, ctx):
+    async def send_confirmation_of_product_purchase(self, ctx, language: str):
         # Extract user ID from the interaction context
         user = ctx.author
 

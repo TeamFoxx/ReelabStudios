@@ -10,7 +10,6 @@
 # ⏤ { imports } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 import json
 import logging
-import uuid
 from pathlib import Path
 
 import discord
@@ -21,12 +20,10 @@ import config
 
 logging.basicConfig(filename='../bot.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-user_data = {}
-
 
 # ⏤ { text functions } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
-async def processing_response(interaction: discord.ComponentInteraction):
+async def processing_response(interaction):
     """
     Sends a processing response to the interaction by editing it with a loading message.
     """
