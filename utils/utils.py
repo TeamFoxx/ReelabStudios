@@ -120,7 +120,7 @@ def load_language_data_graphic(user_language: str) -> dict:
     Returns the language dictionary if found, otherwise returns an empty dictionary.
     """
     script_directory = Path(__file__).resolve().parent.parent
-    file_path = script_directory / "data/languages/order_website_language_file.json"
+    file_path = script_directory / "data/languages/order_graphic_language_file.json"
     try:
         with open(file_path, "r", encoding="utf-8") as file:
             language_data = json.load(file)

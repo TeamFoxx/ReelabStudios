@@ -59,7 +59,7 @@ class BuyGraphic(commands.Cog):
 
     # ⏤ { codebase } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
-    @commands.Cog.on_select('^products:(.*)$')
+    @commands.Cog.on_select('^products$')
     async def graphic_products(self, interaction, select_menu):
         selected = select_menu.values[0].split(":")
 
