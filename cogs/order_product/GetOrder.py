@@ -9,11 +9,10 @@
 #
 # ⏤ { imports } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 import json
-import logging
 from pathlib import Path
 
 import discord
-from discord import Button, ButtonStyle, SelectOption
+from discord import SelectOption
 from discord.ext import commands
 
 import config
@@ -21,24 +20,6 @@ from utils.utils import attachments
 
 
 # ⏤ { function definitions } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
-
-def load_language_data(file_path: Path, user_language: str) -> dict:
-    """
-    Loads the language data from the specified file and selects the language based on user_language.
-    Returns the language dictionary if found, otherwise returns an empty dictionary.
-    """
-    try:
-        with open(file_path, "r", encoding="utf-8") as file:
-            language_data = json.load(file)
-            if user_language in language_data:
-                return language_data[user_language]
-            else:
-                logging.warning(f"Language '{user_language}' not found in language file.")
-                return {}
-    except FileNotFoundError:
-        logging.error(f"Language file '{file_path}' not found.")
-        return {}
-
 
 def format_value(key, value):
     """

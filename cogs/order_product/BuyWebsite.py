@@ -18,7 +18,7 @@ from discord.ext import commands
 
 import config
 from main import reelab
-from utils.utils import header, attachments, processing_response, load_language_data
+from utils.utils import header, attachments, processing_response, load_language_data_website
 
 # ⏤ { configurations } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
@@ -70,7 +70,7 @@ class BuyWebsite(commands.Cog):
             order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
 
             # Load language data based on the user's language preference
-            language = load_language_data(order.user_language)
+            language = load_language_data_website(order.user_language)
 
             # Retrieve emojis
             log_membershipscreening = self.bot.get_emoji(config.EMOJIS["log_membershipscreening"])
@@ -115,7 +115,7 @@ class BuyWebsite(commands.Cog):
         order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
 
         # Load language data based on the user's language preference
-        language = load_language_data(order.user_language)
+        language = load_language_data_website(order.user_language)
 
         # Extract user ID from the interaction context
         user = ctx.author
@@ -206,13 +206,39 @@ class BuyWebsite(commands.Cog):
                        attachments=[banner_file, icon_file, footer_file],
                        )
 
+        order.products["website"] = {
+            "type": 'Personalized Website',
+        }
+
+        # Change order status
+        order.status = "Pending Meeting"
+
+        # Load Order into json file
+        script_directory = Path(__file__).resolve().parent.parent.parent
+        file_path = script_directory / "data/orders.json"
+        with open(file_path, 'r+', encoding='utf-8') as file:
+            # Read the existing data
+            filedata = json.load(file)
+
+            # Update the data
+            filedata[order.order_id] = order.__dict__
+
+            # Reset file position to the beginning
+            file.seek(0)
+
+            # Write the modified data
+            json.dump(filedata, file)
+
+            # Truncate the file to the new size
+            file.truncate()
+
     @commands.Cog.on_click("^website_pricing_information:(.*)$")
     async def website_pricing_information(self, ctx: discord.ComponentInteraction, button):
         order_id = button.custom_id.split(":")[1]
         order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
 
         # Load language data based on the user's language preference
-        language = load_language_data(order.user_language)
+        language = load_language_data_website(order.user_language)
 
         # Retrieve emojis
         plantbig_plant = self.bot.get_emoji(config.EMOJIS["plantbig_plant"])
@@ -234,7 +260,7 @@ class BuyWebsite(commands.Cog):
         order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
 
         # Load language data based on the user's language preference
-        language = load_language_data(order.user_language)
+        language = load_language_data_website(order.user_language)
 
         # Define the modal with input fields for bot name and status
         modal = Modal(
@@ -262,7 +288,7 @@ class BuyWebsite(commands.Cog):
         order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
 
         # Load language data based on the user's language preference
-        language = load_language_data(order.user_language)
+        language = load_language_data_website(order.user_language)
 
         # Retrieve emojis
         promo = self.bot.get_emoji(config.EMOJIS["promo"])

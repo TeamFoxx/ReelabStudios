@@ -25,7 +25,7 @@ from main import reelab
 
 # ⏤ { function definitions } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
-def load_language_data(file_path: Path, user_language: str) -> dict:
+def load_language_data_discord_bot(file_path: Path, user_language: str) -> dict:
     """
     Loads the language data from the specified file and selects the language based on user_language.
     Returns the language dictionary if found, otherwise returns an empty dictionary.
@@ -314,7 +314,7 @@ class ProductPurchase(commands.Cog):
         # Load language data
         script_directory = Path(__file__).resolve().parent.parent.parent
         file_path = script_directory / "data/languages/products_language_file.json"
-        language = load_language_data(file_path, user_language)
+        language = load_language_data_discord_bot(file_path, user_language)
 
         # Embedded message to be sent
         buy_message = discord.Embed(

@@ -8,7 +8,9 @@
 # ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 #
 # ⏤ { imports } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
+import json
 import logging
+from pathlib import Path
 
 import discord
 from discord import Button, ButtonStyle, Modal, TextInput
@@ -16,7 +18,7 @@ from discord.ext import commands
 
 import config
 from main import reelab
-from utils.utils import header, attachments, processing_response, load_language_data
+from utils.utils import header, attachments, processing_response, load_language_data_graphic
 
 # ⏤ { configurations } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 user_data = {}
@@ -55,7 +57,7 @@ class BuyGraphic(commands.Cog):
         self.order_product_channel_id = 1216178294458814526
         self.official_staff_id = 1216137762537996479
 
-# ⏤ { codebase } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
+    # ⏤ { codebase } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
     @commands.Cog.on_select('^products:(.*)$')
     async def graphic_products(self, interaction, select_menu):
@@ -67,7 +69,7 @@ class BuyGraphic(commands.Cog):
             order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
 
             # Load language data based on the user's language preference
-            language = load_language_data(order.user_language)
+            language = load_language_data_graphic(order.user_language)
 
             # Retrieve emojis
             log_membershipscreening = self.bot.get_emoji(config.EMOJIS["log_membershipscreening"])
@@ -112,7 +114,7 @@ class BuyGraphic(commands.Cog):
         order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
 
         # Load selected language
-        language = load_language_data(order.user_language)
+        language = load_language_data_graphic(order.user_language)
 
         # Get user
         user = ctx.author
@@ -203,13 +205,39 @@ class BuyGraphic(commands.Cog):
                        attachments=[banner_file, icon_file, footer_file],
                        )
 
+        order.products["graphic"] = {
+            "type": 'Personalized Graphic',
+        }
+
+        # Change order status
+        order.status = "Pending Meeting"
+
+        # Load Order into json file
+        script_directory = Path(__file__).resolve().parent.parent.parent
+        file_path = script_directory / "data/orders.json"
+        with open(file_path, 'r+', encoding='utf-8') as file:
+            # Read the existing data
+            filedata = json.load(file)
+
+            # Update the data
+            filedata[order.order_id] = order.__dict__
+
+            # Reset file position to the beginning
+            file.seek(0)
+
+            # Write the modified data
+            json.dump(filedata, file)
+
+            # Truncate the file to the new size
+            file.truncate()
+
     @commands.Cog.on_click("^graphic_pricing_information:(.*)$")
     async def graphic_pricing_information(self, ctx: discord.ComponentInteraction, button):
         order_id = button.custom_id.split(":")[1]
         order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
 
         # Load selected language
-        language = load_language_data(order.user_language)
+        language = load_language_data_graphic(order.user_language)
 
         # Retrieve emojis
         plantbig_plant = self.bot.get_emoji(config.EMOJIS["plantbig_plant"])
@@ -231,7 +259,7 @@ class BuyGraphic(commands.Cog):
         order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
 
         # Load selected language
-        language = load_language_data(order.user_language)
+        language = load_language_data_graphic(order.user_language)
 
         # Define the modal with input fields for bot name and status
         modal = Modal(
@@ -259,7 +287,7 @@ class BuyGraphic(commands.Cog):
         order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
 
         # Load selected language
-        language = load_language_data(order.user_language)
+        language = load_language_data_graphic(order.user_language)
 
         # Retrieve emojis
         promo = self.bot.get_emoji(config.EMOJIS["promo"])

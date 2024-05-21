@@ -18,7 +18,7 @@ from discord.ext import commands
 
 import config
 from main import reelab
-from utils.utils import attachments, processing_response, load_language_data
+from utils.utils import attachments, processing_response, load_language_data_discord_bot
 
 # ⏤ { configurations } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
@@ -35,7 +35,8 @@ def calculate_price(user_amount_pricing: int) -> dict:
     amount = {1: "> 1k", 2: "1k-2.5k", 3: "2.5k-5k", 4: "< 5k"}
     price = {1: config.discord_bot_user_based_pricing_1, 2: config.discord_bot_user_based_pricing_2,
              3: config.discord_bot_user_based_pricing_3, 4: config.discord_bot_user_based_pricing_4}
-    return {"bot_users": amount.get(user_amount_pricing, "Unknown"), "user_amount_pricing": price.get(user_amount_pricing, 0)}
+    return {"bot_users": amount.get(user_amount_pricing, "Unknown"),
+            "user_amount_pricing": price.get(user_amount_pricing, 0)}
 
 
 def format_price(price):
@@ -91,7 +92,7 @@ class BuyDiscordBot(commands.Cog):
             order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
 
             # Load language data based on the user's language preference
-            language = load_language_data(order.user_language)
+            language = load_language_data_discord_bot(order.user_language)
 
             # Retrieve emojis
             community_developer = self.bot.get_emoji(config.EMOJIS["community_developer"])
@@ -185,7 +186,7 @@ class BuyDiscordBot(commands.Cog):
         order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
 
         # Load selected language
-        language = load_language_data(order.user_language)
+        language = load_language_data_discord_bot(order.user_language)
 
         bot_type_mapping = {
             "modmail_bot": "Modmail Bot",
@@ -332,7 +333,7 @@ class BuyDiscordBot(commands.Cog):
         order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
 
         # Load selected language
-        language = load_language_data(order.user_language)
+        language = load_language_data_discord_bot(order.user_language)
 
         # Extract the selection made by the user from the button's custom ID
         user_amount_pricing = int(button.custom_id.split(":")[1])
@@ -431,7 +432,7 @@ class BuyDiscordBot(commands.Cog):
         order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
 
         # Load selected language
-        language = load_language_data(order.user_language)
+        language = load_language_data_discord_bot(order.user_language)
 
         # Retrieve emojis
         function_tick = self.bot.get_emoji(config.EMOJIS["function_tick"])
@@ -519,7 +520,7 @@ class BuyDiscordBot(commands.Cog):
         order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
 
         # Load selected language
-        language = load_language_data(order.user_language)
+        language = load_language_data_discord_bot(order.user_language)
 
         # Retrieve emojis
         community_developer = self.bot.get_emoji(config.EMOJIS["community_developer"])
@@ -579,7 +580,7 @@ class BuyDiscordBot(commands.Cog):
         order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
 
         # Load selected language
-        language = load_language_data(order.user_language)
+        language = load_language_data_discord_bot(order.user_language)
 
         # Retrieve user data if available, otherwise set default values
         bot_type = order.products.get('discord_bot').get('type')
@@ -620,7 +621,7 @@ class BuyDiscordBot(commands.Cog):
         order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
 
         # Load selected language
-        language = load_language_data(order.user_language)
+        language = load_language_data_discord_bot(order.user_language)
 
         # Retrieve emojis
         log_membershipscreening = self.bot.get_emoji(config.EMOJIS["log_membershipscreening"])
@@ -733,7 +734,7 @@ class BuyDiscordBot(commands.Cog):
         user = ctx.author
 
         # Load selected language
-        language = load_language_data(order.user_language)
+        language = load_language_data_discord_bot(order.user_language)
 
         # Get Order Product channel for thread creation and Staff role
         channel = ctx.guild.get_channel(self.order_product_channel_id)
@@ -923,7 +924,7 @@ class BuyDiscordBot(commands.Cog):
         user = ctx.author
 
         # Load selected language
-        language = load_language_data(order.user_language)
+        language = load_language_data_discord_bot(order.user_language)
 
         # Get Order Product channel and Staff role
         channel = ctx.guild.get_channel(self.order_product_channel_id)
@@ -1055,7 +1056,7 @@ class BuyDiscordBot(commands.Cog):
         order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
 
         # Load selected language
-        language = load_language_data(order.user_language)
+        language = load_language_data_discord_bot(order.user_language)
 
         # Retrieve emojis
         plantbig_plant = self.bot.get_emoji(config.EMOJIS["plantbig_plant"])
@@ -1078,7 +1079,7 @@ class BuyDiscordBot(commands.Cog):
         order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
 
         # Load selected language
-        language = load_language_data(order.user_language)
+        language = load_language_data_discord_bot(order.user_language)
 
         # Define the modal with input fields for bot name and status
         modal = Modal(
@@ -1107,7 +1108,7 @@ class BuyDiscordBot(commands.Cog):
         order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
 
         # Load selected language
-        language = load_language_data(order.user_language)
+        language = load_language_data_discord_bot(order.user_language)
 
         # Retrieve emojis
         promo = self.bot.get_emoji(config.EMOJIS["promo"])

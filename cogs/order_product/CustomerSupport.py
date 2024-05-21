@@ -26,7 +26,7 @@ user_data = {}
 
 # ⏤ { function definitions } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
-def load_language_data(file_path: Path, user_language: str) -> dict:
+def load_language_data_discord_bot(file_path: Path, user_language: str) -> dict:
     """
     Loads the language data from the specified file and selects the language based on user_language.
     Returns the language dictionary if found, otherwise returns an empty dictionary.
@@ -97,7 +97,7 @@ class CustomerSupport(commands.Cog):
             file_path = script_directory / "languages/customer_support_language_file.json"
 
             # Load language data based on the user's language preference
-            language = load_language_data(file_path, user_language)
+            language = load_language_data_discord_bot(file_path, user_language)
 
             # Log all user information that have been saved
             logging.info(f'{str(user.id)} - Customer Support requested by user: %s', user_info)
