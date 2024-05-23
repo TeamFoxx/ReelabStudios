@@ -18,7 +18,7 @@ from discord.ext import commands
 
 import config
 from main import reelab
-from utils.utils import attachments, processing_response, load_language_data_discord_bot
+from utils.Utils import attachments, processing_response, load_language_data_discord_bot
 
 # ⏤ { configurations } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
@@ -744,6 +744,7 @@ class BuyDiscordBot(commands.Cog):
         plant_plant = self.bot.get_emoji(config.EMOJIS["plant_plant"])
         promo = self.bot.get_emoji(config.EMOJIS["promo"])
         function_cross = self.bot.get_emoji(config.EMOJIS["function_cross"])
+        role_star = self.bot.get_emoji(config.EMOJIS["role_star"])
 
         # Get Order details for further respond.
         hosting_duration = order.products.get('discord_bot').get('hosting_duration')
@@ -854,6 +855,12 @@ class BuyDiscordBot(commands.Cog):
                           files=[header_file, icon_file, footer_file],
                           components=[[
                               Button(
+                                  style=ButtonStyle.green,
+                                  emoji=role_star,
+                                  label="/myorder",
+                                  custom_id=f"myorder:{order_id}",
+                              ),
+                              Button(
                                   style=ButtonStyle.blurple,
                                   emoji=promo,
                                   label=language["discord_order_bot_thread_code_button"],
@@ -935,6 +942,7 @@ class BuyDiscordBot(commands.Cog):
         promo = self.bot.get_emoji(config.EMOJIS["promo"])
         function_cross = self.bot.get_emoji(config.EMOJIS["function_cross"])
         community_advisor = self.bot.get_emoji(config.EMOJIS["community_advisor"])
+        role_star = self.bot.get_emoji(config.EMOJIS["role_star"])
 
         # Load the current counting
         counting = load_counting()
@@ -993,6 +1001,12 @@ class BuyDiscordBot(commands.Cog):
         await thread.send(embeds=[thread_header, description],
                           files=[header_file, icon_file, footer_file],
                           components=[[
+                              Button(
+                                  style=ButtonStyle.green,
+                                  emoji=role_star,
+                                  label="/myorder",
+                                  custom_id=f"myorder:{order_id}",
+                              ),
                               Button(
                                   style=ButtonStyle.blurple,
                                   emoji=promo,
@@ -1148,9 +1162,6 @@ class BuyDiscordBot(commands.Cog):
 
     @commands.Cog.on_click("^close_bot_order$")
     async def order_bot_close_thread(self, ctx: discord.ComponentInteraction, button):
-        # Extract user ID from the interaction context
-        user = ctx.author
-
         # Get the current thread and its name
         thread = ctx.channel
         thread_name = thread.name

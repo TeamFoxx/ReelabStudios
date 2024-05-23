@@ -17,7 +17,8 @@ from discord import Button, ButtonStyle
 from discord.ext import commands
 
 import config
-from utils.utils import header, processing_response, attachments
+from main import reelab
+from utils.Utils import header, processing_response, attachments, load_language_data_customer_support
 
 # ⏤ { configurations } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
@@ -50,8 +51,8 @@ logging.basicConfig(filename='bot.log', level=logging.INFO, format='%(asctime)s 
 
 
 class CustomerSupport(commands.Cog):
-    def __init__(self, bot):
-        self.bot: commands.Bot = bot
+    def __init__(self, reelab):
+        self.bot: commands.Bot = reelab
         self.order_product_channel_id = 1216178294458814526
         self.official_staff_id = 1216137762537996479
         self.customer_support_id = 1216142380571295855
@@ -60,47 +61,18 @@ class CustomerSupport(commands.Cog):
 
     @commands.Cog.on_select('^products$')
     async def customer_support(self, interaction, select_menu):
+        selected = select_menu.values[0].split(":")
+
         # Check if the selected value of the select menu is "order_discord_bot"
-        if select_menu.values[0] == "customer_support":
-            # Import required modules
-            from cogs.order_product.ProductPurchase import user_lang
+        if selected[0] == "customer_support":
+            order_id = selected[1]
+            order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
+
+            # Load language data based on the user's language preference
+            language = load_language_data_customer_support(order.user_language)
 
             # Get the user ID from the interaction
             user = interaction.author
-
-            # Retrieve user language information from user_lang
-            user_info = user_lang.get(user.id, {})
-
-            # Get the language attribute from user_info, default to 'en' if not found
-            user_language = user_info.get('language', 'en')
-
-            # Retrieve user data from the database or initialize an empty dictionary if not found
-            user_info = user_data.get(user.id, {})
-
-            # Update user information with the user_language
-            user_info["user_language"] = user_language
-
-            # Delete user data after processing
-            if user.id in user_lang:
-                del user_lang[user.id]
-            else:
-                pass
-
-            # Update user data in the database
-            user_data[user.id] = user_info
-
-            # Retrieve the user's language preference
-            user_language = user_info.get('user_language', 'en')
-
-            # Define the file path for language data
-            script_directory = Path(__file__).resolve().parent.parent.parent
-            file_path = script_directory / "languages/customer_support_language_file.json"
-
-            # Load language data based on the user's language preference
-            language = load_language_data_discord_bot(file_path, user_language)
-
-            # Log all user information that have been saved
-            logging.info(f'{str(user.id)} - Customer Support requested by user: %s', user_info)
 
             # Get Order Product channel for thread creation
             channel = interaction.guild.get_channel(self.order_product_channel_id)
@@ -175,12 +147,6 @@ class CustomerSupport(commands.Cog):
 
     @commands.Cog.on_click("^close_support_thread$")
     async def close_support_thread(self, ctx: discord.ComponentInteraction, button):
-        # Extract user ID from the interaction context
-        user = ctx.author
-
-        # Log thread closing
-        logging.info(f'{str(user.id)} - the thread has been closed by: %s', user.name)
-
         # Get the current thread and its name
         thread = ctx.channel
         thread_name = thread.name
@@ -204,12 +170,6 @@ class CustomerSupport(commands.Cog):
 
         # Archive the thread
         await thread.edit(archived=True)
-
-        # Delete user data after processing
-        if user_data.get(user.id):
-            del user_data[user.id]
-        else:
-            return
 
 
 # ⏤ { settings } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤

@@ -18,7 +18,7 @@ from discord.ext import commands
 
 import config
 from main import reelab
-from utils.utils import header, attachments, processing_response, load_language_data_website
+from utils.Utils import header, attachments, processing_response, load_language_data_website
 
 # ⏤ { configurations } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
@@ -129,6 +129,7 @@ class BuyWebsite(commands.Cog):
         function_cross = self.bot.get_emoji(config.EMOJIS["function_cross"])
         community_advisor = self.bot.get_emoji(config.EMOJIS["community_advisor"])
         promo = self.bot.get_emoji(config.EMOJIS["promo"])
+        role_star = self.bot.get_emoji(config.EMOJIS["role_star"])
 
         # Load the current counting
         counting = load_counting()
@@ -169,6 +170,12 @@ class BuyWebsite(commands.Cog):
         await thread.send(embeds=[header_embed, description],
                           files=[banner_file, icon_file, footer_file],
                           components=[[
+                              Button(
+                                  style=ButtonStyle.green,
+                                  emoji=role_star,
+                                  label="/myorder",
+                                  custom_id=f"myorder:{order_id}",
+                              ),
                               Button(
                                   style=ButtonStyle.blurple,
                                   emoji=promo,

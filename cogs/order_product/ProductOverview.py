@@ -18,8 +18,8 @@ from discord.ext import commands
 
 import config
 from main import reelab
-from utils.orders import Order
-from utils.utils import header, attachments
+from utils.Orders import Order
+from utils.Utils import header, attachments
 
 
 # ⏤ { function definitions } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
@@ -44,7 +44,7 @@ def load_language_data_discord_bot(file_path: Path, user_language: str) -> dict:
 
 # ⏤ { settings } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
-class ProductPurchase(commands.Cog):
+class ProductOverview(commands.Cog):
     def __init__(self, reelab):
         self.bot: commands.Bot = reelab
 
@@ -191,7 +191,7 @@ class ProductPurchase(commands.Cog):
 
         # Create select menu
         select_menu = SelectMenu(
-            placeholder='Explore your options...',
+            placeholder='Discover your possibilities...',
             options=select_options,
             custom_id='products',
             max_values=1
@@ -307,7 +307,7 @@ class ProductPurchase(commands.Cog):
             user_language = 'en'
 
         # Create order with selected user language
-        order = Order(user_id=user.id, user_name=user.name, user_language=user_language)
+        order = Order(user_id=user.id, user_name=user.name, user_language=user_language, status="Configuration Pending")
         reelab.orders.append(order)
 
         # Load language data
@@ -340,25 +340,25 @@ class ProductPurchase(commands.Cog):
                 label=language["language_selection_order_website_lable"],
                 description=language["language_selection_order_website_description"],
                 emoji=community_member,
-                value='order_website'
+                value=f'order_website:{order.order_id}'
             ),
             SelectOption(
                 label=language["language_selection_order_graphic_lable"],
                 description=language["language_selection_order_graphic_description"],
                 emoji=community_member,
-                value='order_graphics'
+                value=f'order_graphics:{order.order_id}'
             ),
             SelectOption(
                 label=language["language_selection_order_bundle_lable"],
                 description=language["language_selection_order_bundle_description"],
                 emoji=community_eventhost,
-                value='order_bundle'
+                value=f'order_bundle:{order.order_id}'
             ),
             SelectOption(
                 label=language["language_selection_customer_support_lable"],
                 description=language["language_selection_customer_support_description"],
                 emoji=community_advisor,
-                value='customer_support'
+                value=f'customer_support:{order.order_id}'
             )
         ]
 
@@ -379,4 +379,4 @@ class ProductPurchase(commands.Cog):
 # ⏤ { settings } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
 def setup(reelab_bot):
-    reelab_bot.add_cog(ProductPurchase(reelab_bot))
+    reelab_bot.add_cog(ProductOverview(reelab_bot))
