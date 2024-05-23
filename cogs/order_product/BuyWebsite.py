@@ -9,7 +9,6 @@
 #
 # ⏤ { imports } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 import json
-import logging
 from pathlib import Path
 
 import discord
@@ -22,7 +21,6 @@ from utils.Utils import header, attachments, processing_response, load_language_
 
 # ⏤ { configurations } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
-user_data = {}
 counting_file_path = "data/counting.json"
 
 
@@ -49,16 +47,13 @@ def save_counting(counting):
 
 # ⏤ { settings } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
-logging.basicConfig(filename='bot.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-
-
 class BuyWebsite(commands.Cog):
     def __init__(self, bot):
         self.bot: commands.Bot = bot
         self.order_product_channel_id = 1216178294458814526
         self.official_staff_id = 1216137762537996479
 
-# ⏤ { codebase } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
+    # ⏤ { codebase } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
     @commands.Cog.on_select('^products$')
     async def website_products(self, interaction, select_menu):
@@ -335,12 +330,6 @@ class BuyWebsite(commands.Cog):
 
     @commands.Cog.on_click("^close_website_order$")
     async def order_website_close_thread(self, ctx: discord.ComponentInteraction, button):
-        # Extract user ID from the interaction context
-        user = ctx.author
-
-        # Log thread closing
-        logging.info(f'{str(user.id)} - the thread has been closed by: %s', user.name)
-
         # Get the current thread and its name
         thread = ctx.channel
         thread_name = thread.name
@@ -364,12 +353,6 @@ class BuyWebsite(commands.Cog):
 
         # Archive the thread
         await thread.edit(archived=True)
-
-        # Delete user data after processing
-        if user_data.get(user.id):
-            del user_data[user.id]
-        else:
-            return
 
 
 # ⏤ { settings } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤

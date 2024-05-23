@@ -25,7 +25,7 @@ class GetOrder(commands.Cog):
     def __init__(self, reelab):
         self.bot: commands.Bot = reelab
 
-# ⏤ { codebase } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
+    # ⏤ { codebase } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
     @commands.Cog.slash_command(
         name="myorders",
@@ -33,6 +33,10 @@ class GetOrder(commands.Cog):
         guild_ids=[1216127716970070128]
     )
     async def my_orders(self, ctx):
+        """
+        Command to retrieve and display the invoking user's order details.
+        """
+        # Call the function to fetch and display the user's orders
         await my_order(self, ctx)
 
     @commands.Cog.slash_command(
@@ -42,9 +46,14 @@ class GetOrder(commands.Cog):
         guild_ids=[1216127716970070128]
     )
     async def get_orders(self, ctx, user_id: str):
+        """
+        Command to retrieve and display another user's order details.
+        """
         if ctx.author.id in config.staff or ctx.author.id == 599204513722662933:
-            await get_order(self, ctx, user_id)
+            # Check if the user has permission to use the command
+            await get_order(self, ctx, user_id)  # Call the function to fetch and display the specified user's orders
         else:
+            # Respond with a permission error message if the user is not authorized
             await ctx.respond("You do not have permission to use this command.", hidden=True)
 
     @commands.Cog.on_select('^orders_select$')
@@ -65,7 +74,7 @@ class GetOrder(commands.Cog):
         # Attachments
         _, _, footer_file = await attachments()
 
-        embed = create_order_embed(self, selected_order_id, selected_order_details)
+        embed = create_order_embed(selected_order_id, selected_order_details)
         await interaction.edit(embed=embed, attachments=[footer_file])
 
 

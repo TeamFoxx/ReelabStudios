@@ -10,7 +10,7 @@
 # ⏤ { config } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
 # Version information
-version = "v1.9-pre"
+version = "v1.10-pre"
 
 # List of Developer and Staff member
 developer = {599204513722662933}
@@ -18,6 +18,14 @@ staff = {599204513722662933}
 
 # Supported languages
 supported_languages = "de, tr, fr, it, ja, zh, ko"
+
+# channel IDs
+order_product_channel_id = 1216178294458814526
+
+# Role IDs
+official_staff_id = 1216137762537996479
+reelab_role_id = 1217207299874230273
+customer_support_id = 1216142380571295855
 
 # General color for all messages
 EMBED_COLOR = 0x48689b
@@ -34,6 +42,7 @@ EMOJIS = {
     "community_manager": 1217203403709612073,
     "community_eventhost": 1217203402237280488,
     "community_planner": 1217203741279653968,
+    "function_emergency": 1217203837295792129,
     "function_tick": 1217203424425152582,
     "function_cross": 1217203796065648691,
     "function_time": 1217203427361165403,

@@ -9,7 +9,6 @@
 #
 # ⏤ { imports } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 import json
-import logging
 from pathlib import Path
 
 import discord
@@ -30,13 +29,15 @@ counting_file_path = "data/counting.json"
 def calculate_price(user_amount_pricing: int) -> dict:
     """
     Calculates the price based on the user's amount pricing and updates user data accordingly.
-    Returns the calculated price as a string.
+    Returns the calculated price as a dictionary.
     """
     amount = {1: "> 1k", 2: "1k-2.5k", 3: "2.5k-5k", 4: "< 5k"}
     price = {1: config.discord_bot_user_based_pricing_1, 2: config.discord_bot_user_based_pricing_2,
              3: config.discord_bot_user_based_pricing_3, 4: config.discord_bot_user_based_pricing_4}
-    return {"bot_users": amount.get(user_amount_pricing, "Unknown"),
-            "user_amount_pricing": price.get(user_amount_pricing, 0)}
+    return {
+        "bot_users": amount.get(user_amount_pricing, "Unknown"),
+        "user_amount_pricing": price.get(user_amount_pricing, 0)
+    }
 
 
 def format_price(price):
@@ -71,16 +72,11 @@ def save_counting(counting):
 
 # ⏤ { settings } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
-logging.basicConfig(filename='bot.log', level=logging.WARN, format='%(asctime)s - %(levelname)s - %(message)s')
-
-
 class BuyDiscordBot(commands.Cog):
-    def __init__(self, bot):
-        self.bot: commands.Bot = bot
-        self.order_product_channel_id = 1216178294458814526
-        self.official_staff_id = 1216137762537996479
+    def __init__(self, reelab):
+        self.bot: commands.Bot = reelab
 
-    # ⏤ { codebase } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
+    # ⏤ { codebase } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
     @commands.Cog.on_select('^products$')
     async def discord_bot_products(self, interaction, select_menu):
@@ -202,9 +198,9 @@ class BuyDiscordBot(commands.Cog):
         community_developer = self.bot.get_emoji(config.EMOJIS["community_developer"])
         plant_plant = self.bot.get_emoji(config.EMOJIS["plant_plant"])
 
-        # send message for personalized bot request.
+        # Send message for personalized bot request.
         if select_menu.values[0] == "personalized_bot":
-            # remove old message
+            # Remove old message
             await processing_response(interaction)
 
             # Header over Bot message
@@ -231,12 +227,12 @@ class BuyDiscordBot(commands.Cog):
             # Attachments
             banner_file, icon_file, footer_file = await attachments()
 
-            # creates a list of buttons to be sent
+            # Create a list of buttons to be sent
             buttons_personalized = [
                 Button(
                     style=ButtonStyle.green,
                     emoji=log_membershipscreening,
-                    label=language["discord_order_personalized_bot_lable"],
+                    label=language["discord_order_personalized_bot_label"],
                     custom_id=f"personalized_bot_accept_tos:{order_id}",
                 )
             ]
@@ -244,8 +240,7 @@ class BuyDiscordBot(commands.Cog):
             # Edit interaction with new embed and components
             return await interaction.edit(embeds=[header, description_personalized],
                                           attachments=[header_file, icon_file, footer_file],
-                                          components=[buttons_personalized]
-                                          )
+                                          components=[buttons_personalized])
 
         # Getting user ID to fetch stored information
         selected_value = select_menu.values[0]
@@ -265,7 +260,7 @@ class BuyDiscordBot(commands.Cog):
             "expire_date": "Pending Activation"  # Expiry date
         }
 
-        # remove old message
+        # Remove old message
         await processing_response(interaction)
 
         # Header over Bot message
@@ -293,30 +288,30 @@ class BuyDiscordBot(commands.Cog):
         # Attachments
         banner_file, icon_file, footer_file = await attachments()
 
-        # creates a list of buttons to be sent
+        # Create a list of buttons to be sent
         buttons = [
             Button(
                 style=ButtonStyle.grey,
                 emoji=community_advisor,
-                label=language["discord_order_bot_step_1_user_amount_1_lable"],
+                label=language["discord_order_bot_step_1_user_amount_1_label"],
                 custom_id=f"users:1:{order_id}",
             ),
             Button(
                 style=ButtonStyle.grey,
                 emoji=community_advisor,
-                label=language["discord_order_bot_step_1_user_amount_2_lable"],
+                label=language["discord_order_bot_step_1_user_amount_2_label"],
                 custom_id=f"users:2:{order_id}",
             ),
             Button(
                 style=ButtonStyle.grey,
                 emoji=community_advisor,
-                label=language["discord_order_bot_step_1_user_amount_3_lable"],
+                label=language["discord_order_bot_step_1_user_amount_3_label"],
                 custom_id=f"users:3:{order_id}",
             ),
             Button(
                 style=ButtonStyle.grey,
                 emoji=community_advisor,
-                label=language["discord_order_bot_step_1_user_amount_4_lable"],
+                label=language["discord_order_bot_step_1_user_amount_4_label"],
                 custom_id=f"users:4:{order_id}",
             )
         ]
@@ -324,8 +319,7 @@ class BuyDiscordBot(commands.Cog):
         # Edit interaction with new embed and components
         await interaction.edit(embeds=[header, description],
                                attachments=[header_file, icon_file, footer_file],
-                               components=[buttons]
-                               )
+                               components=[buttons])
 
     @commands.Cog.on_click('^users:(.*)$')
     async def order_bot_part_2(self, ctx: discord.ComponentInteraction, button):
@@ -361,7 +355,7 @@ class BuyDiscordBot(commands.Cog):
         price_6_months = format_price(user_amount_pricing * 6)
         price_12_months = format_price(user_amount_pricing * 12)
 
-        # remove old message
+        # Remove old message
         await processing_response(ctx)
 
         # Header over Bot message
@@ -379,8 +373,10 @@ class BuyDiscordBot(commands.Cog):
 
         # Discord bot selection.
         description = discord.Embed(
-            description=language["discord_order_bot_step_2_description"].format(community_developer=community_developer,
-                                                                                log_memberjoin=log_memberjoin),
+            description=language["discord_order_bot_step_2_description"].format(
+                community_developer=community_developer,
+                log_memberjoin=log_memberjoin
+            ),
             color=config.EMBED_COLOR,
         )
         description.set_image(url="attachment://reelab_banner_blue.png")
@@ -394,25 +390,25 @@ class BuyDiscordBot(commands.Cog):
             Button(
                 style=ButtonStyle.grey,
                 emoji=log_timeoutremoved,
-                label=f'{language["discord_order_bot_step_2_hosting_duration_1_lable"]} - {price_single_month}',
+                label=f'{language["discord_order_bot_step_2_hosting_duration_1_label"]} - {price_single_month}',
                 custom_id=f"months:1:{order_id}",
             ),
             Button(
                 style=ButtonStyle.grey,
                 emoji=log_timeoutremoved,
-                label=f'{language["discord_order_bot_step_2_hosting_duration_2_lable"]} - {price_3_months}',
+                label=f'{language["discord_order_bot_step_2_hosting_duration_2_label"]} - {price_3_months}',
                 custom_id=f"months:3:{order_id}",
             ),
             Button(
                 style=ButtonStyle.grey,
                 emoji=log_timeoutremoved,
-                label=f'{language["discord_order_bot_step_2_hosting_duration_3_lable"]} - {price_6_months}',
+                label=f'{language["discord_order_bot_step_2_hosting_duration_3_label"]} - {price_6_months}',
                 custom_id=f"months:6:{order_id}",
             ),
             Button(
                 style=ButtonStyle.grey,
                 emoji=log_timeoutremoved,
-                label=f'{language["discord_order_bot_step_2_hosting_duration_4_lable"]} - {price_12_months}',
+                label=f'{language["discord_order_bot_step_2_hosting_duration_4_label"]} - {price_12_months}',
                 custom_id=f"months:12:{order_id}",
             )
         ]
@@ -420,8 +416,7 @@ class BuyDiscordBot(commands.Cog):
         # Edit interaction with new embed and components
         await ctx.edit(embeds=[header, description],
                        attachments=[header_file, icon_file, footer_file],
-                       components=[buttons]
-                       )
+                       components=[buttons])
 
     @commands.Cog.on_click('^months:(.*)$')
     async def order_bot_part_3(self, ctx: discord.ComponentInteraction, button):
@@ -494,13 +489,13 @@ class BuyDiscordBot(commands.Cog):
             Button(
                 style=ButtonStyle.grey,
                 emoji=function_tick,
-                label=language["discord_order_bot_step_3_about_me_pack_1_lable"],
+                label=language["discord_order_bot_step_3_about_me_pack_1_label"],
                 custom_id=f"about_me_pack:yes:{order_id}",
             ),
             Button(
                 style=ButtonStyle.grey,
                 emoji=function_cross,
-                label=language["discord_order_bot_step_3_about_me_pack_2_lable"],
+                label=language["discord_order_bot_step_3_about_me_pack_2_label"],
                 custom_id=f"about_me_pack:no:{order_id}",
             )
         ]
@@ -562,7 +557,7 @@ class BuyDiscordBot(commands.Cog):
             Button(
                 style=ButtonStyle.grey,
                 emoji=community_owner,
-                label=language["discord_order_bot_step_4_configure_lable"],
+                label=language["discord_order_bot_step_4_configure_label"],
                 custom_id=f"configure_bot:{order_id}",
             )
         ]
@@ -592,7 +587,7 @@ class BuyDiscordBot(commands.Cog):
             components=[
                 [
                     TextInput(
-                        label=language["discord_order_bot_step_4_configure_modal_name_lable"],
+                        label=language["discord_order_bot_step_4_configure_modal_name_label"],
                         custom_id='bot_name',
                         placeholder=f"{bot_type}",
                         required=True,
@@ -600,7 +595,7 @@ class BuyDiscordBot(commands.Cog):
                         max_length=28,
                     ),
                     TextInput(
-                        label=language["discord_order_bot_step_4_configure_modal_status_lable"],
+                        label=language["discord_order_bot_step_4_configure_modal_status_label"],
                         custom_id='bot_status',
                         placeholder=language["discord_order_bot_step_4_configure_modal_status_placeholder"],
                         required=True,
@@ -715,7 +710,7 @@ class BuyDiscordBot(commands.Cog):
                            Button(
                                style=ButtonStyle.green,
                                emoji=log_membershipscreening,
-                               label=language["discord_order_bot_step_5_accept_rules_lable"],
+                               label=language["discord_order_bot_step_5_accept_rules_label"],
                                custom_id=f"pre_made_bot_accept_tos:{order_id}",
                            )
                        ]]
@@ -737,8 +732,8 @@ class BuyDiscordBot(commands.Cog):
         language = load_language_data_discord_bot(order.user_language)
 
         # Get Order Product channel for thread creation and Staff role
-        channel = ctx.guild.get_channel(self.order_product_channel_id)
-        staff = ctx.guild.get_role(self.official_staff_id)
+        channel = ctx.guild.get_channel(config.order_product_channel_id)
+        staff = ctx.guild.get_role(config.official_staff_id)
 
         # Retrieve emojis
         plant_plant = self.bot.get_emoji(config.EMOJIS["plant_plant"])
@@ -934,8 +929,8 @@ class BuyDiscordBot(commands.Cog):
         language = load_language_data_discord_bot(order.user_language)
 
         # Get Order Product channel and Staff role
-        channel = ctx.guild.get_channel(self.order_product_channel_id)
-        staff = ctx.guild.get_role(self.official_staff_id)
+        channel = ctx.guild.get_channel(config.order_product_channel_id)
+        staff = ctx.guild.get_role(config.official_staff_id)
 
         # Retrieve emojis
         plant_plant = self.bot.get_emoji(config.EMOJIS["plant_plant"])
@@ -1102,7 +1097,7 @@ class BuyDiscordBot(commands.Cog):
             components=[
                 [
                     TextInput(
-                        label=language["discord_order_bot_discount_code_modal_name_lable"],
+                        label=language["discord_order_bot_discount_code_modal_name_label"],
                         custom_id='code',
                         required=True,
                         style=1,

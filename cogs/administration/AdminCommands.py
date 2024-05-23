@@ -8,8 +8,6 @@
 # ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 #
 # ⏤ { imports } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
-from utils.Utils import attachments
-
 import logging
 import os
 from datetime import datetime
@@ -19,18 +17,18 @@ import psutil
 from discord.ext import commands
 
 import config
+from utils.Utils import attachments
 
 
 # ⏤ { configurations } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
 class AdminCommands(commands.Cog):
-    def __init__(self, bot):
-        self.bot: commands.Bot = bot
+    def __init__(self, reelab):
+        self.bot: commands.Bot = reelab
         self.start_time = datetime.now()
 
-# ⏤ { codebase } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
+    # ⏤ { codebase } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
-    # Command to restart the bot
     @commands.Cog.slash_command(
         name="restart",
         description="Restart the bot.",
@@ -38,42 +36,25 @@ class AdminCommands(commands.Cog):
         guild_ids=[1216127716970070128]
     )
     async def restart_bot(self, ctx):
-        # Get user and log event
+        """
+        Handles the bot restart command. Only accessible by administrators.
+        Logs the restart event, responds to the user, and restarts the bot.
+        """
+        # Get the user who issued the command
         user = ctx.author
+
+        # Log the restart event with user ID
         logging.warning(f'{str(user.id)} - Performed a bot restart.')
 
+        # Send a response to the user indicating that the bot is restarting
         await ctx.respond("The bot is restarting...", hidden=True)
+
+        # Close the bot connection
         await self.bot.close()
+
+        # Restart the bot by executing the main script
         os.system("python main.py")
 
-    # Command to display bot's logs
-    @commands.Cog.slash_command(
-        name="logs",
-        description="Show the bot's logs.",
-        default_required_permissions=discord.Permissions(administrator=True),
-        guild_ids=[1216127716970070128]
-    )
-    async def show_logs(self, ctx):
-        try:
-            with open("bot.log", "r", encoding="latin-1") as file:
-                logs = file.readlines()
-        except FileNotFoundError:
-            await ctx.respond("The log file does not exist or could not be found.", hidden=True)
-            return
-
-        if not logs:
-            await ctx.respond("The log file is empty.", hidden=True)
-            return
-
-        reversed_logs = reversed(logs)
-
-        with open("logs.txt", "w", encoding="utf-8") as temp_file:
-            temp_file.writelines(reversed_logs)
-
-        log_file = discord.File("logs.txt")
-        await ctx.respond(file=log_file, hidden=True)
-
-    # Command to display bot's metrics
     @commands.Cog.slash_command(
         name="metrics",
         description="Show the bot's metrics.",
@@ -81,6 +62,11 @@ class AdminCommands(commands.Cog):
         guild_ids=[1216127716970070128]
     )
     async def show_metrics(self, ctx):
+        """
+        Handles the bot's metrics command. Displays the bot's performance metrics including latency,
+        CPU usage, memory usage, disk usage, and uptime.
+        """
+
         # Check Server - Bot latency
         latency = round(self.bot.latency * 1000)
 
@@ -154,14 +140,14 @@ class AdminCommands(commands.Cog):
         _, _, footer_file = await attachments()
 
         bot_server_working_path = "./data/pictures/bot_server_working_whitebackground.png"
-        bot_server_working_file = discord.File(bot_server_working_path, filename="bot_server_working_whitebackground.png")
+        bot_server_working_file = discord.File(bot_server_working_path,
+                                               filename="bot_server_working_whitebackground.png")
 
         # Sending the metrics embed as a response
         await ctx.respond(embeds=[header, metrics_embed],
                           files=[bot_server_working_file, footer_file],
                           hidden=True)
 
-    # Command to display general information about the bot
     @commands.Cog.slash_command(
         name="info",
         description="Show general information about the bot.",
@@ -169,6 +155,9 @@ class AdminCommands(commands.Cog):
         guild_ids=[1216127716970070128]
     )
     async def bot_info(self, ctx):
+        """
+        Handles the bot's info command. Displays general information about the bot and its configuration.
+        """
         # Bot information
         bot_name = ctx.bot.user.name
         bot_id = ctx.bot.user.id
@@ -214,8 +203,7 @@ class AdminCommands(commands.Cog):
         banner_file, icon_file, footer_file = await attachments()
 
         bot_server_working_path = "./data/pictures/bot_server_working_transparent.png"
-        bot_server_working_file = discord.File(bot_server_working_path,
-                                               filename="bot_server_working_transparent.png")
+        bot_server_working_file = discord.File(bot_server_working_path, filename="bot_server_working_transparent.png")
 
         # Sending the embeds as a response
         await ctx.respond(embeds=[bot_embed, config_embed],

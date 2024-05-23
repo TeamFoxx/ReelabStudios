@@ -8,9 +8,6 @@
 # ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 #
 # ⏤ { imports } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
-import json
-import logging
-from pathlib import Path
 
 import discord
 from discord import Button, ButtonStyle
@@ -20,44 +17,14 @@ import config
 from main import reelab
 from utils.Utils import header, processing_response, attachments, load_language_data_customer_support
 
-# ⏤ { configurations } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
-
-user_data = {}
-
-
-# ⏤ { function definitions } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
-
-def load_language_data_discord_bot(file_path: Path, user_language: str) -> dict:
-    """
-    Loads the language data from the specified file and selects the language based on user_language.
-    Returns the language dictionary if found, otherwise returns an empty dictionary.
-    """
-    try:
-        with open(file_path, "r", encoding="utf-8") as file:
-            language_data = json.load(file)
-            if user_language in language_data:
-                return language_data[user_language]
-            else:
-                logging.warning(f"Language '{user_language}' not found in language file.")
-                return {}
-    except FileNotFoundError:
-        logging.error(f"Language file '{file_path}' not found.")
-        return {}
-
 
 # ⏤ { settings } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
-
-logging.basicConfig(filename='bot.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-
 
 class CustomerSupport(commands.Cog):
     def __init__(self, reelab):
         self.bot: commands.Bot = reelab
-        self.order_product_channel_id = 1216178294458814526
-        self.official_staff_id = 1216137762537996479
-        self.customer_support_id = 1216142380571295855
 
-# ⏤ { codebase } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
+    # ⏤ { codebase } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
     @commands.Cog.on_select('^products$')
     async def customer_support(self, interaction, select_menu):
@@ -75,11 +42,11 @@ class CustomerSupport(commands.Cog):
             user = interaction.author
 
             # Get Order Product channel for thread creation
-            channel = interaction.guild.get_channel(self.order_product_channel_id)
+            channel = interaction.guild.get_channel(config.order_product_channel_id)
 
             # Get Official Staff role
-            staff = interaction.guild.get_role(self.official_staff_id)
-            customer_support = interaction.guild.get_role(self.customer_support_id)
+            staff = interaction.guild.get_role(config.official_staff_id)
+            customer_support = interaction.guild.get_role(config.customer_support_id)
 
             # Retrieve emojis
             plant_plant = self.bot.get_emoji(config.EMOJIS["plant_plant"])

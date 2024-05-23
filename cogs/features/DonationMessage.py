@@ -20,7 +20,7 @@ class DonationMessage(commands.Cog):
     def __init__(self, bot):
         self.bot: commands.Bot = bot
 
-# ⏤ { codebase } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
+    # ⏤ { codebase } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
     @commands.Cog.slash_command(
         name="support-us",
@@ -28,13 +28,22 @@ class DonationMessage(commands.Cog):
         default_required_permissions=discord.Permissions(administrator=True)
     )
     async def donation(self, ctx):
+        """
+        Slash command to send the "Donation & Booster" message to the chat.
+
+        Args:
+            ctx (discord.ApplicationContext): The context in which the command is invoked.
+        """
+        # Retrieve the PayPal emoji
         paypal = self.bot.get_emoji(1216828302098956299)
 
+        # Create the donation header embed
         donation_head = discord.Embed(colour=0x2b2d31)
         donation_head.set_author(name="The official Reelab Studio Discord Server", url="https://reelab.studio/",
                                  icon_url="attachment://reelab_logo_white.png")
         donation_head.set_image(url="attachment://reelab_banner_white.gif")
 
+        # Create the booster message embed
         booster_msg = discord.Embed(
             description=f"# Boost the server\n"
                         f"> Boosting our server helps us enhance the experience for everyone in the community. "
@@ -50,6 +59,7 @@ class DonationMessage(commands.Cog):
         )
         booster_msg.set_image(url="attachment://reelab_banner_pink.png")
 
+        # Create the donation message embed
         donation_msg = discord.Embed(
             description=f"# PayPal Donators\n"
                         f"> Your donation allows us to move forward with our projects and continually improve our services. "
@@ -60,6 +70,7 @@ class DonationMessage(commands.Cog):
         )
         donation_msg.set_image(url="attachment://reelab_banner_blue.png")
 
+        # Prepare attachment files
         banner_path = "./data/pictures/reelab_banner_white.gif"
         banner_file = discord.File(banner_path, filename="reelab_banner_white.gif")
 
@@ -72,6 +83,7 @@ class DonationMessage(commands.Cog):
         pink_footer_path = "./data/pictures/reelab_banner_pink.png"
         pink_footer_file = discord.File(pink_footer_path, filename="reelab_banner_pink.png")
 
+        # Send the embeds and files along with the PayPal button
         await ctx.respond(embeds=[donation_head, booster_msg, donation_msg],
                           files=[footer_file, banner_file, icon_file, pink_footer_file],
                           components=[[

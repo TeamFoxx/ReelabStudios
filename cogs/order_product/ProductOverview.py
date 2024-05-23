@@ -8,9 +8,6 @@
 # ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 #
 # ⏤ { imports } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
-import json
-import logging
-from pathlib import Path
 
 import discord
 from discord import Button, ButtonStyle, SelectOption, SelectMenu
@@ -19,27 +16,7 @@ from discord.ext import commands
 import config
 from main import reelab
 from utils.Orders import Order
-from utils.Utils import header, attachments
-
-
-# ⏤ { function definitions } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
-
-def load_language_data_discord_bot(file_path: Path, user_language: str) -> dict:
-    """
-    Loads the language data from the specified file and selects the language based on user_language.
-    Returns the language dictionary if found, otherwise returns an empty dictionary.
-    """
-    try:
-        with open(file_path, "r", encoding="utf-8") as file:
-            language_data = json.load(file)
-            if user_language in language_data:
-                return language_data[user_language]
-            else:
-                logging.warning(f"Language '{user_language}' not found in language file.")
-                return {}
-    except FileNotFoundError:
-        logging.error(f"Language file '{file_path}' not found.")
-        return {}
+from utils.Utils import header, attachments, load_language_data_product_overview
 
 
 # ⏤ { settings } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
@@ -48,7 +25,7 @@ class ProductOverview(commands.Cog):
     def __init__(self, reelab):
         self.bot: commands.Bot = reelab
 
-    # ⏤ { codebase } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
+    # ⏤ { codebase } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
     @commands.Cog.slash_command(
         name="order-a-product",
@@ -93,7 +70,7 @@ class ProductOverview(commands.Cog):
                         f"> **Interested in bundling services for extra savings?** Explore our dedicated <#1217192999549800640> Channel for exclusive offers!\n"
                         f"- Don't miss out on these amazing deals! Grab yours now and elevate your community. :rocket:\n\n"
                         f"⏤\n"
-                        f"- :shopping_cart: **Ready to purchase?** Just klick the button below.\n"
+                        f"- :shopping_cart: **Ready to purchase?** Just click the button below.\n"
                         f"- Need assistance or have questions? Feel free to ask our staff members in the server!\n\n"
                         f"**Note:** Our current payment methods include PayPal, credit/debit card, Discord Nitro boosts, and promotional offers.",
             color=config.EMBED_COLOR,
@@ -121,12 +98,11 @@ class ProductOverview(commands.Cog):
         # Load attachments
         banner_file, icon_file, footer_file = await attachments()
 
-        # Edit interaction with new embed and components
+        # Send the message with embed and components
         await ctx.respond(embeds=[header_embed, buy_product_msg],
                           files=[banner_file, icon_file, footer_file],
                           components=[buttons])
 
-    # Order product section.
     @commands.Cog.on_click('^order_product$')
     async def order_product(self, ctx: discord.ComponentInteraction, button):
         # Create order
@@ -288,9 +264,6 @@ class ProductOverview(commands.Cog):
     async def language_selection_confirmed(self, interaction, select_menu):
         user = interaction.author
 
-        # Log the selected bot type
-        logging.info(f'{str(user.id)} - Selected Language to proceed purchase.')
-
         # Retrieve emojis
         plantbig_plant = self.bot.get_emoji(config.EMOJIS["plantbig_plant"])
         community_advisor = self.bot.get_emoji(config.EMOJIS["community_advisor"])
@@ -310,10 +283,7 @@ class ProductOverview(commands.Cog):
         order = Order(user_id=user.id, user_name=user.name, user_language=user_language, status="Configuration Pending")
         reelab.orders.append(order)
 
-        # Load language data
-        script_directory = Path(__file__).resolve().parent.parent.parent
-        file_path = script_directory / "data/languages/products_language_file.json"
-        language = load_language_data_discord_bot(file_path, user_language)
+        language = load_language_data_product_overview(order.user_language)
 
         # Embedded message to be sent
         buy_message = discord.Embed(

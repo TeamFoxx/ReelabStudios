@@ -11,8 +11,8 @@
 
 from pathlib import Path
 
-from discord import SlashCommandOption as Option, SlashCommandOptionChoice as Choice
 import discord
+from discord import SlashCommandOption as Option, SlashCommandOptionChoice as Choice
 from discord.ext import commands
 
 import config
@@ -26,9 +26,8 @@ import config
 class ReloadFunction(commands.Cog):
     def __init__(self, reelab):
         self.bot = reelab
-        self.developer = config.developer
 
-# ⏤ { codebase } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
+    # ⏤ { codebase } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
     @commands.Cog.slash_command(
         name="reload",
@@ -52,11 +51,23 @@ class ReloadFunction(commands.Cog):
         connector={'sync-commands': 'sync_slash_commands'}
     )
     async def reload(self, ctx, cog: str, sync_slash_commands: bool = False):
-        if ctx.author.id in self.developer or ctx.author.id == 599204513722662933:
+        """
+        Reloads a specified cog to refresh changes or fix issues.
+
+        Args:
+            ctx (commands.Context): The context of the command invocation.
+            cog (str): The name of the cog to reload.
+            sync_slash_commands (bool, optional): Whether to sync slash commands after reloading. Defaults to False.
+        """
+        # Check if the user has permission to reload cogs
+        if ctx.author.id in config.developer or ctx.author.id == 599204513722662933:
+            # Temporarily set the bot's sync commands setting
             before = getattr(self.bot, 'sync_commands_on_cog_reload', False)
             self.bot.sync_commands_on_cog_reload = sync_slash_commands
             await ctx.defer(hidden=True)
+
             try:
+                # Reload the specified cog
                 cog_path = Path('./cogs').rglob(f'{cog}.py')
                 for path in cog_path:
                     extension = str(path).replace('/', '.').replace('\\', '.')[:-3]
@@ -64,18 +75,30 @@ class ReloadFunction(commands.Cog):
                 await ctx.respond(
                     f"The Cog `{cog}` has been successfully reloaded"
                     f"{' and the slash-commands synced.' if sync_slash_commands else '.'}",
-                    hidden=True)
+                    hidden=True
+                )
             except commands.ExtensionNotLoaded:
-                await ctx.respond(f"There is no extension with the Name `{cog}` loaded", hidden=True)
+                await ctx.respond(f"There is no extension with the name `{cog}` loaded.", hidden=True)
             except Exception as e:
                 await ctx.respond(f"An error occurred: {e}", hidden=True)
-            self.bot.sync_commands_on_cog_reload = before
+            finally:
+                # Restore the bot's original sync commands setting
+                self.bot.sync_commands_on_cog_reload = before
         else:
             await ctx.respond("You do not have permission to use this command.", hidden=True)
 
     @reload.autocomplete_callback
     async def reload_cog_autocomplete(self, i, cog: str = None, sync_slash_commands: bool = False):
+        """
+        Provides autocomplete suggestions for the cog name.
+
+        Args:
+            i (discord.Interaction): The interaction object for the autocomplete.
+            cog (str, optional): The partial name of the cog being typed. Defaults to None.
+        """
+        # Get a list of all available cogs
         all_cogs = [p.stem for p in Path('./cogs').rglob('*.py') if p.stem != '__init__']
+        # Send autocomplete choices that match the partial cog name
         await i.send_choices([Choice(name, name) for name in all_cogs if name.startswith(cog or '')])
 
 
