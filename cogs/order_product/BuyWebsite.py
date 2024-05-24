@@ -237,10 +237,28 @@ class BuyWebsite(commands.Cog):
     @commands.Cog.on_click("^website_pricing_information:(.*)$")
     async def website_pricing_information(self, ctx: discord.ComponentInteraction, button):
         order_id = button.custom_id.split(":")[1]
-        order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
 
-        # Load language data based on the user's language preference
-        language = load_language_data_website(order.user_language)
+        # Try to find the order in reelab.orders
+        order = next((o for o in reelab.orders if o.order_id == order_id), None)
+
+        # If order is not found, load from JSON file
+        if not order:
+            script_directory = Path(__file__).resolve().parent.parent.parent
+            file_path = script_directory / "data/orders.json"
+
+            # Load the orders data from the JSON file
+            with open(file_path, 'r', encoding='utf-8') as file:
+                filedata = json.load(file)
+                order = filedata.get(order_id)
+
+            # If order is still not found, handle the error
+            if not order:
+                await ctx.respond("Order not found.", hidden=True)
+                return
+
+            language = load_language_data_website(order['user_language'])
+        else:
+            language = load_language_data_website(order.user_language)
 
         # Retrieve emojis
         plantbig_plant = self.bot.get_emoji(config.EMOJIS["plantbig_plant"])
@@ -259,10 +277,28 @@ class BuyWebsite(commands.Cog):
     @commands.Cog.on_click("^website_discount_code:(.*)$")
     async def website_discount_code(self, ctx: discord.ComponentInteraction, button):
         order_id = button.custom_id.split(":")[1]
-        order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
 
-        # Load language data based on the user's language preference
-        language = load_language_data_website(order.user_language)
+        # Try to find the order in reelab.orders
+        order = next((o for o in reelab.orders if o.order_id == order_id), None)
+
+        # If order is not found, load from JSON file
+        if not order:
+            script_directory = Path(__file__).resolve().parent.parent.parent
+            file_path = script_directory / "data/orders.json"
+
+            # Load the orders data from the JSON file
+            with open(file_path, 'r', encoding='utf-8') as file:
+                filedata = json.load(file)
+                order = filedata.get(order_id)
+
+            # If order is still not found, handle the error
+            if not order:
+                await ctx.respond("Order not found.", hidden=True)
+                return
+
+            language = load_language_data_website(order['user_language'])
+        else:
+            language = load_language_data_website(order.user_language)
 
         # Define the modal with input fields for bot name and status
         modal = Modal(
@@ -287,10 +323,28 @@ class BuyWebsite(commands.Cog):
     @commands.Cog.on_submit('^website_discount_code:(.*)$')
     async def website_submit_discount_code(self, ctx: discord.ModalSubmitInteraction):
         order_id = ctx.custom_id.split(":")[1]
-        order = list(filter(lambda o: o.order_id == order_id, reelab.orders))[0]
 
-        # Load language data based on the user's language preference
-        language = load_language_data_website(order.user_language)
+        # Try to find the order in reelab.orders
+        order = next((o for o in reelab.orders if o.order_id == order_id), None)
+
+        # If order is not found, load from JSON file
+        if not order:
+            script_directory = Path(__file__).resolve().parent.parent.parent
+            file_path = script_directory / "data/orders.json"
+
+            # Load the orders data from the JSON file
+            with open(file_path, 'r', encoding='utf-8') as file:
+                filedata = json.load(file)
+                order = filedata.get(order_id)
+
+            # If order is still not found, handle the error
+            if not order:
+                await ctx.respond("Order not found.", hidden=True)
+                return
+
+            language = load_language_data_website(order['user_language'])
+        else:
+            language = load_language_data_website(order.user_language)
 
         # Retrieve emojis
         promo = self.bot.get_emoji(config.EMOJIS["promo"])

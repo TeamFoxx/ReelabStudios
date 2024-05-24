@@ -16,9 +16,7 @@ from discord import Modal, TextInput
 from discord.ext import commands
 
 import config
-from main import reelab
 from utils.OrderBackend import my_order_button
-from utils.Utils import attachments
 
 
 # ⏤ { settings } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
@@ -135,11 +133,49 @@ class EditOrder(commands.Cog):
 
     @commands.Cog.on_click('^confirm_payment:(.*)$')
     async def confirm_payment(self, ctx: discord.ComponentInteraction, button):
-        """
-        Deletes an order from the JSON file based on the order ID.
-        """
+        # Retrieve emojis
+        function_emergency = self.bot.get_emoji(config.EMOJIS["function_emergency"])
+
         if ctx.author.id in config.staff or ctx.author.id == 599204513722662933:
             order_id = button.custom_id.split(":")[1]
+
+            # Define the path to the orders JSON file
+            script_directory = Path(__file__).resolve().parent.parent.parent
+            file_path = script_directory / "data/orders.json"
+
+            # Load the orders data from the JSON file
+            with open(file_path, 'r', encoding='utf-8') as file:
+                filedata = json.load(file)
+
+            # Find the order by order ID
+            order = filedata.get(order_id)
+
+            if order:
+                # Define the modal with input fields for bot name and status
+                modal = Modal(
+                    title=f"Update {order['user_name']}'s Order",
+                    custom_id=f'order_status_update:{order_id}',
+                    components=[
+                        [
+                            TextInput(
+                                label="Change Order Status",
+                                custom_id='order_status',
+                                placeholder=f"{order['status']}",
+                                required=True,
+                                style=1,
+                                max_length=120,
+                            )
+                        ]
+                    ]
+                )
+
+                # Respond to the interaction with the modal
+                await ctx.respond_with_modal(modal)
+            else:
+                embed = discord.Embed(description=f"{function_emergency} - Order `{order_id}` **not found**.",
+                                      color=config.EMBED_COLOR)
+                embed.set_image(url="attachment://reelab_banner_blue.png")
+                await ctx.edit(embed=embed, components=[])
         else:
             await ctx.respond("You do not have permission to use this command.", hidden=True)
 

@@ -9,29 +9,29 @@
 #
 # ⏤ { config } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
-# Version information
-version = "v1.10-pre"
+# Version Configuration: Defines the current version of the bot
+version = "v1.0"
 
-# List of Developer and Staff member
+# Access Control: Identifies the unique IDs for developers and staff members for privileged actions
 developer = {599204513722662933}
-staff = {599204513722662933}
+staff = {599204513722662933, 549591994020659211}
 
-# Supported languages
+# Localization: Specifies supported languages for multi-lingual support
 supported_languages = "de, tr, fr, it, ja, zh, ko"
 
-# channel IDs
+# Discord Channels: Stores Discord channel IDs where bot interactions occur
 order_product_channel_id = 1216178294458814526
 
-# Role IDs
+# Role Management: Defines IDs for various roles used in role-based features within the bot
 official_staff_id = 1216137762537996479
 reelab_role_id = 1217207299874230273
 customer_support_id = 1216142380571295855
 
-# General color for all messages
-EMBED_COLOR = 0x48689b
-HEADER_COLOR = 0x2b2d31
+# Styling: Configures colors used in embeds throughout the bot's responses
+EMBED_COLOR = 0x48689b  # primary color for embeds
+HEADER_COLOR = 0x2b2d31  # color used for header sections in embeds
 
-# All emojis that are being used
+# Emoji Configuration: Defines custom emoji IDs for rich presence and interaction feedback
 EMOJIS = {
     "community_owner": 1217203408516284516,
     "community_admin": 1217203398802280631,
@@ -59,21 +59,21 @@ EMOJIS = {
     "role_star": 1217203475004526613
 }
 
-# General Pricing for Pre-Made Discord Bots
-discord_bot_user_based_pricing_1 = 2  # Price for less than 1000
+# Pricing Models: Detailed pricing configurations for various tiers of bot services
+discord_bot_user_based_pricing_1 = 2  # Price for less than 1000 users
 discord_bot_user_based_pricing_2 = 2.50  # Price for 1000-2499 users
 discord_bot_user_based_pricing_3 = 3.00  # Price for 2500-4999 users
 discord_bot_user_based_pricing_4 = 3.50  # Price for 5000 or more users
 
-# Cost of fees for one-time set-up
+# Setup Fees: Specific charges for initial setup across different service durations
 setup_fee_1_month = 5  # Fees for 1 month hosting.
 setup_fee_3_month = 4  # Fees for 3 month hosting.
 setup_fee_6_month = 2.50  # Fees for 6 month hosting.
 setup_fee_12_month = 0  # Fees for 12 month hosting.
 
-# Discount & Promo Codes
+# Promotional Codes: Lists discounts available through promo codes
 DISCOUNT_CODES = {
-    'lifeservices_reelab': 5,
-    '0000': 0,
-    'newcomer': 20
+    'lifeservices_reelab': 5,  # 5% discount
+    '0000': 0,  # No discount
+    'newcomer': 20  # 20% discount
 }

@@ -77,12 +77,23 @@ def create_order_embed(order_id: str, details: dict) -> discord.Embed:
         'discord_bot': [
             ('Configuration', ['bot_name', 'bot_status', 'bot_users', 'about_me_pack']),
             ('Pricing', ['setup_fees', 'total_price']),
-            ('Administration', ['hosting_duration', 'start_date', 'expire_date'])
+            ('Hosting / Administration', ['hosting_duration', 'start_date', 'expire_date']),
+            ('Paid', ['payment_method', 'transaction_id']),
+            ('Further Information', ['Info:', 'Note:', 'Warning:'])
         ],
         'website': [
-            ('Domain Details', ['domain', 'hosting_provider']),
-            ('Pricing', ['hosting_duration', 'total_price']),
-            ('Dates', ['start_date', 'expire_date'])
+            ('Domain Details', ['domain']),
+            ('Pricing', ['total_price']),
+            ('Hosting / Administration', ['hosting_duration', 'start_date', 'expire_date']),
+            ('Paid', ['payment_method', 'transaction_id']),
+            ('Further Information', ['Info:', 'Note:', 'Warning:'])
+        ],
+        'graphic': [
+            ('Details', ['graphic_type', 'dimensions', 'file_format']),
+            ('Pricing', ['total_price']),
+            ('Delivery', ['delivery_date']),
+            ('Paid', ['payment_method', 'transaction_id']),
+            ('Further Information', ['Info:', 'Note:', 'Warning:'])
         ]
         # Add more templates for other product types as needed
     }
@@ -290,7 +301,7 @@ async def my_order_button(self, ctx, button):
     function_tick = self.bot.get_emoji(config.EMOJIS["function_tick"])
     log_memberleave = self.bot.get_emoji(config.EMOJIS["log_memberleave"])
     function_time = self.bot.get_emoji(config.EMOJIS["function_time"])
-    log_memberjoin = self.bot.get_emoji(config.EMOJIS["log_memberjoin"])
+    community_planner = self.bot.get_emoji(config.EMOJIS["community_planner"])
     function_emergency = self.bot.get_emoji(config.EMOJIS["function_emergency"])
 
     # Extract the order ID from the button custom ID
@@ -345,21 +356,104 @@ async def my_order_button(self, ctx, button):
                 ),
                 Button(
                     style=ButtonStyle.grey,
+                    emoji=community_planner,
+                    label="Order update",
+                    custom_id=f"order_update:{order_id}",
+                ),
+                Button(
+                    style=ButtonStyle.grey,
                     emoji=log_memberleave,
                     label="Delete order",
                     custom_id=f"delete_order:{order_id}",
                 ),
-                Button(
-                    style=ButtonStyle.grey,
-                    emoji=function_tick,
-                    label="Confirm Payment",
-                    custom_id=f"confirm_payment:{order_id}",
-                )
             ]
 
             # Create and send the embed with order details and admin action buttons
             embed = create_order_embed(order_id, order_details)
             await ctx.respond(embed=embed, components=[buttons], file=footer_file, hidden=True)
+        else:
+            # Respond with a permission error message
+            await ctx.respond("You do not have permission to use this command.", hidden=True)
+
+
+async def my_order_button_selectmenu(self, ctx):
+    """
+    Handles the display of a user's order based on the order ID from the button ID.
+    """
+
+    # Retrieve emojis
+    log_memberleave = self.bot.get_emoji(config.EMOJIS["log_memberleave"])
+    function_time = self.bot.get_emoji(config.EMOJIS["function_time"])
+    community_planner = self.bot.get_emoji(config.EMOJIS["community_planner"])
+    function_emergency = self.bot.get_emoji(config.EMOJIS["function_emergency"])
+
+    # Extract the order ID from the button custom ID
+    order_id = ctx.custom_id.split(":")[1]
+
+    # Define the path to the orders JSON file
+    script_directory = Path(__file__).resolve().parent.parent
+    file_path = script_directory / "data/orders.json"
+
+    # Load the orders data from the JSON file
+    with open(file_path, 'r', encoding='utf-8') as file:
+        filedata = json.load(file)
+
+    # Find the order by order ID
+    order_details = filedata.get(order_id)
+
+    # Check if the order details exist
+    if not order_details:
+        # Attachments
+        _, _, footer_file = await attachments()
+
+        # Create an embed message indicating the order has been cancelled
+        embed = discord.Embed(
+            description=f"{function_emergency} - The order has already been **cancelled**.\n- Order ID: `{order_id}`",
+            color=config.EMBED_COLOR
+        )
+        embed.set_image(url="attachment://reelab_banner_blue.png")
+        await ctx.respond(embed=embed, file=footer_file, hidden=True)
+        return
+
+    # Check if the user is the creator of the order
+    if str(order_details['user_id']) == str(ctx.author.id):
+        # Attachments
+        _, _, footer_file = await attachments()
+
+        # Create and send the embed with order details
+        embed = create_order_embed(order_id, order_details)
+        await ctx.respond(embed=embed, file=footer_file, hidden=True)
+    else:
+        # Check if the user has admin permissions
+        if ctx.author.id in config.staff or ctx.author.id == 599204513722662933:
+            # Attachments
+            _, _, footer_file = await attachments()
+
+            # Create a list of admin action buttons
+            buttons = [
+                Button(
+                    style=ButtonStyle.grey,
+                    emoji=function_time,
+                    label="Status update",
+                    custom_id=f"status_update:{order_id}",
+                ),
+                Button(
+                    style=ButtonStyle.grey,
+                    emoji=community_planner,
+                    label="Order update",
+                    custom_id=f"order_update:{order_id}",
+                ),
+                Button(
+                    style=ButtonStyle.grey,
+                    emoji=log_memberleave,
+                    label="Delete order",
+                    custom_id=f"delete_order:{order_id}",
+                ),
+            ]
+
+            # Create and send the embed with order details and admin action buttons
+            embed = create_order_embed(order_id, order_details)
+            await ctx.edit(embed=embed, components=[buttons], attachments=[footer_file])
         else:
             # Respond with a permission error message
             await ctx.respond("You do not have permission to use this command.", hidden=True)
