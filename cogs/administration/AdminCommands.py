@@ -8,7 +8,6 @@
 # ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 #
 # ⏤ { imports } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
-import logging
 import os
 from datetime import datetime
 
@@ -40,12 +39,6 @@ class AdminCommands(commands.Cog):
         Handles the bot restart command. Only accessible by administrators.
         Logs the restart event, responds to the user, and restarts the bot.
         """
-        # Get the user who issued the command
-        user = ctx.author
-
-        # Log the restart event with user ID
-        logging.warning(f'{str(user.id)} - Performed a bot restart.')
-
         # Send a response to the user indicating that the bot is restarting
         await ctx.respond("The bot is restarting...", hidden=True)
 

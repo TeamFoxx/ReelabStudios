@@ -10,7 +10,7 @@
 # ⏤ { config } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 
 # Version Configuration: Defines the current version of the bot
-version = "v1.0"
+version = "v1.1"
 
 # Access Control: Identifies the unique IDs for developers and staff members for privileged actions
 developer = {599204513722662933}
@@ -73,7 +73,9 @@ setup_fee_12_month = 0  # Fees for 12 month hosting.
 
 # Promotional Codes: Lists discounts available through promo codes
 DISCOUNT_CODES = {
-    'lifeservices_reelab': 5,  # 5% discount
-    '0000': 0,  # No discount
-    'newcomer': 20  # 20% discount
+    'newcomer': 20,  # 20% discount
+    'StarterPack10': 10,  # 10% discount
+    'BrandingBundle15': 15,  # 15% discount
+    'Ultimate20': 20,  # 20% discount
+    'lifeservices_reelab': 5  # 5% discount
 }

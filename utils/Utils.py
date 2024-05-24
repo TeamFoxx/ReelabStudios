@@ -9,16 +9,11 @@
 #
 # ⏤ { imports } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
 import json
-import logging
 from pathlib import Path
 
 import discord
 
 import config
-
-# ⏤ { settings } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
-
-logging.basicConfig(filename='../bot.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 
 # ⏤ { text functions } ⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤⏤
@@ -118,7 +113,7 @@ def load_language_data_product_overview(user_language: str) -> dict:
                 return {}
     except FileNotFoundError:
         # Log an error if the language file is not found
-        logging.error(f"Language file '{file_path}' not found.")
+        print(f"Language file '{file_path}' not found.")
         return {}
 
 
@@ -145,7 +140,7 @@ def load_language_data_discord_bot(user_language: str) -> dict:
                 return {}
     except FileNotFoundError:
         # Log an error if the language file is not found
-        logging.error(f"Language file '{file_path}' not found.")
+        print(f"Language file '{file_path}' not found.")
         return {}
 
 
@@ -171,7 +166,7 @@ def load_language_data_website(user_language: str) -> dict:
                 return {}
     except FileNotFoundError:
         # Log an error if the language file is not found
-        logging.error(f"Language file '{file_path}' not found.")
+        print(f"Language file '{file_path}' not found.")
         return {}
 
 
@@ -197,7 +192,33 @@ def load_language_data_graphic(user_language: str) -> dict:
                 return {}
     except FileNotFoundError:
         # Log an error if the language file is not found
-        logging.error(f"Language file '{file_path}' not found.")
+        print(f"Language file '{file_path}' not found.")
+        return {}
+
+
+def load_language_data_order_bundle(user_language: str) -> dict:
+    """
+    Loads the language data for the website from the specified file based on the user_language.
+    Returns the language dictionary if found, otherwise returns an empty dictionary.
+    """
+    # Define the directory and file path for the language data
+    script_directory = Path(__file__).resolve().parent.parent
+    file_path = script_directory / "data/languages/order_bundle_language_file.json"
+
+    try:
+        # Open and load the language data from the file
+        with open(file_path, "r", encoding="utf-8") as file:
+            language_data = json.load(file)
+            # Check if the specified user_language is available
+            if user_language in language_data:
+                return language_data[user_language]
+            else:
+                # If user_language is not found, print a warning and return an empty dictionary
+                print(f"Warning: Language code '{user_language}' not found. Falling back to English.")
+                return {}
+    except FileNotFoundError:
+        # Log an error if the language file is not found
+        print(f"Language file '{file_path}' not found.")
         return {}
 
 
@@ -223,5 +244,5 @@ def load_language_data_customer_support(user_language: str) -> dict:
                 return {}
     except FileNotFoundError:
         # Log an error if the language file is not found
-        logging.error(f"Language file '{file_path}' not found.")
+        print(f"Language file '{file_path}' not found.")
         return {}
